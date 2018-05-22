@@ -1,0 +1,269 @@
+body {
+    background-color: #e5e5e5;
+}
+
+.navigator {
+    width: 10rem;
+    text-align: center;
+    font-size: 0.4rem;
+    color: #fff;
+    background-color: #10B9B9;
+    height: 1.194444rem;
+    line-height: 1.194444rem;
+    position: fixed;
+    left: 0;
+    top: 0;
+    right: 0;
+    z-index: 99;
+}
+
+.navigator img {
+    display: block;
+    float: left;
+    margin-left: 0.555556rem;
+    width: 0.277778rem;
+    margin-top: 0.31rem;
+}
+
+.searchPart {
+    /*height: 0.870370rem;*/
+    height: 1.7rem;
+    line-height: 0.870370rem;
+    padding: 0.370370rem 0;
+    background-color: #fff;
+    border-top: 1px solid #999999;
+    border-bottom: 1px solid #999999;
+    position: fixed;
+    margin-top: 1.194444rem;
+    z-index: 99;
+}
+
+.searchPart .city {
+    float: left;
+    font-size: 0.407407rem;
+    color: #333333;
+    margin-left: 0.555556rem;
+    display: block;
+}
+
+.mu-menu-destop{
+    height: 8rem!important;
+    width: 2.2rem!important;
+}
+.mu-menu-list{
+    width: 2.2rem!important;
+}
+
+.selectOption {
+    width: 2.1rem;
+    float: left;
+    font-size: 0.407407rem;
+    color: #333333;
+    margin-left: 0.555556rem;
+    display: inline-block;
+}
+
+.searchPart .trangle {
+    float: left;
+    margin-left: 0.15rem;
+    width: 0;
+    height: 0;
+    border-left: 0.148rem solid transparent;
+    border-right: 0.148rem solid transparent;
+    border-top: 0.185185rem solid #333333;
+    margin-top: 0.370370rem;
+}
+
+.searchPart input {
+    display: block;
+    float: left;
+    width: 6.851852rem;
+    height: 0.870370rem;
+    line-height: 0.870370rem;
+    border-radius: 0.435185rem;
+    background-color: #f1f1f1;
+    border: 1px solid #f1f1f1;
+    font-size: 0.388889rem;
+    color: #999999;
+    text-indent: 0.518519rem;
+    margin-left: 0.296296rem;
+}
+
+.searchPart input.haveKeyWords {
+    display: block;
+    float: left;
+    width: 6.851852rem;
+    height: 0.870370rem;
+    line-height: 0.870370rem;
+    border-radius: 0.435185rem;
+    background-color: #fff;
+    border: 1px solid #333333;
+    font-size: 0.388889rem;
+    color: #333333;
+    text-indent: 0.518519rem;
+    margin-left: 0.296296rem;
+}
+
+.searchPart img {
+    position: absolute;
+    display: block;
+    width: 0.68rem;
+    right: 0.955729rem;
+    top: 0.45rem;
+}
+
+.mint-loadmore-parent-ext {
+    height: 100vh;
+    overflow: scroll;
+    position: fixed;
+    top: 2.5rem;
+    margin-left: 0.370370rem;
+    margin-right: 0.370370rem;
+}
+
+.hospitalPart {
+    height: 1.2963rem;
+    line-height: 1.2963rem;
+    border-top: 1px solid #999999;
+    border-bottom: 1px solid #999999;
+    background-color: #fff;
+}
+
+.hospitalPart span.leftTag {
+    font-size: 0.407407rem;
+    color: #333333;
+    margin-left: 0.555556rem;
+    display: block;
+    float: left;
+}
+
+.hospitalPart span.trangle {
+    float: right;
+    margin-right: 0.974359rem;
+    width: 0;
+    height: 0;
+    border-width: 0.24rem 0 0.24rem 0.18rem;
+    border-style: solid;
+    border-color: transparent transparent transparent #333333;
+    margin-top: 0.38rem;
+}
+
+.hospitalList {
+    background-color: #fff;
+}
+
+.singleHospital {
+    width: 9.055556rem;
+    margin: 0 auto;
+    padding: 0.555556rem 0;
+    /*height: 1.666667rem;*/
+    border-bottom: 1px solid #a0a0a0;
+}
+
+.clearfix:after {
+    content: ".";
+    display: block;
+    clear: both;
+    visibility: hidden;
+    line-height: 0;
+    height: 0;
+    font-size: 0;
+}
+
+.clearfix {
+    *zoom: 1;
+}
+
+.hospitalImg {
+    float: left;
+    width: 2.222222rem;
+    height: 1.666667rem;
+    margin-left: 0.083333rem;
+    margin-right: 0.537037rem;
+}
+
+.hospitalImg img {
+    width: 2.222222rem;
+    height: 1.666667rem;
+    display: block;
+}
+
+.hospitalInfo {
+    float: left;
+    width: 5.666667rem;
+    height: 1.537037rem;
+    padding: 0 0 0.055556rem 0;
+}
+
+.hospitalInfo .hospitalName {
+    font-size: 0.407407rem;
+    color: #333333;
+    float: left;
+    width: 6.2rem;
+    margin-bottom: 0.05rem;
+}
+
+.hospitalInfo .hospitalAddress {
+    font-size: 0.333333rem;
+    color: #999999;
+    margin-bottom: 0.05rem;
+    float: left;
+    width: 6.2rem;
+}
+
+.hospitalInfo .hospitalPosition {
+    float: left;
+    width: 6.2rem;
+}
+
+.hospitalInfo .hospitalPosition img {
+    display: block;
+    float: left;
+    width: 0.277778rem;
+    height: 0.370370rem;
+    margin-right: 0.259259rem;
+    margin-top: 0.05rem;
+}
+
+.hospitalInfo .hospitalPosition span {
+    color: #ff6600;
+    font-size: 0.370370rem;
+    float: left;
+}
+
+span.icon-search:before {
+    content: "\e91e";
+    color: #666666;
+    font-size: 0.416667rem;
+    position: absolute;
+    display: block;
+    right: 0.955729rem;
+    top: 0.6rem;
+}
+
+span.icon-position:before {
+    content: "\e91c";
+    color: #ff6600;
+    font-size: 0.34rem;
+    margin-right: 0.2rem;
+    float: left;
+    margin-top: 0.12rem;
+}
+
+span.icon-arrow-left:before {
+    content: "\e903";
+    font-size: 0.6rem;
+    color: #fff;
+    position: absolute;
+    left: 0.444444rem;
+    top: 0.3rem;
+    display: block;
+}
+
+
+
+
+
+
+
+

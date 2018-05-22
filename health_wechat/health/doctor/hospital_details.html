@@ -1,0 +1,120 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="pragma" content="no-cache"/>
+    <meta http-equiv="cache-control" content="no-cache"/>
+    <meta name="screen-orientation" content="portrait"/>
+    <meta name="x5-orientation" content="portrait"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="green"/>
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <title>团队详情</title>
+    <script type="text/javascript" src="/js/jquery.min.js"></script>
+    <script type="text/javascript" src="/js/link.js"></script>
+    <link rel="stylesheet" type="text/css" href="/common/common.css">
+    <link rel="stylesheet" type="text/css" href="/common/style.css">
+    <link rel="stylesheet" type="text/css" href="/css/doctor/doctorList.css">
+    <script type="text/javascript" src="/common/mint-ui.js"></script>
+    <link rel="stylesheet" href="/common/mint-ui.css">
+</head>
+<body>
+<div id="app" v-cloak>
+    <!-- 二级导航部分 -->
+    <p class="navigator">
+        <span class="icon-arrow-left"></span>
+        团队详情
+    </p>
+    <!-- 团队信息部分 -->
+    <div class="hospitalInfoPart">
+        <p class="hospitalGroup">{{teamData.name}}</p>
+        <p class="hospitalTag">{{teamData.org_name}}</p>
+        <div class="hospitalDetailInfo">
+            {{teamData.description}}
+        </div>
+    </div>
+    <!-- 医生列表 -->
+    <div class="doctorList">
+        <div class="singleDoctor clearfix" @click="toDoctorDetail(item.doctor_id)" v-for="item in doctorList">
+            <div class="doctorAvatar">
+                <img v-lazy="item.file_path">
+            </div>
+            <div class="doctorInfo clearfix">
+                <p class="introduction clearfix">
+                    <span class="doctorName">{{item.name}}</span>
+                    <span class="doctorPostage">{{item.title}}</span>
+                    <span class="chairman" v-if="item.is_leader==1">团队负责人</span>
+                </p>
+                <p class="advantage">
+                    {{item.specialty}}
+                </p>
+            </div>
+        </div>
+
+    </div>
+    <!-- 底部固定栏 -->
+    <div class="bottomPart">
+        <div class="bottomLeft">
+            <span class="icon-hint"></span>
+            <span>签约后可享受整个团队服务</span>
+        </div>
+        <div class="bottomRight" @click="sign">
+            立即签约
+        </div>
+    </div>
+</div>
+</body>
+<script type="text/javascript">
+    new Vue({
+        el: "#app",
+        data() {
+            return {
+                teamData: {},
+                doctorList:[]
+            }
+        },
+        created() {
+            this.getTeamDetail();
+        },
+        methods: {
+            // 获取团队详情
+            getTeamDetail() {
+                this.$indicator.open();
+                let url = $.formateUrl('wechat/team/detail');
+                let params = {
+                    team_id: $.getQueryString('teamId')
+                };
+                $.get(url, params, res => {
+                    if (res.code == 0) {
+                        this.$indicator.close();
+                        this.teamData = res.content;
+                        this.doctorList=res.content.doctors;
+                    } else {
+                        this.$toast(res.message);
+                    }
+                    this.$indicator.close();
+                })
+
+            },
+            sign() {
+                // 判断是否绑定微信
+                let url= $.formateUrl('wechat/user-guest/user');
+                $.get(url,res=>{
+                    if(res.code==0){
+                        window.localStorage.setItem('teamId', JSON.stringify($.getQueryString('teamId')));
+                        window.location.href = health.homeUrl + 'health/doctor/my_family.html';
+                    }else {  //未绑定
+                        window.location.href=health.homeUrl + 'health/doctor/sign_member_info.html';
+                    }
+                })
+            },
+            toDoctorDetail(docId) {
+                window.location.href = health.homeUrl + 'health/doctor/doctorDetailInfo.html?docId='+docId+'&teamId='+$.getQueryString('teamId');
+
+            }
+        },
+
+
+    })
+</script>
+</html>

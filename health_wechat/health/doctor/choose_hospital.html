@@ -1,0 +1,204 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="pragma" content="no-cache"/>
+    <meta http-equiv="cache-control" content="no-cache"/>
+    <meta name="screen-orientation" content="portrait"/>
+    <meta name="x5-orientation" content="portrait"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="green"/>
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <title>选择医院</title>
+    <script type="text/javascript" src="/js/jquery.min.js"></script>
+    <script type="text/javascript" src="/js/link.js"></script>
+    <link rel="stylesheet" type="text/css" href="/common/common.css">
+    <link rel="stylesheet" type="text/css" href="/common/style.css">
+    <link rel="stylesheet" type="text/css" href="/css/doctor/chooseHospital.css">
+    <link rel="stylesheet" type="text/css" href="/common/muse.css">
+    <script type="text/javascript" src="/common/muse-ui.js"></script>
+    <link rel="stylesheet" href="/common/mint-ui.css">
+    <script type="text/javascript" src="/common/mint-ui.js"></script>
+</head>
+<body>
+<div id="app" v-cloak>
+    <!-- 二级导航部分 -->
+    <p class="navigator">
+        <span class="icon-arrow-left"></span>
+        选择医院
+    </p>
+    <!-- 搜索部分样式一 -->
+    <div class="clearfix" style="margin-bottom: 2rem">
+        <div class="searchPart">
+            <!--<span class="city">北京市</span>-->
+            <!--<span class="trangle"></span>-->
+            <div class="selectOption">
+                <mu-select-field v-model="city" underlineShow="false" name="sexyType" fullWidth="true" autoWidth="true"
+                                 @change="changeCity">
+                    <mu-menu-item v-for="item,index in cityList" :key="item.id" :value="item.id" :title="item.name"/>
+                </mu-select-field>
+                <br/>
+            </div>
+            <input type="text" v-model="search" @keyup.enter="searchVal" placeholder="搜索医院名称"/>
+            <span class="icon-search" @click="searchVal"></span>
+        </div>
+    </div>
+    <!-- 搜索部分样式二 -->
+    <!-- <p class="searchPart">
+        <span class="city">北京市</span>
+        <span class="trangle"></span>
+        <input type="text" value="北京市中医院" class="haveKeyWords"/>
+    </p> -->
+    <!-- 医院列表 -->
+    <div class="mint-loadmore-parent-ext">
+        <mt-loadmore :top-method="loadTop" :bottom-method="loadBottom" :bottom-all-loaded="allLoaded" ref="loadmore"
+                     :auto-fill="false"
+                     topPullText
+                     topLoadingText
+                     bottomPullText
+                     bottomLoadingText
+                     @top-status-change="handleTopChange">
+            <div class="hospitalList">
+                <div class="singleHospital clearfix" @click="hospitalDetails(item.orgid)" v-for="item in HospitalData">
+                    <div class="hospitalImg">
+                        <img v-lazy="item.file_path">
+                    </div>
+                    <div class="hospitalInfo">
+                        <p class="hospitalName dot">{{item.cn_name}}</p>
+                        <p class="hospitalAddress dot">{{item.address}}</p>
+                        <p class="hospitalPosition">
+                            <span class="icon-position"></span>
+                            <span>{{item.distance}}</span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </mt-loadmore>
+    </div>
+</div>
+</body>
+<script type="text/javascript">
+    new Vue({
+        el: "#app",
+        data() {
+            return {
+                city: 0,
+                cityList: [],
+                search: '',
+                county: '',
+
+                HospitalData: [],
+                allLoaded: false,
+                page: 1,
+                topStatus: '',
+                longitude: '',
+                latitude: '',
+            }
+        },
+        created() {
+            this.getCity();
+            this.longitude = window.localStorage.getItem('longitude');
+            this.latitude = window.localStorage.getItem('latitude');
+        },
+        mounted() {
+            this.getHospital(this.page);
+        },
+        methods: {
+            loadTop() { //下拉刷新
+                this.allLoaded = false;
+                this.page = 1;
+                this.HospitalData = [];
+                this.getHospital(this.page);
+                this.$refs.loadmore.onTopLoaded();
+            },
+            loadBottom() { // 上拉加载
+                this.page = this.page + 1;
+                this.getHospital(this.page);
+                this.$refs.loadmore.onBottomLoaded();
+            },
+            handleTopChange(status) {
+                this.topStatus = status;
+            },
+            //    获取列表
+            getHospital(page) {
+                let url = $.formateUrl('wechat/org/list');
+                let params = {
+                    page_size: defined.indexPageSize,
+                    lon: this.longitude,
+                    lat: this.latitude,
+                    page: page,
+                    keywords: this.search,
+                    county: this.county
+                };
+                var ve = this;
+                $.ajax({
+                    url: url,
+                    type: 'get',
+                    data: params,
+                    beforeSend: ve => {
+                        this.$indicator.open();
+                    },
+                    success: res => {
+                        if (res.code == 0) {
+                            if (parseInt(res.content.pages) >= page) {
+                                this.allLoaded = false;
+                                this.HospitalData = this.HospitalData.concat(res.content.data);
+                            } else {
+                                this.allLoaded = true;
+                            }
+                        } else {
+                            this.$toast(res.message);
+                        }
+                    },
+                    complete: ve => {
+                        this.$indicator.close();
+                    }
+                });
+            },
+            hospitalDetails(orgid) {
+                window.location.href = health.homeUrl + 'health/doctor/hospital_info.html?id=' + orgid;
+            },
+            //     获取区
+            getCity() {
+                let url = $.formateUrl('wechat/other/district');
+                let params = {
+                    pid: defined.city
+                };
+
+                $.ajax({
+                    url: url,
+                    type: 'get',
+                    data: params,
+                    async: false,
+                    success: res => {
+                        if (res.code == 0) {
+                            let data = res.content;
+                            let default_city = [{
+                                name: '全部',
+                                id: 0
+                            }];
+                            this.cityList = default_city.concat(data);
+                        } else {
+                            this.$toast(res.message);
+                        }
+                    },
+                });
+            },
+            // 城市改变
+            changeCity(val) {
+                this.HospitalData = [];
+                this.page = 1;
+                this.county = val;
+                this.getHospital(this.page);
+            },
+            //    搜索
+            searchVal() {
+                this.HospitalData = [];
+                this.page = 1;
+                this.getHospital(this.page);
+            }
+        },
+    })
+</script>
+</html>

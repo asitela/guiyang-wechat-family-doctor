@@ -1,0 +1,187 @@
+body{
+    background-color: #e5e5e5;
+}
+.navigator{
+    width: 10rem;
+    text-align: center;
+    font-size: 0.4rem;
+    color: #fff;
+    background-color: #10B9B9;
+    height: 1.194444rem;
+    line-height: 1.194444rem;
+    left: 0;
+    top: 0;
+    right: 0;
+    position: fixed;
+    z-index: 99;
+}
+.navigator img{
+    display: block;
+    float: left;
+    margin-left: 0.555556rem;
+    width: 0.277778rem;
+    margin-top: 0.31rem;
+}
+.headPart{
+    width: 10rem;
+    position: relative;
+    margin-top: 1.194444rem;
+}
+.headPart img.bannerImg{
+    display: block;
+    width: 10rem;
+    height: auto;
+}
+.headPart .shadowPart{
+    position: absolute;
+    background-color: rgba(51,51,51,0.5);
+    height: 1.296296rem;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+.headPart .shadowPart .hospitalName{
+    color: #fff;
+    margin-left: 0.555556rem;
+    font-size: 0.351851rem;
+    line-height: 0.648148rem;
+}
+.headPart .shadowPart .hospitalAddress{
+    color: #c3c2c2;
+    font-size: 0.314814rem;
+    margin-left: 0.555556rem;
+    line-height: 0.648148rem;
+}
+.headPart .shadowPart .hospitalAddress img{
+    float: left;
+    display: block;
+    width: 0.277778rem;
+    height: 0.370370rem;
+    margin-top: 0.15rem;
+    margin-right: 0.15rem;
+}
+.headPart .shadowPart .hospitalAddress  span{
+    display: block;
+    /*float: left;*/
+}
+.hospitalInfoPart{
+    background-color: #fff;
+    width: 10rem;
+    margin-bottom: 0.185185rem;
+    padding: 0.5rem 0;
+}
+.hospitalInfoPart .hospitalTag{
+    padding: 0 0.555556rem 0.3rem 0.555556rem;
+    font-size: 0.388889rem;
+    color: #616265;
+}
+.hospitalInfoPart .hospitalDetailInfo{
+    font-size: 0.351852rem;
+    color: #616265;
+    line-height: 1.5;
+    padding: 0 0.555556rem;
+}
+.groupInfo{
+    background-color: #fff;
+}
+.groupTag{
+    height: 1.296296rem;
+    line-height: 1.296296rem;
+    margin: 0 0.555556rem;
+    font-size: 0.388889rem;
+    color: #616265;
+    border-bottom: 1px solid #a0a0a0;
+}
+.singleDoctor{
+    width: 9.055556rem;
+    margin: 0 auto;
+    padding: 0.555556rem 0;
+    height: 1.666667rem;
+    border-bottom: 1px solid #a0a0a0;
+}
+.clearfix:after {       
+    content: ".";    
+    display: block;  
+    clear: both;     
+    visibility: hidden;    
+    line-height: 0;
+    height: 0;     
+    font-size:0;   
+}
+.clearfix { *zoom:1;}
+.doctorLeftPart{
+    float: left;
+    width: 2.222222rem;
+    height: 1.666667rem;
+    margin-left: 0.083333rem;
+    margin-right: 0.537037rem;
+}
+.doctorLeftPart img{
+    width: 2.222222rem;
+    height: 1.666667rem;
+    display: block;
+}
+.doctorRightPart{
+    float: left;
+    width: 5.666667rem;
+    height: 1.537037rem;
+    padding: 0 0 0.055556rem 0;
+}
+.doctorRightPart .doctorHospitalName{
+    font-size: 0.407407rem;
+    color: #333333;
+    float: left;
+    width: 6.2rem;
+    margin-bottom: 0.05rem;
+}
+.doctorRightPart .doctorHospitalAddress{
+    font-size: 0.333333rem;
+    color: #999999;
+    margin-bottom: 0.05rem;
+    float: left;
+    width: 6.2rem;
+}
+.doctorRightPart .doctorHospitalNum {
+    float: left;  
+    width: 6.2rem;
+    color: #666666;
+    font-size: 0.370370rem;
+}
+.doctorRightPart .doctorHospitalNum span.signPeopleNum{
+    font-size: 0.370370rem;
+    float: left;
+    margin-right: 0.3rem;
+    display: block;
+}
+.doctorRightPart .doctorHospitalNum span.signFamilyNum{
+    font-size: 0.370370rem;
+    float: left;
+     display: block;
+}
+.doctorRightPart .doctorHospitalNum span span.colorNum{
+    color: #ff6600;
+}
+span.icon-arrow-left:before{
+    content: "\e903";
+    font-size: 0.6rem;
+    color: #fff;
+    position: absolute;
+    left: 0.444444rem;
+    top: 0.3rem;
+    display: block;
+}
+span.icon-position:before{
+    content: "\e91c";
+    color: #fff;
+    font-size: 0.34rem;
+    margin-right: 0.2rem;
+    float: left;
+    margin-top: 0.15rem;
+}
+
+
+
+
+
+
+

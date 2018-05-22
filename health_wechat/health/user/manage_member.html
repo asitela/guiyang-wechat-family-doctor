@@ -1,0 +1,240 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="pragma" content="no-cache"/>
+    <meta http-equiv="cache-control" content="no-cache"/>
+    <meta name="screen-orientation" content="portrait"/>
+    <meta name="x5-orientation" content="portrait"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="green"/>
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <title>成员管理</title>
+    <script type="text/javascript" src="/js/jquery.min.js"></script>
+    <script type="text/javascript" src="/js/link.js"></script>
+    <link rel="stylesheet" type="text/css" href="/common/common.css">
+    <link rel="stylesheet" type="text/css" href="/common/style.css">
+    <link rel="stylesheet" href="/common/material-icons.css">
+    <link rel="stylesheet" href="/common/cyrillic.css">
+    <!--<link rel="stylesheet" type="text/css" href="/common/muse.css">-->
+    <link rel="stylesheet" type="text/css" href="/css/user/manageMember.css">
+    <!--<script type="text/javascript" src="/common/muse-ui.js"></script>-->
+    <script type="text/javascript" src="/common/mint-ui.js"></script>
+    <link rel="stylesheet" href="/common/mint-ui.css">
+</head>
+<body>
+<div id="app" v-cloak>
+    <!-- 二级导航部分 -->
+    <p class="navigator">
+        <span class="icon-arrow-left"></span>
+        成员管理
+        <!--<a class="addMember" href="javascript:void(0);">编辑</a>-->
+    </p>
+
+    <form>
+        <!-- 基本信息 -->
+        <div class="basicInfo" id="wrap">
+            <p class="relation">
+                <span class="relationLeft">与本人关系</span>
+                <span class="relationRight">{{memberData.relat}}</span>
+            </p>
+            <p class="basicInfoTag">基本信息</p>
+            <ul class="basicInfoList">
+                <li>
+                    <span class="basicInfoLeft">居民头像</span>
+                    <img v-if="memberData.gender==defined.woman" src="/img/pic_girl.png" class="avatar">
+                    <img v-else src="/img/pic_001.png" class="avatar">
+                </li>
+                <li>
+                    <span class="basicInfoLeft">居民姓名</span>
+                    <span class="basicInfoRight">{{memberData.name}}</span>
+                </li>
+                <li>
+                    <span class="basicInfoLeft">证件号码</span>
+                    <span class="basicInfoRight">{{memberData.identity_card}}</span>
+                </li>
+                <li>
+                    <span class="basicInfoLeft">出生日期</span>
+                    <span class="basicInfoRight">{{memberData.birthday}}</span>
+                </li>
+                <li>
+                    <span class="basicInfoLeft">性别</span>
+                    <span class="basicInfoRight">{{memberData.gender_msg}}</span>
+                </li>
+                <li>
+                    <span class="basicInfoLeft">联系地址</span>
+                    <span class="basicInfoRight dot" style="width: 6rem;text-align: right">{{memberData.address}}</span>
+                    <!--<input type="text" readonly name="userAddress">-->
+                </li>
+                <li>
+                    <span class="basicInfoLeft">联系电话</span>
+                    <span class="basicInfoRight">{{memberData.mobile}}</span>
+                    <!--<input type="tel" readonly name="userPhone">-->
+                </li>
+                <li>
+                    <span class="basicInfoLeft">邮箱地址</span>
+                    <span class="basicInfoRight">{{memberData.email}}</span>
+                    <!--<input type="text" readonly name="userMail">-->
+                </li>
+            </ul>
+        </div>
+        <!-- 健康资料 -->
+        <div class="healthInfo">
+            <p class="healthInfoTag">健康资料</p>
+            <ul class="healthInfoList">
+                <li>
+                    <span class="healthInfoLeft">疾病史</span>
+                    <span class="basicInfoRight dot">{{memberData.past_history}}</span>
+                    <!--<input type="text" readonly name="userAddress">-->
+                </li>
+                <li>
+                    <span class="healthInfoLeft">过敏史</span>
+                    <span class="basicInfoRight dot">{{memberData.allergy_history}}</span>
+                    <!--<input type="tel" readonly name="userPhone">-->
+                </li>
+                <li>
+                    <span class="healthInfoLeft">居民标签</span>
+                    <span class="basicInfoRight dot">{{tag}}</span>
+                    <!--<input type="text" readonly name="userMail">-->
+                </li>
+                <li>
+                    <span class="healthInfoLeft">血型</span>
+                    <!--  <input type="text" name="userMail" placeholder="请输入邮箱地址"> -->
+                    <template>
+                        <div class="RhOption">
+                            <!--<mu-select-field  disabled v-model="RhTypeOne" underlineShow="false" name="RhType"  fullWidth="true" autoWidth="true">
+                              <mu-menu-item v-for="text,index in RhType" :key="index" :value="index" :title="text" />
+                            </mu-select-field>-->
+                            <span v-if="memberData.rh_blood">{{memberData.rh_blood}}型</span>
+                            <br/>
+                        </div>
+                    </template>
+                    <template>
+                        <div class="bloodOption">
+                            <!--<mu-select-field  disabled v-model="bloodTypeOne" underlineShow="false" name="bloodType"  fullWidth="true" autoWidth="true">
+                              <mu-menu-item v-for="text,index in bloodType" :key="index" :value="index" :title="text" />
+                            </mu-select-field>-->
+                            <span v-if="memberData.blood">{{memberData.blood}}型</span>
+                            <br/>
+                        </div>
+                    </template>
+                </li>
+            </ul>
+        </div>
+        <!-- 家庭医生 -->
+        <div class="familyDoctor">
+            <p class="familyDoctorTag">
+                家庭医生
+                <span>{{memberData.status_msg}}</span>
+            </p>
+            <ul class="familyDoctorList">
+                <li>
+                    <span class="familyDoctorLeft">签约医院</span>
+                    <span class="basicInfoRight">{{memberData.org_name}}</span>
+                    <!--<input type="text" readonly name="signHospital">-->
+                </li>
+                <li>
+                    <span class="familyDoctorLeft">签约团队</span>
+                    <span class="basicInfoRight">{{memberData.team_name}}</span>
+                    <!--<input type="tel" readonly name="signGroup">-->
+                </li>
+                <li>
+                    <span class="familyDoctorLeft">责任医生</span>
+                    <span class="basicInfoRight">{{memberData.leader_name}}</span>
+                    <!--<input type="text" readonly name="signDoctor">-->
+                </li>
+                <li>
+                    <span class="familyDoctorLeft">签约有效期</span>
+                    <span class="basicInfoRight">{{memberData.sign_end_date}}</span>
+                    <!--<input type="text" readonly name="signDate">-->
+                </li>
+            </ul>
+        </div>
+        <!--<a href="javascript:void(0);" class="checkDeal">查看家庭医生协议</a>-->
+        <button type="button" class="deleteMember" @click="deleteMember">删除成员</button>
+    </form>
+    <!-- 弹出框 -->
+    <div class="dialog" v-show="modelFlag">
+        <div class="content">
+            <div class="dialogTitle">
+                <p>您确定要删除该成员吗？</p>
+            </div>
+            <p class="dialogBtns">
+                <a href="javascript:void(0);" class="cancleBtn" @click="cancel">取消</a>
+                <a href="javascript:void(0);" class="certainBtn" @click="sub">确定</a>
+            </p>
+        </div>
+    </div>
+</div>
+</body>
+<script type="text/javascript">
+    new Vue({
+        el: '#app',
+        data() {
+            return {
+                modelFlag: false,
+                /*bloodTypeOne:0,
+                bloodType:['请选择血型','A型','B型','AB型','O型'],
+                RhTypeOne:0,
+                RhType:['选择Rh血型','Rh+血型','Rh—血型']*/
+                memberData: {},
+                tag: ''
+            }
+        },
+        created() {
+            this.GetMemberDetails();
+        },
+        methods: {
+            // 获取成员详情
+            GetMemberDetails() {
+                this.$indicator.open();
+                let url = $.formateUrl('wechat/user/user-info');
+                let params = {
+                    user_id: $.getQueryString('memberId')
+                };
+                $.get(url, params, res => {
+                    if (res.code == 0) {
+                        this.$indicator.close();
+                        this.memberData = res.content;
+                        let tags = [];
+                        for (let i = 0; i < res.content.tags.length; i++) {
+                            tags.push(res.content.tags[i].name)
+                        }
+                        this.tag = tags.toString();
+                    } else {
+                        this.$toast(res.message);
+                    }
+                    this.$indicator.close();
+                })
+            },
+
+            //    删除成员
+            deleteMember() {
+                this.modelFlag = true;
+            },
+            cancel() {
+                this.modelFlag = false;
+            },
+            sub() {
+                let url = $.formateUrl('wechat/user/delete-member');
+                let params = {
+                    user_id: $.getQueryString('memberId')
+                };
+                $.get(url, params, res => {
+                    if (res.code == 0) {
+                        this.modelFlag = false;
+                        this.$toast('删除成功');
+                        setTimeout(function () {
+                            let url = health.homeUrl + 'health/user/my_family.html';
+                            window.location.replace(url);
+                        }, 1500);
+                    } else {
+                        this.$toast(res.message);
+                    }
+                    this.modelFlag = false;
+                })
+            }
+        },
+    })
+</script>
+</html>

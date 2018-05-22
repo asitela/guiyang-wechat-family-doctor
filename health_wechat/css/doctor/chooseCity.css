@@ -1,0 +1,180 @@
+body{
+    background-color: #e5e5e5;
+}
+.navigator{
+    width: 10rem;
+    text-align: center;
+    font-size: 0.4rem;
+    color: #fff;
+    background-color: #10B9B9;
+    height: 1.194444rem;
+    line-height: 1.194444rem;
+    position: fixed;
+    left: 0;
+    top: 0;
+    right: 0;
+}
+.navigator img{
+    display: block;
+    float: left;
+    margin-left: 0.555556rem;
+    width: 0.277778rem;
+    margin-top: 0.31rem;
+}
+.searchPart{
+    /*height: 0.870370rem;
+    line-height: 0.870370rem;*/
+    padding: 0.370370rem 0;
+    background-color: #fff;
+    border-top: 1px solid #999999;
+    border-bottom: 1px solid #999999;
+    position: relative;
+    margin-top: 1.194444rem;
+}
+.searchPart input{
+    display: block;
+    width: 8.796296rem;
+    height: 0.870370rem;
+    line-height: 0.870370rem;
+    border-radius: 0.435185rem;
+    background-color: #f1f1f1;
+    border: 1px solid #f1f1f1;
+    font-size: 0.388889rem;
+    color: #999999;
+    text-indent: 0.518519rem;
+    margin: 0 auto;
+}
+.searchPart input.haveKeyWords{
+    display: block;
+    width: 8.796296rem;
+    height: 0.870370rem;
+    line-height: 0.870370rem;
+    border-radius: 0.435185rem;
+    background-color: #fff;
+    border: 1px solid #333333;
+    font-size: 0.388889rem;
+    color: #333333;
+    text-indent: 0.518519rem;
+    margin: 0 auto;
+}
+.searchPart img{
+    position: absolute;
+    display: block;
+    width: 0.68rem;
+    right: 0.955729rem;
+    top: 0.45rem;
+}
+.position{
+    height: 1rem;
+    line-height: 1rem;
+    background-color: #fff;
+    border-bottom: 1px solid #999999;
+    margin-bottom: 20px;
+}
+.position  a.leftPart{
+    float: left;
+    display: block;
+    margin-left: 0.601851rem;
+}
+.position  a.leftPart img{
+    display: block;
+    float: left;
+    width: 0.277778rem;
+    height: 0.370370rem;
+    margin-right: 0.203704rem;
+    margin-top: 0.314814rem;
+}
+.position  a.leftPart span{
+    float: left;
+    display: block;
+    font-size: 0.351852rem;
+    color: #ff6600;
+}
+.position  a.rightPart{
+    float: right;
+    display: block;
+    margin-right: 0.601852rem;
+}
+.position  a.rightPart img{
+    float: right;
+    width: 0.388889rem;
+    height: 0.388889rem;
+    margin-right: 0.185185rem;
+    display: block;
+    margin-top: 0.305556rem;
+}
+.position  a.rightPart span{
+    float: right;
+    display: block;
+    font-size: 0.351851rem;
+    color: #666666
+}
+.cityPart{
+    background-color: #fff;
+}
+.cityPart .cityPartTag {
+    font-size: 0.388889rem;
+    color: #999999;
+    height: 1rem;
+    line-height: 1rem;
+    margin: 0 0.601851rem;
+    border-bottom: 1px solid #a0a0a0;
+}
+.cityPart ul {
+    margin: 0 0.601851rem;
+}
+.cityPart ul li{
+    height: 1rem;
+    line-height: 1rem;
+    border-bottom: 1px solid #a0a0a0;
+    color: #333333;
+    font-size: 0.388889rem;
+}
+.cityPart ul li.selectedCity{
+    color: red;
+}
+.cityPart ul li span{
+    float: left;
+}
+.cityPart ul li img{
+    float: right;
+    display: block;
+    width: 0.4rem;
+    height: 0.4rem ;
+    margin-top: 0.3rem;
+}
+span.icon-search:before{
+    content: "\e91e";
+    color: #666666;
+    font-size: 0.416667rem;
+    position: absolute;
+    display: block;
+    right: 0.955729rem;
+    top: 0.6rem;
+}
+span.icon-position:before{
+    content: "\e91c";
+    color: #ff6600;
+    font-size: 0.34rem;
+    margin-right: 0.2rem;
+    float: left;
+    margin-top: 0.32rem;
+}
+span.icon-relocation:before {
+    content: "\e91d";
+    color: #666666;
+    font-size: 0.416667rem;
+    float: left;
+    margin-top: 0.28rem;
+    margin-right: 0.2rem;
+}
+span.icon-arrow-left:before{
+    content: "\e903";
+    font-size: 0.6rem;
+    color: #fff;
+    position: absolute;
+    left: 0.444444rem;
+    top: 0.3rem;
+    display: block;
+}
+

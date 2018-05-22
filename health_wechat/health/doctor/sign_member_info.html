@@ -1,0 +1,194 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="pragma" content="no-cache"/>
+    <meta http-equiv="cache-control" content="no-cache"/>
+    <meta name="screen-orientation" content="portrait"/>
+    <meta name="x5-orientation" content="portrait"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="green"/>
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <title>签约人信息</title>
+    <script type="text/javascript" src="/js/jquery.min.js"></script>
+    <script type="text/javascript" src="/js/link.js"></script>
+    <link rel="stylesheet" type="text/css" href="/common/common.css">
+    <link rel="stylesheet" type="text/css" href="/common/style.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,400italic">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" type="text/css" href="/common/muse.css">
+    <link rel="stylesheet" type="text/css" href="/css/doctor/signMemberInfo.css">
+    <link rel="stylesheet" href="/common/mint-ui.css">
+    <script type="text/javascript" src="/common/mint-ui.js"></script>
+</head>
+<body>
+<div id="app" v-cloak>
+    <!-- 二级导航部分 -->
+    <p class="navigator">
+        <span class="icon-arrow-left"></span>
+        签约人信息
+    </p>
+    <div class="infoPart">
+        <form id="signInfo">
+            <!--<div class="CardType">
+                <p class="cardTag">与本人关系</p>
+                <template>
+                    <div class="selectOption">
+                      <mu-select-field   v-model="relationOne" underlineShow="false" name="relation"  fullWidth="true" autoWidth="true">
+                        <mu-menu-item v-for="text,index in relationType" :key="index" :value="index" :title="text" />
+                      </mu-select-field>
+                      <br/>
+                    </div>
+                </template>
+            </div>-->
+            <input type="hidden" name="token" v-model="$.getToken()">
+            <div class="CardType">
+                <p class="cardTag" id="label_card">证件类型</p>
+                <template>
+                    <div class="selectOption">
+                        <mu-select-field v-model="cardOne" underlineShow="false" name="residentCardTrpe"
+                                         fullWidth="true"
+                                         autoWidth="true"
+                                         validator="notNull"
+                                         vname="label_card">
+                            <mu-menu-item v-for="text,index in cardType" :key="text.id" :value="text.id"
+                                          :title="text.card"/>
+                        </mu-select-field>
+                        <br/>
+                    </div>
+                    <input type="hidden" v-model="cardOne" name="id_type">
+                </template>
+            </div>
+            <div class="valueMessage">
+                <p class="valueMessageTag" id="label_num">证件号码</p>
+                <input type="text" placeholder="请输入证件号码" class="infoWrite"
+                       vname="label_num"
+                       validator="notNull"
+                       name="identity_card"
+                       :vtype="cardOne==defined.idCard?'IDNoNull':'BirthCertificate'"
+                       :maxlength="cardOne==defined.idCard?'18':'10'"
+                       v-model="signData.number"/>
+            </div>
+            <div class="valueMessage">
+                <p class="valueMessageTag" id="label_name">居民姓名</p>
+                <input type="text" placeholder="请输入姓名" class="infoWrite"
+                       name="name"
+                       vname="label_name"
+                       validator="notNull"
+                       v-model="signData.name"/>
+            </div>
+            <div class="valueMessage">
+                <p class="valueMessageTag" id="label_tel">手机号码</p>
+                <input type="tel" placeholder="请输入手机号码" class="infoWrite"
+                       name="mobile"
+                       vname="label_tel"
+                       validator="notNull"
+                       vtype="phone"
+                       maxlength="11"
+                       v-model="signData.tel"/>
+            </div>
+            <div class="code">
+                <p class="codeTag" id="label_code">验证码</p>
+                <p class="getCode clearfix">
+                    <input type="tel" placeholder="请输入验证码"
+                           vname="label_code"
+                           name="verify_code"
+                           validator="notNull"
+                           v-model="signData.code"/>
+                    <span class="getCodeText" v-if="!flagTime" @click="getCode">获取验证码</span>
+                    <!-- 获取验证码 倒计时样式 -->
+                    <span class="leftTime" v-if="flagTime">{{count}}S</span>
+                </p>
+            </div>
+            <!--<p class="wrongTips">请输入正确的验证码 !</p>-->
+            <div class="errorText wrongTips"></div>
+            <!-- <p class="wrongTips">居民姓名与身份证号码不匹配，请重新输入 !</p> -->
+            <!-- 确认绑定样式一 -->
+            <button type="button" class="fullInfo" @click="sub">下一步</button>
+            <!-- 确认绑定样式二 -->
+            <!-- <button ype="submit" class="shortInfo">下一步</button> -->
+        </form>
+    </div>
+</div>
+</body>
+<script type="text/javascript" src="/common/muse-ui.js"></script>
+<script type="text/javascript">
+    new Vue({
+        el: "#app",
+        data() {
+            return {
+                //relationOne:0,
+                cardOne: '',
+                cardType: [
+                    {
+                        id: defined.idCard,
+                        card: '居民身份证'
+                    },
+                    {
+                        id: defined.Birth,
+                        card: '出生证'
+                    },
+                ],
+                signData: {},
+
+                flagTime: false,
+                count: '',
+                timer: null,
+            }
+        },
+        created() {
+
+        },
+        methods: {
+            getCode() {
+                if (this.signData.tel == '' || this.signData.tel == undefined) {
+                    $('.wrongTips').text('请输入手机号');
+                    return false;
+                }
+                this.flagTime = true;
+                const TIME_COUNT = 120;
+                if (!this.timer) {
+                    this.count = TIME_COUNT;
+                    this.timer = setInterval(() => {
+                        if (this.count > 0 && this.count <= TIME_COUNT) {
+                            this.count--;
+                        } else {
+                            this.flagTime = false;
+                            clearInterval(this.timer);
+                            this.timer = null;
+                        }
+                    }, 1000);
+                    //     发送验证码
+                    let url = $.formateUrl('mobile-captcha/send');
+                    let params = {
+                        receiver: this.signData.tel
+                    };
+                    $.post(url, params, res => {
+                        if (res.code == 0) {
+                            this.$toast(res.message);
+                        } else {
+                            this.$toast(res.message);
+                        }
+                    })
+                }
+            },
+            // 下一步
+            sub() {
+                console.log(this.signData.number);
+                if (validateForm(signInfo)) {
+                    let params = $('#signInfo').serialize();
+                    let url = $.formateUrl('wechat/user-guest/binding');
+                    $.post(url, params, res => {
+                        if (res.code == 0) {
+                            window.location.href = health.homeUrl + '/health/index.html';
+                        } else {
+                            this.$toast(res.message);
+                        }
+                    })
+                }
+
+            }
+        }
+    })
+</script>
+</html>

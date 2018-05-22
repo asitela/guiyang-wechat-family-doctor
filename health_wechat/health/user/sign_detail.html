@@ -1,0 +1,78 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="pragma" content="no-cache"/>
+    <meta http-equiv="cache-control" content="no-cache"/>
+    <meta name="screen-orientation" content="portrait"/>
+    <meta name="x5-orientation" content="portrait" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="green"/>
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <title>签约详情</title>
+    <script type="text/javascript" src="/js/jquery.min.js"></script>
+    <script type="text/javascript" src="/js/link.js"></script>
+    <script type="text/javascript" src="/common/mint-ui.js"></script>
+    <link rel="stylesheet" href="/common/mint-ui.css">
+    <link rel="stylesheet" type="text/css" href="/common/common.css">
+    <link rel="stylesheet" type="text/css" href="/common/style.css">
+    <link rel="stylesheet" type="text/css" href="/css/user/signDetail.css">
+</head>
+<body>
+<div id="app" v-cloak>
+    <!-- 二级导航部分 -->
+    <p class="navigator">
+        <span class="icon-arrow-left"></span>
+        签约详情
+    </p>
+    <div class="contentPart">
+        <div class="signHospitalInfo clearfix">
+            <div class="hospitalInfoLeft">
+                <p class="hospitalName">{{signData.org_name}}</p>
+                <p class="hospitalAddress">{{signData.team_name}}</p>
+            </div>
+            <div class="hospitalImg">
+                <img v-lazy="signData.file_path?signData.file_path:'/img/pic_002.png'">
+            </div>
+        </div>
+        <div class="signHistory" v-for="item in signData.logs">
+            <p class="signResult">{{item.remark}}</p>
+            <p class="signTime">{{item.created_at}}</p>
+        </div>
+    </div>
+</div>
+</body>
+<script type="text/javascript">
+    new Vue({
+        el:'#app',
+        data(){
+            return{
+                signData:{}
+            }
+        },
+        created(){
+            this.getSignDetail();
+        },
+        methods:{
+            //    获取签约详情
+            getSignDetail(){
+                this.$indicator.open();
+                let url=$.formateUrl('wechat/user/sign-detail');
+                let params={
+                    sign_id:$.getQueryString('signID')
+                };
+                $.get(url,params,res=>{
+                    if(res.code==0){
+                        this.$indicator.close();
+                        this.signData=res.content;
+                    }else {
+                        this.$toast(res.message);
+                    }
+                    this.$indicator.close();
+                })
+            },
+        },
+
+    })
+</script>
+</html>

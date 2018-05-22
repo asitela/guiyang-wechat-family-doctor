@@ -1,0 +1,74 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="pragma" content="no-cache"/>
+    <meta http-equiv="cache-control" content="no-cache"/>
+    <meta name="screen-orientation" content="portrait"/>
+    <meta name="x5-orientation" content="portrait"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="green"/>
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <title>我的服务包</title>
+    <script type="text/javascript" src="/js/jquery.min.js"></script>
+    <script type="text/javascript" src="/js/link.js"></script>
+    <script type="text/javascript" src="/common/mint-ui.js"></script>
+    <link rel="stylesheet" href="/common/mint-ui.css">
+    <link rel="stylesheet" type="text/css" href="/common/common.css">
+    <link rel="stylesheet" type="text/css" href="/common/style.css">
+    <link rel="stylesheet" type="text/css" href="/css/user/myServiceBag.css">
+</head>
+<body>
+<div id="app">
+    <!-- 二级导航部分 -->
+    <p class="navigator">
+        <span class="icon-arrow-left"></span>
+        我的服务包
+    </p>
+    <div class="contentPart">
+        <div class="singleService" v-for="item in server" @click="serverDetails(item.pack_id)">
+            <p class="serviceInfo clearfix">
+                <span class="serviceName">{{item.name}}</span>
+                <span class="serviceCode">{{item.code}}</span>
+            </p>
+            <p class="serviceContent">适用人群：{{item.tags}}</p>
+        </div>
+    </div>
+</div>
+</body>
+<script type="text/javascript">
+    new Vue({
+        el:'#app',
+        data() {
+            return {
+                server:[]
+            }
+        },
+        created() {
+            this.getServerBag();
+        },
+        methods:{
+            //    获取服务包
+            getServerBag(){
+                this.$indicator.open();
+                let url=$.formateUrl('wechat/user/pack-list');
+                let params={
+                    user_id:''
+                };
+                $.get(url,params,res=>{
+                    if(res.code==0){
+                        this.$indicator.close();
+                        this.server=res.content;
+                    }else {
+                        this.$toast(res.message);
+                    }
+                    this.$indicator.close();
+                })
+            },
+            serverDetails(id){
+                window.location.href = health.homeUrl + 'health/user/hypertension_bag.html?packId='+id;
+            },
+        }
+    })
+</script>
+</html>

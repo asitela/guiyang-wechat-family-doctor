@@ -1,0 +1,452 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="pragma" content="no-cache"/>
+    <meta http-equiv="cache-control" content="no-cache"/>
+    <meta name="screen-orientation" content="portrait"/>
+    <meta name="x5-orientation" content="portrait"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="green"/>
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <title>签约</title>
+    <script type="text/javascript" src="/js/jquery.min.js"></script>
+    <script type="text/javascript" src="/js/link.js"></script>
+    <link rel="stylesheet" type="text/css" href="/common/common.css">
+    <link rel="stylesheet" type="text/css" href="/common/style.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,400italic">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" type="text/css" href="/common/muse.css">
+    <link rel="stylesheet" type="text/css" href="/css/doctor/sign.css">
+    <script type="text/javascript" src="/js/jSignature.min.js"></script>
+    <link rel="stylesheet" href="/common/mint-ui.css">
+    <script type="text/javascript" src="/common/mint-ui.js"></script>
+</head>
+<body>
+<div id="app" v-cloak>
+    <!-- 二级导航部分 -->
+    <p class="navigator">
+        <span class="icon-arrow-left"></span>
+        签约
+    </p>
+    <!--<form>-->
+    <!-- 居民标签 -->
+    <div class="tagPart">
+        <p class="residentTag">居民标签(默认为普通人群)</p>
+        <div class="tagList">
+            <div class="tagListContent clearfix">
+                <span class="singleTag dot" v-for="item in memberTags"
+                      @click="changeState(item.tag_id,$event)"
+                      :data-checked='0'
+                >{{item.name}}
+                </span>
+            </div>
+        </div>
+        <div class="supplyTag">
+            <!-- 补充标签 -->
+            <div class="supplyContent" v-show="otherFlag">
+                <span class="supplyOtherContent">其他</span>
+                <input type="text" placeholder="请输入其他标签" v-model="tagInfo.other" maxlength="10" name="otherTag"/>
+            </div>
+            <!-- 展示补充标签 -->
+            <!--<div class="supplyTagContent">
+               <span class="supplyOtherTagContent">其他</span>
+               <span class="supplyOtherTagList">高血压、高血压</span>
+           </div>-->
+        </div>
+    </div>
+    <!-- 居民信息 -->
+    <div class="residentInfo">
+        <div class="valueMessage">
+            <p class="valueMessageTag">
+                疾病史
+            </p>
+            <input type="text" maxlength="100" v-model="tagInfo.history" placeholder="请输入过往疾病史" class="infoWrite"
+                   name="historyIll"/>
+        </div>
+        <div class="valueMessage">
+            <p class="valueMessageTag">
+                过敏史
+            </p>
+            <input type="text" maxlength="100" v-model="tagInfo.allergic" placeholder="请输入过往药物过敏史" class="infoWrite"
+                   name="allergic"/>
+        </div>
+        <div class="residentBloodInfo">
+            <p class="bloodTag">血型</p>
+            <div class="bloodDetailInfo clearfix">
+                <div class="bloodInfoLeft">
+                    <!-- <p>
+                        请选择血型
+                        <span class="trangle"></span>
+                    </p> -->
+                    <!-- <ul>
+                        <li class="firsLine">请选择血型</li>
+                        <li>A型</li>
+                        <li>B型</li>
+                        <li>AB型</li>
+                        <li>O型</li>
+                    </ul> -->
+                    <template>
+                        <div class="selectOption">
+                            <mu-select-field v-model="type1" underlineShow="false" name="bloodType" fullWidth="true"
+                                             autoWidth="true" @change="bloodChang">
+                                <mu-menu-item v-for="text,index in bloodType" :key="text.value" :value="text.value"
+                                              :title="text.name"/>
+                            </mu-select-field>
+                            <br/>
+                        </div>
+                    </template>
+                </div>
+                <div class="bloodInfoRight">
+                    <!-- <p>
+                        选择Rh血型
+                        <span class="trangle"></span>
+                    </p>
+                    <ul>
+                        <li class="firsLine">选择Rh血型</li>
+                        <li>Rh＋血型</li>
+                        <li>Rh－血型</li>
+                    </ul> -->
+                    <template>
+                        <div class="selectOption">
+                            <mu-select-field v-model="RhType1" underlineShow="false" name="RhType" fullWidth="true"
+                                             autoWidth="true" @change="rhTypeChange">
+                                <mu-menu-item v-for="text,index in RhType" :key="text.value" :value="text.value"
+                                              :title="text.name"/>
+                            </mu-select-field>
+                            <br/>
+                        </div>
+                    </template>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 签约信息 -->
+    <p class="signInfo">签约信息</p>
+    <ul class="signInfoList">
+        <li>
+            <span class="signInfoLeft">签约社区</span>
+            <span class="signInfoRight">{{signInfo.org_name}}</span>
+        </li>
+        <li>
+            <span class="signInfoLeft">签约团队</span>
+            <span class="signInfoRight">{{signInfo.team_name}}</span>
+        </li>
+        <li>
+            <span class="signInfoLeft">责任医生</span>
+            <span class="signInfoRight">{{signInfo.name}}</span>
+        </li>
+        <li>
+            <span class="signInfoLeft">签约生效时间</span>
+            <input type="text" class="dateInput" name="birthDay" v-model="time"
+                   style="border: none;width: 2.4rem;margin-left: 3rem" readonly/>
+            <span class="icon-date icon_time" @click="openPicker"></span>
+            <mt-datetime-picker ref="picker" v-model="pickerValue" year-format="{value} 年" month-format="{value} 月"
+                                date-format="{value} 日" v-model="pickerVisible" type="date"
+                                :start-date="start_date" :end-date="end_date"
+                                @confirm="handleConfirm"></mt-datetime-picker>
+            <!--<span class="signInfoRight">2018.02.06</span>-->
+
+        </li>
+        <li>
+            <span class="signInfoLeft">有效期</span>
+            <span class="signInfoRight">1年</span>
+        </li>
+    </ul>
+    <!-- 同意签约 -->
+    <div class="agreeMent">
+        <!-- 同意签约协议 -->
+        <div class="agreeMentContent clearfix">
+            <template>
+                <div class="checkboxNew">
+                    <mu-checkbox label="" class="demo-checkbox" @change="selectChange" :value="select"/>
+                    <br/>
+                </div>
+            </template>
+            <span class="agreeDeal">已阅读并同意<span class="greenColor" @click="protocol">《签约服务协议》</span></span>
+        </div>
+
+        <!-- 签名 -->
+        <div v-show="autographFlag">
+            <div class="signatureContent clearfix">
+                <span class="signature" id="sign_canvas" @click="autographName">确定</span>
+                <span class="clear" id="reset_canvas">清除</span>
+            </div>
+            <span style="display: flex;justify-content: center; color: #10b9b9">请手写签名</span>
+            <div class="signaturePart" id="signature_canvas"></div>
+            <div class="line"
+                 style="height: 0.05rem;width: 7rem;position:relative; top:-0.8rem; background-color: #10b9b9 ; margin: 0 auto"></div>
+        </div>
+        <!-- 签名展示 -->
+        <!--<img src="/img/pic_banner.png" class="signatureImg" v-if="imgFlag">-->
+        <!-- 确认绑定样式一 -->
+        <button type="button" class="fullInfo" @click="subBinding" v-show="subFlag">确认签约</button>
+        <!-- 确认绑定样式二 -->
+        <!-- <button type="button" class="shortInfo">确认绑定</button> -->
+    </div>
+</div>
+</body>
+<script type="text/javascript" src="/common/muse-ui.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        //初始化画布
+        $("#signature_canvas").jSignature({
+            height: '2.777778rem',
+            width: '8.740740rem',
+            color: "#000",
+            'background-color':'#fff',
+            'decor-color': '#FFF'//#10b9b9
+        });
+        //重置画布
+        $('#reset_canvas').click(function () {
+            $("#signature_canvas").jSignature("clear");
+        });
+    });
+
+</script>
+<script type="text/javascript">
+
+    new Vue({
+        el: "#app",
+        data() {
+            return {
+                type1: '',
+                bloodType: [{
+                    name: '请选择血型',
+                    value: ''
+                }, {
+                    name: 'A血型',
+                    value: 'A'
+                }, {
+                    name: 'B血型',
+                    value: 'B'
+                }, {
+                    name: 'AB血型',
+                    value: 'AB'
+                }, {
+                    name: 'O血型',
+                    value: 'O'
+                }],
+                RhType1: '',
+                RhType: [{
+                    name: '选择Rh血型',
+                    value: '',
+                }, {
+                    name: 'Rh(+)血型',
+                    value: 'Rh(+)',
+                }, {
+                    name: 'Rh(-)血型',
+                    value: 'Rh(-)',
+                }],
+                time: '',
+                pickerValue: new Date(),
+                start_date: new Date(),
+                end_date: new Date(),
+                value: '2018年05月10日',
+                select: 'true',
+                //    确定绑定
+                autographFlag: false,
+                subFlag: true,
+                imgFlag: false,
+                memberTags: [],
+                selectTags: [],
+                flag: '',
+                tagInfo: {},
+                signInfo: {},
+                signInfoHistory: {},
+                otherFlag: ''
+            }
+        },
+        created() {
+            this.time = this.formatDate(new Date());
+            this.start_date.setFullYear(this.start_date.getFullYear());
+            this.end_date.setMonth(this.start_date.getMonth() + 1);
+            this.signInfoHistory = JSON.parse(window.localStorage.getItem('signInfo'));
+            this.getTags();
+            this.getSignInfo();
+        },
+        methods: {
+            // 获取系统标签
+            getTags() {
+                this.$indicator.open();
+                let url = $.formateUrl('wechat/other/get-tags');
+                $.get(url, res => {
+                    if (res.code == 0) {
+                        this.$indicator.close();
+                        this.memberTags = res.content;
+                    } else {
+                        this.$toast(res.message);
+                    }
+                    this.$indicator.close();
+                })
+            },
+            // 点击标签
+            changeState(id, e) {
+                let flag = e.target.getAttribute('data-checked');
+                this.flag = flag;
+                if (flag == 0) {   //    选中
+                    if (this.selectTags.length >= 6) {
+                        this.$toast('最多选6个标签');
+                        return false;
+                    }
+                    this.selectTags.push(id);
+                    this.selectTags.forEach((value, index) => {   //判断其他是否被选中
+                        if (defined.other == value) {
+                            this.otherFlag = true;
+                        }
+                    });
+                    e.target.setAttribute('data-checked', '1');
+                    e.target.setAttribute('class', 'selectedSingleTag');
+                } else {    //  未选中
+                    e.target.setAttribute('data-checked', '0');
+                    e.target.setAttribute('class', 'singleTag');
+                    this.selectTags.forEach((value, index) => {
+                        id == value ? this.selectTags.splice(index, 1) : '';
+                        if (defined.other == value) {
+                            this.otherFlag = false;
+                        }
+                    });
+                }
+            },
+            //血型
+            bloodChang(val) {
+                this.type1 = val;
+            },
+            rhTypeChange(val) {
+                this.RhType1 = val;
+            },
+            // 获取签约信息
+            getSignInfo() {
+                this.$indicator.open();
+                let url = $.formateUrl('wechat/team/team-info');
+                let params = {
+                    team_id: this.signInfoHistory.team_id
+                };
+                $.get(url, params, res => {
+                    if (res.code == 0) {
+                        this.$indicator.close();
+                        this.signInfo = res.content;
+                    } else {
+                        this.$toast(res.message);
+                    }
+                    this.$indicator.close();
+                })
+            },
+            // 时间
+            openPicker() {
+                this.$refs.picker.open();
+            },
+            handleConfirm() {
+                this.time = this.formatDate(this.$refs.picker.value);
+            },
+            formatDate(date) {
+                const y = date.getFullYear();
+                let m = date.getMonth() + 1;
+                m = m < 10 ? '0' + m : m;
+                let d = date.getDate();
+                d = d < 10 ? ('0' + d) : d;
+                return y + '-' + m + '-' + d
+            },
+            selectChange(val) {
+                this.select = val;
+            },
+            // 协议跳转
+            protocol() {
+                this.$messagebox({
+                    title: '提示',
+                    message: '1、在手机端签约时请使用您的真实姓名、身份证号、手机号，避免因不实信息造成签约失败；' +
+                    '2、在部分地区，手机端签约申请仅作为方便居民申请签约的渠道之一，不能代替申请人到医院进行纸质签约；' +
+                    '3、如所在社区医院需要居民线下签约，请在规定时间内到所在医院完成签约手续，才能正式成为该医院、医生签约关注的对象。',
+                });
+                // window.location.href = health.homeUrl + 'health/doctor/service_deal.html';
+            },
+            //  确定绑定  显示签名
+            subBinding() {
+                if (!this.select) {
+                    this.$toast('请勾选服务协议');
+                    return false;
+                }
+                if (this.selectTags.length <= 0) {
+                    this.$toast('请至少选择一个标签');
+                    return false;
+                }
+                this.autographFlag = true;
+                this.subFlag = false;
+                this.scrollToBottom();
+            },
+            scrollToBottom () {
+                this.$nextTick(() => {
+                    document.getElementById("app").scrollIntoView(false);
+                })
+            },
+            // 签名
+            autographName() {
+                if (this.otherFlag) {  //其他被选中
+                    if (this.tagInfo.other == '' || this.tagInfo.other == undefined) {
+                        this.$toast('请在其他项内输入内容');
+                        return false;
+                    }
+                }
+                // 判断是否有签名
+                var datapair = $("#signature_canvas").jSignature("getData");
+                let signNaive = $("#signature_canvas").jSignature('getData', 'native');
+
+                if (signNaive.length < 1) {
+                    this.$toast('请在签名区签名');
+                    return false;
+                }
+
+                var img = new Image();
+                img.src = "data:" + datapair[0] + "," + datapair[1];
+                // console.log(img.src);
+                $(img).appendTo($("#someelement"));
+                this.autographFlag = false;
+                //this.imgFlag = true;    //图片
+                //this.titleFlag = true;  //模态框提示
+                let url = $.formateUrl('wechat/sign/sign');
+                let tags = [];
+                this.selectTags.forEach((item, i) => {
+                    tags.push({
+                        tag_id: item,
+                        name: ''
+                    })
+                });
+                if (this.otherFlag) {
+                    tags.push({
+                        tag_id: '0',
+                        name: this.tagInfo.other
+                    });
+                }
+                let signParam = {
+                    blood: this.type1,
+                    rh_blood: this.RhType1,
+                    past_history: this.tagInfo.history,
+                    allergy_history: this.tagInfo.allergic,
+                    start_time: this.time,
+                    tags: tags,
+                    signed: datapair,
+                };
+                let params = Object.assign(this.signInfoHistory, signParam);
+                $.post(url, params, res => {
+                    if (res.code == 0) {
+                        let signId = res.content.sign_id;
+                        this.$messagebox({
+                            title: '提示',
+                            message: '签约申请发送成功!,请等待医生回复',
+                            closeOnClickModal: false
+                        }).then(action => {
+                            window.location.href = health.homeUrl + 'health/doctor/sign_success.html?signId=' + signId;
+                        });
+                    } else {
+                        this.$toast(res.message);
+                    }
+                });
+                //window.location.href = health.homeUrl + 'health/doctor/sign_success.html';
+            },
+        },
+        watch: {
+            'processData': 'scrollToBottom'
+        }
+    })
+</script>
+</html>

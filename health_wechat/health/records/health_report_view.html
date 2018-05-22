@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <title>健康报告-家庭医生服务管理平台</title>
+    <meta name="description" content="">
+    <meta name="screen-orientation" content="portrait">
+    <meta name="x5-orientation" content="portrait">
+    <meta id="metaEle" name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <script type="text/javascript" src="/js/jquery.min.js"></script>
+    <script type="text/javascript" src="/js/jquery.cookie.js"></script>
+    <script type="text/javascript" src="/js/health.js"></script>
+    <script type="text/javascript" src="/js/defined.js"></script>
+    <script type="text/javascript" src="/js/fastclick.js"></script>
+    <script type="text/javascript" src="/js/vue.min.js"></script>
+    <script type="text/javascript" src="/js/echarts.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="/css/records/reportview.css">
+<body>
+<div id="app" class="comm_bgbox">
+	<header class="retnav"><i onclick="javascript:history.go(-1)" class="icon-arrow-left fl"></i><span>查看报告</span></header>
+	<div class="reportbox">
+        <div class="r_logo">
+            <span>家庭医生服务管理平台</span>
+        </div>
+        <h1 class="report-title">个人健康数据分析报告</h1>
+        <div class="user-info">
+            <div>姓&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名：<span>{{account.name}}</span>
+            </div>
+            <div>性&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;别：<span>{{account.gender}}</span>
+            </div>
+            <div>年&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;龄：<span>{{account.age}}</span></div>
+            <div>服务机构：<span>{{account.org_name}}</span></div>
+            <div>报告日期：<span>{{curdata}}</span></div>
+        </div>
+        <div class="report-Prompt">本档案非医疗诊断报告，任何医疗行为请遵从医嘱。</div>
+        <div class="report-bd">
+            <div>
+                <div class="repbd-h3">重要健康指标数据趋势分析</div>
+                <div class="repbd-indent">以下我们将您历次体检的体质指数、血压、血糖等重要数据进行统计分析，更多的数据分析可登录云平台查看。</div>
+                <div class="repbd-title"><span class="icon-hr_fat"></span>脂肪指数</div>
+                <div class="repbd-img-prompt">脂肪趋势图</div>
+                <div class="repbd-img" id="fatchart">
+
+                </div>
+                <div class="repbd-border">
+                    <div><span class="Parentheses">【解释】</span>又称“体质指数”，英文 Body Mass
+                        Index（BMI），是目前国际上常用的衡量人体胖瘦程度以及是否健康的一个标准。大多数个体的体重指数与身体脂肪的百分含量有明显的相关性。具体计算方法是体重( kg)除以身高 ( m)的平方。
+                    </div>
+                    <div class="repbd-text"><span class="Parentheses">【判断】</span>＜18.5 为偏瘦，18.5~＜24 为正常，24~＜28 为超重，≥28 为肥胖。</div>
+                </div>
+                <div class="repbd-title2">预防要点</div>
+                <div><span class="Parentheses">【饮食】</span>食欲亢进者可用替代饮食(饮水、无糖饮料、多纤维饮食等)，不可每日只吃一餐或两餐，
+                    戒餐会使减肥疗法失败或食欲大增；同时补充蛋白质，增加瘦肉、鸡蛋、豆制品饮食。在控制热能减肥时，要补充人体所需的蛋白质，一般可按每公斤体重1.2~1.5克掌握。
+                </div>
+                <div class="repbd-text2">
+                    <span class="Parentheses">【运动】</span>运动可以增加机体能量的消耗，从而可以帮助减轻体重。运动可以增强胃肠蠕动及其血液循环，改善胃肠血供。控制每天运动量的大小，过量的运动消耗体内脂肪的同时也消耗了体内其他营养素。适当的体力劳动和体育锻炼，渐渐达到理想体重。
+                </div>
+                <div class="repbd-title"><span class="icon-hr_blood-pressure"></span>血压指数</div>
+                <div class="repbd-img-prompt">血压趋势图</div>
+                <div class="repbd-img" id="presschart">
+                </div>
+                <div class="repbd-border">
+                    <div><span class="Parentheses">【解释】</span>指血管内的血液对于单位面积血管壁的侧压力，通常指动脉血压，血压水平与心血管病发病率呈连续正相关。</div>
+                    <div class="repbd-text"><span class="Parentheses">【参考】</span>收缩压低于 120mmHg 和舒张压低于 80mmHg 为正常，收缩压为 120~＜140mmHg 和/或舒张压为 80~＜90mmHg
+                        为正常高值，收缩压≥140mmHg 和/或舒张压≥90mmHg 为高血压，收缩压≥140mmHg 和舒张压＜90mmHg 为单纯收缩期高血压。
+                    </div>
+                </div>
+                <div class="repbd-red">
+                    <div class="repbd-tips"><span class="icon-hint"></span>温馨提示</div>
+                    如果您的血压值已经超出正常范围，可能是临时现象，也可能是已患高血压病，请近期复查并到专科就诊！</div>
+                <div class="repbd-title2">预防要点</div>
+                <div><span class="Parentheses">【饮食】</span>饮食应高钾、低钠、低脂肪,注意戒烟,限制饮酒。晚餐应少而清淡，食用油要用含维生素E和亚油酸的植物油，控制甜食的摄入量。多吃高纤维食物，如笋、青菜、大白菜、冬瓜、番茄等，
+                    以及少量鱼、虾、禽肉、脱脂奶粉、蛋清等。
+                </div>
+                <div class="repbd-text2">
+                    <span class="Parentheses">【运动】</span>加强自身修养，改正不良个性，保持心理平衡，提高心理素质；改善人际关系，建立起适当的、规律性的工作、生活、运动、休息习惯，保持足够的睡眠，能够对降低血压起到积极作用。
+                </div>
+                <div class="repbd-title"><span class="icon-hr_blood-suger"></span>血糖指数</div>
+                <div class="repbd-img-prompt">血糖趋势图</div>
+                <div class="repbd-img" id="sugarchart">
+                </div>
+                <div class="repbd-img" id="sugaraftchart">
+                </div>
+                <div class="repbd-border">
+                    <div><span class="Parentheses">【解释】</span>空腹血糖是指至少 8 小时没有进食热量的情况下，所检测的静脉血浆葡萄糖值。</div>
+                    <div class="repbd-text"><span class="Parentheses">【参考】</span>一般国际标准是＜6.1mmol/L为正常血糖（NGR），6.1~＜7.0 mmol/L为空腹血糖受损（IFG），≥7.0
+                        mmol/L为糖尿病（DM）。或餐后（正餐后约2小时）血糖浓度超过11.0 mmol/L（200
+                        mg/dl）。诊断糖尿病还需结合糖尿病症状（高血糖所导致的多饮多食、多尿、体重下降、皮肤瘙痒、视力模糊等急性代谢紊乱表现），若无糖尿病症状，需改日重复检查。
+                    </div>
+                </div>
+                <div class="repbd-title2">预防要点</div>
+                <div><span class="Parentheses">【饮食】</span>必须控制总热量，一般是低热、低脂、低糖、高纤维膳食物。要少吃食糖、糖果、蜂蜜、甜食以及含糖饮料。</div>
+                <div class="repbd-text2"><span class="Parentheses">【运动】</span>研究显示，让一组糖尿病人每周 6 次单腿蹬踏自行车测力共计 3 个月，另一条腿则保持静止。3
+                    月后测量两条腿的肌肉组织对葡萄糖的摄入情况，发现糖尿病患者运动腿的胰岛素敏感性与健康个体相当。运动可以使过剩的脂肪组织消耗掉，还可以达到降低血脂的作用。
+                </div>
+            </div>
+            <div class="health_status">
+                <div class="repbd-h3">整体健康状况</div>
+                <div class="repbd-indent">以下为我们将分析您在报告日期内的健康数据采集信息，为您做一个综合的健康数据分析。</div>
+                <div class="repbd-h3">健康数据分析统计</div>
+                <div class="data-statistics">
+                    <div class="data-acc">
+                        <span class="icon-myaccount"></span>
+                        <span>{{account.name}}</span>
+                    </div>
+                    <div class="data-title">
+                        <span></span>
+                        <span>采集次数</span>
+                        <span>异常次数</span>
+                    </div>
+                    <div class="data_icon">
+                        <span><i class="icon-hr_ecg"></i>心电记录</span>
+                        <span class="spanblack">{{MemeberEcgStruct.all}}</span>
+                        <span class="spanorg">{{MemeberEcgStruct.abnormal}}</span>
+                    </div>
+                    <div class="data_icon">
+                        <span><i class="icon-hr_fat"></i>脂肪记录</span>
+                        <span class="spanblack">{{MemeberFat.all}}</span>
+                        <span class="spanorg">{{MemeberFat.abnormal}}</span>
+                    </div>
+                    <div class="data_icon">
+                        <span><i class="icon-hr_blood-pressure"></i>血压记录</span>
+                        <span class="spanblack">{{MemeberBloodPressure.all}}</span>
+                        <span class="spanorg">{{MemeberBloodPressure.abnormal}}</span>
+                    </div>
+                    <div class="data_icon">
+                        <span><i class="icon-hr_blood-suger"></i>血糖记录</span>
+                        <span class="spanblack">{{MemeberBloodSugar.all}}</span>
+                        <span class="spanorg">{{MemeberBloodSugar.abnormal}}</span>
+                    </div>
+                    <div class="data_icon">
+                        <span><i class="icon-hr_oxygan"></i>血氧记录</span>
+                        <span class="spanblack">{{MemberBloodOxygen.all}}</span>
+                        <span class="spanorg">{{MemberBloodOxygen.abnormal}}</span>
+                    </div>
+                </div>
+                <div class="repbd-title3">说明</div>
+                <div class="indent-Explain">
+                   <span>1.</span> 心率数据变化由于检测时受外界环境因素较大，如检测前有运动，睡眠，及其它因素影响有可能检测结果超过正常范围，如有不适请到医院就诊。
+                </div>
+                <div class="indent-Explain">
+                    <span>2.</span>脂肪率数据受当时测量方法及手部水分影响可能会影响检查结果。
+                </div>
+                <div class="indent-Explain">
+                    <span>3.</span>本健康数据分析不作为任何诊断、治疗及证明的依据。
+                </div>
+                <div class="indent-Explain">
+                    <span>4.</span>本次检查结果在正常范围的，并不能完全排除身体有潜在疾病。
+                </div>
+                <div class="indent-Explain">
+                    <span>5.</span>健康体检只是健康管理的第一步，您仍需注意身体状况变化，改善不良生活习惯，定期进行健康体检，才能享受高质量生活和快乐人生。
+                </div>
+            </div>
+           
+        </div>
+        <section class="split_border"></section>
+        <div class="detail_mar">
+            <h1 class="detail_title">益体康 - 健康管理服务平台</h1>
+            <div class="detail_title1">附件：测量记录明细</div>
+            <div class="data-acc">
+                <span>心电记录</span>
+            </div>
+            <div class="detail_header">
+                <span>序号</span>
+                <span>上传日期</span>
+                <span>心率</span>
+            </div>
+            <div class="detail_bd">
+                <div class="detail_td" v-for="(item,index) in dataRecord.MemeberEcgStruct">
+                    <span>{{index+1}}</span>
+                    <span>{{item.create_time}}</span>
+                    <span>{{item.avr_heartrate}}</span>
+                </div>
+                <div class="detail_td" v-if="dataRecord.MemeberEcgStruct+''==''">
+                    <span>没有找到数据。</span>
+                </div>
+            </div>
+            <div class="data-acc">
+                <span>脂肪记录</span>
+            </div>
+            <div class="detail_header">
+                <span>序号</span>
+                <span>上传日期</span>
+                <span>脂肪率</span>
+                <span>体质指数</span>
+            </div>
+            <div class="detail_bd">
+                <div class="detail_td" v-for="(item,index) in dataRecord.MemeberFat">
+                    <span>{{index+1}}</span>
+                    <span>{{item.create_time}}</span>
+                    <span>{{item.fatcontent}}</span>
+                    <span>{{item.bmi}}</span>
+                </div>
+                <div class="detail_td" v-if="dataRecord.MemeberFat+''==''">
+                    <span>没有找到数据。</span>
+                </div>
+            </div>
+            <div class="data-acc">
+                <span>血压记录</span>
+            </div>
+            <div class="detail_header detail_header1">
+                <span class="fixed_td">序号</span>
+                <span>上传日期</span>
+                <span>收缩压</span>
+                <span>舒张压</span>
+                <span>脉压差</span>
+            </div>
+            <div class="detail_bd detail_bd1">
+                <div class="detail_td" v-for="(item,index) in dataRecord.MemeberBloodPressure">
+                    <span class="fixed_td">{{index+1}}</span>
+                    <span>{{item.create_time}}</span>
+                    <span>{{item.systolic_pressure}}</span>
+                    <span>{{item.diastolic_pressure}}</span>
+                    <span>{{item.systolic_pressure-item.diastolic_pressure}}</span>
+                </div>
+                <div class="detail_td" v-if="dataRecord.MemeberBloodPressure+''==''">
+                    <span>没有找到数据。</span>
+                </div>
+            </div>
+             <div class="data-acc">
+                <span>血糖记录</span>
+            </div>
+            <div class="detail_header">
+                <span>序号</span>
+                <span>上传日期</span>
+                <span>血糖值</span>
+                <span>状态</span>
+            </div>
+            <div class="detail_bd">
+                <div class="detail_td" v-for="(item,index) in dataRecord.MemeberBloodSugar">
+                    <span>{{index+1}}</span>
+                    <span>{{item.create_time}}</span>
+                    <span>{{item.bloodsugar}}</span>
+                    <span>{{item.status==0?'正常':'异常'}}</span>
+                </div>
+                <div class="detail_td" v-if="dataRecord.MemeberBloodSugar+''==''">
+                    <span>没有找到数据。</span>
+                </div>
+            </div>
+               <div class="data-acc">
+                <span>血氧记录</span>
+            </div>
+            <div class="detail_header">
+                <span>序号</span>
+                <span>上传日期</span>
+                <span>血氧含量</span>
+                <span>脉率值</span>
+            </div>
+            <div class="detail_bd">
+                <div class="detail_td" v-for="(item,index) in dataRecord.MemberBloodOxygen">
+                    <span>{{index+1}}</span>
+                    <span>{{item.create_time}}</span>
+                    <span>{{item.oxygen}}</span>
+                    <span>{{item.pulse}}</span>
+                </div>
+                <div class="detail_td" v-if="dataRecord.MemberBloodOxygen+''==''">
+                    <span>没有找到数据。</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
+<script>
+    new Vue({
+        el: "#app",
+        data: {
+            token:  $.getToken(),
+            user_id: $.getQueryString("user_id"),
+            start_time: $.getQueryString("start_time"),
+            end_time: $.getQueryString("end_time"),
+            account:[],
+            reportdatas:[],
+            dataRecord:[],
+            MemeberEcgStruct:[],
+            MemeberBloodSugar:[],
+            MemeberBloodPressure:[],
+            MemeberFat:[],
+            MemberBloodOxygen:[],
+            curdata:new Date().format("yyyy/MM/dd")
+        },
+        mounted: function () {
+            this.init();
+        },
+        methods: {
+            init:function(){
+                let url = $.formateUrl('wechat/health/report');
+                $.get(url,{
+                    token:this.token,
+                    user_id:this.user_id,
+                    start_time:this.start_time,
+                    end_time:this.end_time,
+                }, _data => {
+                    if (_data.code == 0) {
+                        var res =  _data.content;
+                        this.reportdatas = _data.content;
+                        this.account = res.user;
+                        this.start_time=res.start_time;
+                        this.end_time=res.end_time;
+                        var dataLine=res.dataLine;
+                        this.dataRecord=res.dataRecord;
+                            if(dataLine.MemeberFat==undefined||dataLine.MemeberFat.date==undefined){
+                                $("#fatchart").html("暂无测量数据");
+                            }
+                            else{
+                                this.initechartfat(dataLine.MemeberFat);
+                            }
+                            if(dataLine.MemeberBloodPressure==undefined||dataLine.MemeberBloodPressure.date==undefined){
+                                $("#presschart").html("暂无测量数据");
+                            }
+                            else{
+                                this.initechartpress(dataLine.MemeberBloodPressure);
+                            }
+                            if(dataLine.MemeberBloodSugar==undefined){
+                                $("#sugarchart").html("暂无测量数据");
+                            }else
+                            {
+                                this.initechartsugar(dataLine.MemeberBloodSugar);
+                            }
+
+                        this.MemeberEcgStruct=res.dataCount.MemeberEcgStruct;
+                        this.MemeberBloodSugar=res.dataCount.MemeberBloodSugar;
+                        this.MemeberBloodPressure=res.dataCount.MemeberBloodPressure;
+                        this.MemeberFat=res.dataCount.MemeberFat;
+                        this.MemberBloodOxygen=res.dataCount.MemberBloodOxygen;
+                    } else {
+                        console.log(_data.message);
+                    }
+                });
+            },
+            initechartfat: function (MemeberFat) {
+                var fatdMap = document.getElementById('fatchart');
+                //用于使chart自适应高度和宽度,通过窗体高宽计算容器高宽
+                var resizeWorldMapContainer = function () {
+                    fatdMap.style.width = window.innerWidth >= 600 ? '600px': (window.innerWidth-30) +'px';
+                    fatdMap.style.height= window.innerWidth >= 300? '300px':window.innerWidth +'px';
+                };
+                //设置容器高宽
+                resizeWorldMapContainer();
+
+                // 基于准备好的dom，初始化echarts实例
+                var myChart = echarts.init(fatdMap);
+                myChart.resize();
+
+                //初始化脂肪数据 指定图表的配置项和数据
+                var option = {
+                    backgroundColor: 'white',
+                    title: {
+                        text: '',
+                        subtext: ''
+                    },
+                    tooltip: {
+                        trigger: 'axis'
+                    },
+                    legend: {
+                        data:['脂肪含量','体质指数','水分含量']
+                    },
+                    grid: {
+                        left: '3%',
+                        right: '6%',
+                        bottom: '3%',
+                        containLabel: true
+                    },
+                    toolbox: {
+                        feature: {
+                        }
+                    },
+                    xAxis: {
+                        type: 'category',
+                        boundaryGap: false,
+                        data: []
+                    },
+                    yAxis: {
+                        type: 'value'
+                    },
+                    series: [
+                        {
+                            name:'脂肪含量',
+                            type:'line',
+                            markPoint:{
+                                data:[
+                                    {
+                                        type: 'max',
+                                        name: '最大值'
+                                    },{
+                                        type: 'min',
+                                        name: '最小值'
+                                    }
+                                ]
+                            },
+                            data:[]
+                        },
+                        {
+                            name:'体质指数',
+                            type:'line',
+                            markPoint:{
+                                data:[
+                                    {
+                                        type: 'max',
+                                        name: '最大值'
+                                    },{
+                                        type: 'min',
+                                        name: '最小值'
+                                    }
+                                ]
+                            },
+                            data:[]
+                        },
+                        {
+                            name:'水分含量',
+                            type:'line',
+                            markPoint:{
+                                data:[
+                                    {
+                                        type: 'max',
+                                        name: '最大值'
+                                    },{
+                                        type: 'min',
+                                        name: '最小值'
+                                    }
+                                ]
+                            },
+                            data:[]
+                        }
+                    ]
+                };
+                    option.xAxis.data=MemeberFat.date;
+                    option.title.subtext="\n"+this.start_time+"-"+this.end_time;
+                    option.series[0].data=MemeberFat.fat;
+                    option.series[1].data=MemeberFat.bmi;
+                    option.series[2].data=MemeberFat.water;
+                    myChart.setOption(option);
+
+                // 使用刚指定的配置项和数据显示图表。
+                //用于使chart自适应高度和宽度
+                window.onresize = function () {
+                    //重置容器高宽
+                    resizeWorldMapContainer();
+                    myChart.resize();
+                };
+            },
+            initechartpress: function (MemeberBloodPressure) {
+                var pressdMap = document.getElementById('presschart');
+                //用于使chart自适应高度和宽度,通过窗体高宽计算容器高宽
+                var resizeWorldMapContainer = function () {
+                    pressdMap.style.width = window.innerWidth >= 600 ? '600px': (window.innerWidth-30) +'px';
+                    pressdMap.style.height  = window.innerWidth >= 300? '300px':window.innerWidth +'px';
+                };
+                //设置容器高宽
+                resizeWorldMapContainer();
+
+                // 基于准备好的dom，初始化echarts实例
+                var pressChart = echarts.init(pressdMap);
+                pressChart.resize();
+
+                //初始化血压数据 指定图表的配置项和数据
+                var pressopt = {
+                    backgroundColor: 'white',
+                    title: {
+                        text: '',
+                        subtext: ''
+                    },
+                    tooltip: {
+                        trigger: 'axis'
+                    },
+                    legend: {
+                        data:['舒张压','收缩压']
+                    },
+                    grid: {
+                        left: '3%',
+                        right: '6%',
+                        bottom: '3%',
+                        containLabel: true
+                    },
+                    toolbox: {
+                        feature: {
+                        }
+                    },
+                    xAxis: {
+                        type: 'category',
+                        boundaryGap: false,
+                        data: []
+                    },
+                    yAxis: {
+                        type: 'value'
+                    },
+                    series: [
+                        {
+                            name:'舒张压',
+                            type:'line',
+                            markPoint:{
+                                data:[
+                                    {
+                                        type: 'max',
+                                        name: '最大值'
+                                    },{
+                                        type: 'min',
+                                        name: '最小值'
+                                    }
+                                ]
+                            },
+                            markLine:{
+                                silent:true,
+                                data:[
+                                    {
+                                        yAxis:90,
+                                        lineStyle:{
+                                            normal:{color:'green'}
+                                        }
+                                    }
+                                ]
+                            },
+                            data:[]
+                        },
+                        {
+                            name:'收缩压',
+                            type:'line',
+                            markPoint:{
+                                data:[
+                                    {
+                                        type: 'max',
+                                        name: '最大值'
+                                    },{
+                                        type: 'min',
+                                        name: '最小值'
+                                    }
+                                ]
+                            },
+                            data:[]
+                        }
+                    ]
+                };
+                if(MemeberBloodPressure.date!=undefined){
+                    pressopt.xAxis.data=MemeberBloodPressure.date;
+                    pressopt.title.subtext="\n"+this.start_time+"-"+this.end_time;
+                    pressopt.series[0].data=MemeberBloodPressure.diastolic;
+                    pressopt.series[1].data=MemeberBloodPressure.systolic;
+                    pressChart.setOption(pressopt);
+                }
+
+                // 使用刚指定的配置项和数据显示图表。
+                //用于使chart自适应高度和宽度
+                window.onresize = function () {
+                    //重置容器高宽
+                    resizeWorldMapContainer();
+                    pressChart.resize();
+                };
+            },
+            initechartsugar: function (MemeberBloodSugar) {
+                var sugarbefMap = document.getElementById('sugarchart');
+                var sugaraftMap = document.getElementById('sugaraftchart');
+                //用于使chart自适应高度和宽度,通过窗体高宽计算容器高宽
+                var resizeWorldMapContainer = function () {
+                    sugarbefMap.style.width=sugaraftMap.style.width = window.innerWidth >= 600 ? '600px': (window.innerWidth-30) +'px';
+                    sugarbefMap.style.height  =sugaraftMap.style.height = window.innerWidth >= 300? '300px':window.innerWidth +'px';
+                };
+                //设置容器高宽
+                resizeWorldMapContainer();
+
+                // 基于准备好的dom，初始化echarts实例
+                var sugarChart = echarts.init(sugarbefMap);
+                var sugarChart1 = echarts.init(sugaraftMap);
+                sugarChart.resize();
+                sugarChart1.resize();
+                //初始化血糖数据 指定图表的配置项和数据
+                var beforeOption = {
+                    backgroundColor: 'white',
+                    title: {
+                        text: ''
+                    },
+                    tooltip: {
+                        trigger: 'axis'
+                    },
+                    legend: {
+                        data: ['餐前']
+                    },
+                    grid: {
+                        left: '3%',
+                        right: '6%',
+                        bottom: '3%',
+                        containLabel: true
+                    },
+                    toolbox: {
+                        feature: {}
+                    },
+                    xAxis: {
+                        type: 'category',
+                        boundaryGap: false,
+                        data: []
+                    },
+                    yAxis: {
+                        type: 'value'
+                    },
+                    series: [
+                        {
+                            name: '餐前',
+                            type: 'line',
+                            stack: '总量',
+                            itemStyle : {
+                                normal : {
+                                    lineStyle:{
+                                        color:'#ff6600'
+                                    }
+                                }
+                            },
+                            markPoint: {
+                                data: [
+                                    {
+                                        type: 'max',
+                                        name: '最大值',
+                                        itemStyle : {
+                                            normal : {
+                                                color:'#ff6600'
+                                            }
+                                        }
+                                    }, {
+                                        type: 'min',
+                                        name: '最小值',
+                                        itemStyle : {
+                                            normal : {
+                                                color:'#ff6600'
+                                            }
+                                        }
+                                    }
+                                ]
+                            },
+                            data: []
+                        }
+                    ]
+                };
+                var afterOption = {
+                    backgroundColor: 'white',
+                    tooltip: {
+                        trigger: 'axis'
+                    },
+                    legend: {
+                        data: ['餐后']
+                    },
+                    grid: {
+                        left: '3%',
+                        right: '6%',
+                        bottom: '3%',
+                        containLabel: true
+                    },
+                    toolbox: {
+                        feature: {}
+                    },
+                    xAxis: {
+                        type: 'category',
+                        boundaryGap: false,
+                        data: []
+                    },
+                    yAxis: {
+                        type: 'value'
+                    },
+                    series: [
+                        {
+                            name: '餐后',
+                            type: 'line',
+                            stack: '总量',
+                            itemStyle : {
+                                normal : {
+                                    lineStyle:{
+                                        color:'#77b2ba'
+                                    }
+                                }
+                            },
+                            markPoint: {
+                                data: [
+                                    {
+                                        type: 'max',
+                                        name: '最大值',
+                                        itemStyle : {
+                                            normal : {
+                                                color:'#77b2ba'
+                                            }
+                                        }
+                                    }, {
+                                        type: 'min',
+                                        name: '最小值',
+                                        itemStyle : {
+                                            normal : {
+                                                color:'#77b2ba'
+                                            }
+                                        }
+                                    }
+                                ]
+                            },
+                            data: []
+                        }
+                    ]
+                }
+                if(MemeberBloodSugar.beforeDate!=undefined){
+                    beforeOption.xAxis.data=MemeberBloodSugar.beforeDate;
+                    beforeOption.title.subtext="\n"+this.start_time+"-"+this.end_time;
+                    beforeOption.series[0].data=MemeberBloodSugar.before;
+                    sugarChart.setOption(beforeOption);
+                }
+                if(MemeberBloodSugar.afterDate!=undefined){
+                    afterOption.xAxis.data=MemeberBloodSugar.afterDate;
+                    //                afterOption.title.subtext="\n"+this.start_time+"-"+this.end_time;
+                    afterOption.series[0].data=MemeberBloodSugar.after;
+                    sugarChart1.setOption(afterOption);
+                }
+                // 使用刚指定的配置项和数据显示图表。
+                //用于使chart自适应高度和宽度
+                window.onresize = function () {
+                    //重置容器高宽
+                    resizeWorldMapContainer();
+                    sugarChart.resize();
+                    sugarChart1.resize();
+                };
+            }
+        }
+    });
+</script>

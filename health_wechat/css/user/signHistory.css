@@ -1,0 +1,267 @@
+body{
+    background-color: #e5e5e5;
+}
+.navigator{
+    width: 10rem;
+    text-align: center;
+    font-size: 0.4rem;
+    color: #fff;
+    background-color: #10B9B9;
+    height: 1.194444rem;
+    line-height: 1.194444rem;
+    position: fixed;
+    left: 0;
+    top: 0;
+    right: 0;
+}
+span.icon-arrow-left:before{
+    content: "\e903";
+    font-size: 0.6rem;
+    color: #fff;
+    position: absolute;
+    left: 0.444444rem;
+    top: 0.3rem;
+    display: block;
+}
+.clearfix:after {       
+    content: ".";    
+    display: block;  
+    clear: both;     
+    visibility: hidden;    
+    line-height: 0;
+    height: 0;     
+    font-size:0;   
+}
+.clearfix { *zoom:1;}
+.contentPart{
+    margin-top: 1.194444rem;
+}
+.singleSign{
+    background-color: #fff;
+    border-top: 1px solid #a0a0a0;
+    border-bottom: 1px solid #a0a0a0;
+    margin-bottom: 0.185185rem;
+}
+.signTopPart{
+    margin: 0 0.425926rem;
+    padding: 0 0.185185rem;
+    border-bottom: 1px solid #a0a0a0;
+    height: 1.944444rem;
+}
+.signInfo{
+    padding-top: 0.470370rem;
+    margin-bottom: 0.12rem;
+}
+.signAddress{
+    font-size: 0.407407rem;
+    color: #333333;
+}
+.signStatusOne{
+    float: right;
+    /*color: #0099ff;*/
+    font-size: 0.444444rem;
+    margin-top: -0.05rem;
+}
+.signStatusTwo{
+    float: right;
+    color: #10B9B9;
+    font-size: 0.444444rem;
+    margin-top: -0.05rem;
+}
+.signStatusThree{
+    float: right;
+    color: #999999;
+    font-size: 0.444444rem;
+    margin-top: -0.05rem;
+}
+.rev-application{
+    border-radius: 5px;
+    padding: 0.1rem;
+    color: #EC971F;
+    /*border: 1px solid #EC971F!important;*/
+}
+.dismissal{
+    border-radius: 5px;
+    padding: 0.1rem;
+    color: #337AB7!important;
+    /*border: 1px solid #337AB7!important;*/
+}
+.surrender{
+    border-radius: 5px;
+    padding: 0.1rem;
+    color:#20191a8f!important;
+    /*border: 1px solid #20191a8f!important;*/
+}
+.member-state-fa{
+    border-radius: 5px;
+    padding: 0.1rem;
+    color: #7e57c2!important;
+    /*border: 1px solid #7e57c2!important;*/
+}
+.member-state-su{
+    border-radius: 5px;
+    padding: 0.1rem;
+    color: #10b9b9!important;
+    /*border: 1px solid #10b9b9!important;*/
+}
+.signTime{
+    font-size: 0.351852rem;
+    color: #999999;
+    margin-bottom: 0.35rem;
+}
+.avatar{
+    float: left;
+    width: 0.925926rem;
+    height: 0.925926rem;
+    border-radius: 0.462963rem;
+    margin-right: 0.370370rem;
+    margin-top: 0.509259rem;
+    margin-left: 0.648148rem;
+    margin-bottom: 0.509259rem;
+}
+.avatar img{
+    width: 0.925926rem;
+    height: 0.925926rem;
+    border-radius: 0.462963rem;
+}
+.signProgress{
+    width: 7.407407rem;
+    float: left;
+}
+.signProgress p.signContext{
+    width: 7.407407rem;
+    font-size: 0.370370rem;
+    color: #999999;
+    padding-top: 0.45rem;
+    padding-bottom: 0.45rem;
+}
+a.cancleApply{
+    color: #ff3300;
+    font-size: 0.351852rem;
+    float: right;
+    text-decoration: underline;
+}
+.dialog{
+    position: fixed;
+    background: rgba(51,51,51,0.5);
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+}
+.content{
+    position: absolute;
+    top: 4.5rem;
+    width: 7.777778rem;
+    left: 50%;
+    margin-left: -3.888889rem;
+}
+.content .dialogTitle{
+    background: #fff;
+    border-radius: 0.092593rem 0.092593rem 0 0;
+    padding: 1.3rem 0;
+    text-align: center;
+    border-bottom: 1px solid #a0a0a0;
+}
+.content .dialogTitle p{
+    width: 60%;
+    margin: 0 auto;
+    text-align: center;
+    color: #666666;
+    font-size: 0.388889rem;
+}
+.content .dialogBtns{
+    height: 1.296296rem;
+    line-height: 1.296296rem;
+}
+.content .dialogBtns a.cancleBtn{
+    display: block;
+    float: left;
+    width: 50%;
+    text-align: center;
+    color: #666666;
+    font-size: 0.388889rem;
+    background: #fff;
+    border-radius: 0 0 0 0.092593rem;
+}
+.content .dialogBtns a.certainBtn{
+    display: block;
+    float: left;
+    width: 50%;
+    text-align: center;
+    color: #fff;
+    font-size: 0.388889rem;
+    background: #10B9B9;
+    border-radius: 0 0 0.092593rem 0;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,200 @@
+.navigator{
+    width: 10rem;
+    text-align: center;
+    font-size: 0.4rem;
+    color: #fff;
+    background-color: #10B9B9;
+    height: 1.194444rem;
+    line-height: 1.194444rem;
+    left: 0;
+    top: 0;
+    right: 0;
+    position: fixed;
+    z-index: 99;
+}
+.infoPart{
+    width: 9.111111rem;
+    margin: 0 auto;
+    margin-top: 1.194444rem;
+}
+.CardType{
+    border-bottom: 1px solid #666666;
+    position: relative;
+    height: 2.14rem;
+}
+.CardType .cardTag {
+    font-size: 0.370370rem;
+    color: #999999;
+    padding: 0.444444rem 0 0.1rem 0.185185rem;
+}
+.cardInfo .cardName{
+    display: block;
+    float: left;
+    color: #333333;
+    font-size: 0.388889rem;
+    padding-left: 0.185185rem
+}
+.cardInfo .trangle{
+    float: right;
+    margin-left: 0.15rem;
+    width: 0;
+    height: 0;
+    border-left: 0.148rem solid transparent;
+    border-right: 0.148rem solid transparent;
+    border-top: 0.185185rem solid #333333;
+    margin-top: 0.26rem;
+}
+.cardList{
+    position: absolute;
+    width: 9rem;
+    padding: 4px;
+    background: #fff;
+    border: 1px solid #10b9b9;
+    left: 0;
+    top: 1.05rem;
+    display: none;
+}
+.cardList li{
+    height: 0.8rem;
+    line-height: 0.8rem;
+    text-align: center;
+    font-size: 0.388889rem;
+}
+.cardList li.idCard{
+    background: #10b9b9;
+    color: #fff;
+}
+.valueMessage{
+    border-bottom: 1px solid #666666;
+    padding: 0.4rem 0 0.3rem 0.185185rem;
+}
+.valueMessageTag{
+    font-size: 0.370370rem;
+    color: #999999;
+    margin-bottom: 0.15rem;
+}
+input.infoWrite{
+    display: block;
+    width: 8.8rem;
+    border: none;
+    outline: none;
+    font-size: 0.388889rem;
+    color: #333333;
+}
+.code .codeTag{
+    padding: 0.4rem 0 0.15rem 0.185185rem;
+    font-size: 0.370370rem;
+    color: #999999;
+}
+.getCode input{
+    display: block;
+    float: left;
+    width: 5.740741rem;
+    border:none;
+    border-bottom: 1px solid #666666;
+    color: #333333;
+    font-size: 0.388889rem;
+    text-indent: 0.185185rem;
+    padding-bottom: 0.3rem;
+}
+.getCode span.getCodeText{
+    float: right;
+    width: 2.962963rem;
+    height: 1rem;
+    line-height: 1rem;
+    text-align: center;
+    display: block;
+    border: 1px solid #10b9b9;
+    color: #10b9b9;
+    font-size: 0.351852rem;
+    border-radius: 5px;
+    margin-top:-0.25rem;
+}
+.getCode span.leftTime{
+    float: right;
+    width: 2.962963rem;
+    height: 1rem;
+    line-height: 1rem;
+    text-align: center;
+    display: block;
+    border: 1px solid #999999;
+    color: #fff;
+    font-size: 0.351852rem;
+    border-radius: 5px;
+    margin-top:-0.25rem;
+    background: #999999;
+}
+.clearfix:after {       
+    content: ".";    
+    display: block;  
+    clear: both;     
+    visibility: hidden;    
+    line-height: 0;
+    height: 0;     
+    font-size:0;   
+}
+.clearfix { *zoom:1;}
+.wrongTips{
+    margin-top: 0.277778rem;
+    color: #ff3300;
+    font-size: 0.333333rem;
+    padding-left: 0.185185rem;
+}
+
+
+
+button.shortInfo{
+    display: block;
+    width: 9.111111rem;
+    height: 1.111111rem;
+    line-height: 1.111111rem;
+    text-align: center;
+    border-radius: 5px;
+    margin-top: 0.648148rem;
+    font-size: 0.416667rem;
+    background: #999999;
+    color: #fff;
+}
+button.fullInfo{
+    display: block;
+    width: 9.111111rem;
+    height: 1.111111rem;
+    line-height: 1.111111rem;
+    text-align: center;
+    border-radius: 5px;
+    margin-top: 0.648148rem;
+    font-size: 0.416667rem;
+    background: #10b9b9;
+    color: #fff;
+}
+span.icon-arrow-left:before{
+    content: "\e903";
+    font-size: 0.6rem;
+    color: #fff;
+    position: absolute;
+    left: 0.444444rem;
+    top: 0.3rem;
+    display: block;
+}
+.selectOption{
+    width: 9.12rem;
+}
+.label-foucs{
+    border: none;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

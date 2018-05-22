@@ -1,0 +1,127 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="pragma" content="no-cache"/>
+    <meta http-equiv="cache-control" content="no-cache"/>
+    <meta name="screen-orientation" content="portrait"/>
+    <meta name="x5-orientation" content="portrait" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="green"/>
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <title>医院介绍</title>
+    <script type="text/javascript" src="/js/jquery.min.js"></script>
+    <script type="text/javascript" src="/js/link.js"></script>
+    <link rel="stylesheet" type="text/css" href="/common/common.css">
+    <link rel="stylesheet" type="text/css" href="/common/style.css">
+    <link rel="stylesheet" type="text/css" href="/css/doctor/hospitalInfo.css">
+    <link rel="stylesheet" href="/common/mint-ui.css">
+    <script type="text/javascript" src="/common/mint-ui.js"></script>
+</head>
+<body>
+<div id="app" v-cloak>
+    <!-- 二级导航部分 -->
+    <p class="navigator">
+        <span class="icon-arrow-left"></span>
+        医院介绍
+    </p>
+    <!-- banner图部分 -->
+    <div class="headPart">
+        <img :src="hospitalData.file_path" class="bannerImg" style="height: 4.1667rem">
+        <div class="shadowPart">
+            <p class="hospitalName">{{hospitalData.cn_name}}</p>
+            <p class="hospitalAddress">
+                <span class="icon-position"></span>
+                <span class="dot" style="width: 8.5rem">{{hospitalData.address}}</span>
+            </p>
+        </div>
+    </div>
+    <div class="hospitalInfoPart">
+        <p class="hospitalTag">医院简介</p>
+        <div class="hospitalDetailInfo">{{hospitalData.remark}}</div>
+    </div>
+    <div class="groupInfo">
+        <p class="groupTag">团队介绍</p>
+        <div class="doctorList">
+            <div class="singleDoctor clearfix" @click="hospitalDetails(item.team_id )" v-for="item in teamData">
+                <div class="doctorLeftPart">
+                    <img v-lazy="item.file_path">
+                </div>
+                <div class="doctorRightPart">
+                    <p class="doctorHospitalName">
+                        {{item.name}}
+                        <span style="margin-left: 5px">({{item.doctor_count}})名医生</span>
+                    </p>
+                    <p class="doctorHospitalAddress">&nbsp;</p>   <!-- 删掉 -->
+                    <p class="doctorHospitalNum">
+                        <span class="signPeopleNum">
+                            签约<span class="colorNum">{{item.sign_count}}</span>人
+                        </span>
+                        <!--<span class="signFamilyNum">
+                            签约家庭<span class="colorNum">230</span>户
+                        </span>-->
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+<script type="text/javascript">
+    new Vue({
+        el: "#app",
+        data() {
+            return {
+                hospitalData:{},
+                teamData:[]
+            }
+        },
+        created() {
+            this.getHospital();
+            this.getTeam();
+        },
+        methods: {
+            hospitalDetails(teamId) {
+                window.location.href = health.homeUrl + 'health/doctor/hospital_details.html?teamId='+teamId;
+            },
+        //    获取医院详情
+            getHospital(){
+                this.$indicator.open();
+                let url = $.formateUrl('wechat/org/detail');
+                let params={
+                    orgid: $.getQueryString('id')
+                };
+                $.get(url,params,res=>{
+                    if(res.code==0){
+                        this.$indicator.close();
+                        this.hospitalData=res.content;
+                    }else {
+                        this.$toast(res.message);
+                    }
+                    this.$indicator.close();
+                })
+            },
+
+        //    获取团队
+            getTeam(){
+                this.$indicator.open();
+                let url = $.formateUrl('wechat/team/list');
+                let params={
+                    orgid: $.getQueryString('id')
+                };
+                $.get(url,params,res=>{
+                    if(res.code==0){
+                        this.$indicator.close();
+                        this.teamData=res.content;
+                    }else {
+                        this.$toast(res.message);
+                    }
+                    this.$indicator.close();
+                })
+            }
+        },
+
+
+    })
+</script>
+</html>

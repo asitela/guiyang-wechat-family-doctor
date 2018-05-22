@@ -1,0 +1,228 @@
+body{
+    background-color: #e5e5e5;
+}
+.navigator{
+    width: 10rem;
+    text-align: center;
+    font-size: 0.4rem;
+    color: #fff;
+    background-color: #10B9B9;
+    height: 1.194444rem;
+    line-height: 1.194444rem;
+    left: 0;
+    top: 0;
+    right: 0;
+    position: fixed;
+}
+span.icon-arrow-left:before{
+    content: "\e903";
+    font-size: 0.6rem;
+    color: #fff;
+    position: absolute;
+    left: 0.444444rem;
+    top: 0.3rem;
+    display: block;
+}
+span.icon-arrowTwo-left:before{
+    content: "\e903";
+    font-size: 0.6rem;
+    color: #fff;
+    position: absolute;
+    left: 0.444444rem;
+    top: 0.3rem;
+    display: block;
+}
+.operation{
+    color: #fff;
+    position: absolute;
+    right: 0.444444rem;
+    top: 0.06rem;
+    display: block;
+}
+.case_title{
+    display: flex;
+    align-items: center;
+    margin-top:1.194444rem ;
+    height: 1.5rem;
+    background-color: #ffffff;
+    padding: 0 2%;
+    font-size: 0.35rem;
+    border-bottom: 1px solid #000000;
+}
+.title{
+    margin-left: 20px;
+    margin-right: 20px;
+}
+.case_title input{
+    width: 6rem;
+    height: 0.6rem;
+    border-radius: 15px;
+    border: 1px solid #5a5a5a;
+}
+.del{
+    position: relative;
+    top: 0;
+    left: -0.8rem;
+    display: inline-block;
+    width: 0.5rem;
+    height: 0.5rem;
+    border-radius: 50%;
+    color: #FFFFFF;
+    background-color: #ccc;
+    text-align: center;
+    line-height: 0.45rem;
+}
+.case_con{
+    padding: 5px 0;
+    font-size: 0.35rem;
+    position: relative;
+
+}
+.case_con textarea{
+    resize:none;
+    /*background-color: #e5e5e5;*/
+    border: none;
+    width: 96%;
+    height: 5rem;
+    padding: 0 2%;
+    font-size: 0.35rem;
+}
+.remnant{
+    position: absolute;
+    top:4.5rem;
+    right: 10px;
+}
+
+.pictureList{
+    width: 8.740740rem;
+    margin: 0 auto 0.277778rem;
+}
+
+.pic_con{
+    background-color: #ffffff;
+    padding-bottom: 0.1rem;
+}
+.clearfix:after {
+    content: ".";
+    display: block;
+    clear: both;
+    visibility: hidden;
+    line-height: 0;
+    height: 0;
+    font-size:0;
+}
+.singlePicture{
+    width: 2.037037rem;
+    height: 2.037037rem;
+    border: 1px solid #999999;
+    float: left;
+    margin-right: 0.462963rem;
+    margin-top: 0.4rem;
+    position: relative;
+}
+
+.pictureList .singlePicture img{
+    width: 2.037037rem;
+    height: 2.037037rem;
+    display: block;
+}
+span.icon-del:before{
+    content: "\e908";
+    color: #fff;
+    font-size: 0.32rem;
+    background-color: #666666;
+    width: 0.45rem;
+    height: 0.45rem;
+    line-height: 0.45rem;
+    text-align: center;
+    border-radius: 0.225rem;
+    top: -0.2rem;right: -0.2rem;
+    display: block;
+    position: absolute;
+}
+.selectPicture{
+    width: 2.037037rem;
+    height: 2.037037rem;
+    border: 1px solid #999999;
+    float: left;
+    margin-right: 0.462963rem;
+    margin-top: 0.4rem;
+    position: relative;
+}
+ .selectPicture{
+    position: relative;
+}
+span.icon-picture:before{
+    content: "\e91a";
+    color: #999999;
+    font-size: 1rem;
+    margin-top: 0.45rem;
+    margin-bottom: 0.45rem;
+    margin-left: 0.5rem;
+    display: block;
+    float: left;
+}
+.picNum{
+    position: absolute;
+    left: 37%;
+    top:71%;
+}
+.pictureList .selectPicture input{
+    display: block;
+    width: 2.037037rem;
+    height: 2.037037rem;
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    opacity: 0;
+}
+
+.model{
+    position: fixed;
+    top:0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 99999;
+    background: rgba(0,0,0,0.4)
+}
+.model_pic{
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    justify-content: center;
+}
+.model img{
+    width: 100%;
+    height: 100%;
+}
+.add{
+    display: flex;
+    justify-content: center;
+}
+.sub_add{
+    display: inline-block;
+    width: 4rem;
+    height: 1rem;
+    background-color: #10b9b9;
+    color: #FFFFFF;
+    font-size: 0.4rem;
+    line-height: 1rem;
+    border-radius: 0.1rem;
+    text-align: center;
+    margin: 0.5rem 0 0.5rem 0;
+}
+
+
+
+
+
+
+
+
+
+
+

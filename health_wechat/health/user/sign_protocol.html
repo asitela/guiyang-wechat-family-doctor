@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="pragma" content="no-cache"/>
+    <meta http-equiv="cache-control" content="no-cache"/>
+    <meta name="screen-orientation" content="portrait"/>
+    <meta name="x5-orientation" content="portrait"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="green"/>
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <title>签约协议</title>
+    <script type="text/javascript" src="/js/jquery.min.js"></script>
+    <script type="text/javascript" src="/js/link.js"></script>
+    <link rel="stylesheet" type="text/css" href="/common/style.css">
+    <link rel="stylesheet" type="text/css" href="/common/common.css">
+    <link rel="stylesheet" href="/common/mint-ui.css">
+    <script type="text/javascript" src="/common/mint-ui.js"></script>
+    <link rel="stylesheet" href="/css/user/sign_protocol.css">
+</head>
+<body>
+<div id="app" v-cloak>
+    <!-- 二级导航部分 -->
+    <p class="navigator">
+        <span class="icon-arrow-left"></span>
+        签约协议
+    </p>
+    <div class="con">
+        <p class="title">
+            <span>贵阳市基层医疗卫生机构</span>
+            <span>家庭医生团队服务</span>
+        </p>
+        <p class="protocol">
+            协议书
+        </p>
+        <div class="host">
+            <span>云岩区卫生和计划生育局</span>
+            <span>
+                印制
+            </span><br>
+            <!--<span class="page">1</span>-->
+        </div>
+        <!--  第二页-->
+        <p class="title_two">
+            <span>贵阳市基层医疗卫生机构家庭医生团队服务</span>
+            <span>协议书</span>
+        </p>
+        <div class="people">
+            <span class="name_title">甲方：（居民）</span>
+            <span class="name">{{signData.memName}}</span><br>
+            <span class="name">联系电话:</span>
+            <span class="name_title">{{signData.memTel}}</span><br>
+            <span class="name">身份证号：</span>
+            <span class="name_title">{{signData.memCard}}</span><br>
+            <span class="name">住址：</span>
+            <span class="name_title address" >{{signData.memAddr}}</span>
+        </div>
+        <div class="people">
+            <span class="name_title">已方：（家庭医生团队）</span><br>
+            <span class="name">家庭医生签字：</span>
+            <span class="name_title">{{signData.docName}} </span><br>
+            <span class="name">联系电话：</span>
+            <span class="name_title">{{signData.docTel}}</span><br>
+            <span class="name_title">团队成员及联系电话：</span>
+            <div v-for="item in signData.teamDoc">
+                <span style="font-weight: 600;font-size: 0.4rem">{{item.index}}.</span>
+                <span class="name" style="margin-right: 0.2rem">{{item.name}}</span>
+                <span class="name">{{item.mobile}}</span><br>
+            </div>
+        </div>
+        <div class="people">
+            <span class="name_title">丙方：</span><br>
+            <span class="name">地址：</span>
+            <span class="name_title address" style="width:8rem;vertical-align: text-top"></span><br>
+            <span class="name">电话：</span>
+            <span class="name_title"></span><br>
+            <div class="page_size">
+                <!--<span class="page">2</span>-->
+            </div>
+        </div>
+        <!-- 条约 -->
+        <div>
+            <div class="stage stage_first">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;为加强基本公共卫生服务项目的分类管理，针对居民个体开展的服务项目，采取有家庭医生或以其为核心的团队与服务对象进行签约的方式开展。通过签约，为服务对象提供综合的、连续的健康管理服务，充分发挥社区家庭医生健康“守门人”的作用。
+            </div>
+            <div class="stage">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;经丙方推荐，本着自主平等、相互尊重的原则，甲方自愿聘请乙方 <span>{{signData.teamName}}</span>团队为甲方的家庭医生服务团队。乙方愿意为甲方提供相应的健康服务，丙方愿意为乙方提供场所，协调甲、乙双方，提供相应的保障。经甲、乙、丙三方协商，签订此协议，接受以下条款的约定：
+            </div>
+            <div class="stage">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;一、乙方的家庭医生必须为执业注册到丙方的全科医生，乙方作为服务的提供者，在提供基本医疗和基本公共卫生服务的基础上，向甲方提供以下基本服务和个性化服务项目。（见附件）</div>
+            <div class="stage">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;二、甲方自愿接受以上所选服务，将自己的身体健康状况及变化情况首先及时告知乙方，病保证沟通畅通，积极配合乙方的服务。</div>
+            <div class="stage">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;三、以上为基本服务项目，签约时甲方向乙方和丙方提供基本资料与近期身体状况的资料。协议三方可通过协商，增加、细化服务项目，如超过协议服务项目，涉及到其他特殊收费项目，则按照有关文件标准执行。</div>
+            <div class="stage">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;四、甲方的权利和义务：
+                <ul>
+                    <li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1、协议期内甲方可向乙方咨询健康方面的问题。</li>
+                    <li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2、协议期内甲方可预约乙方要求诊治除急诊外的身体不适。</li>
+                    <li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3、遇急诊时，甲方应直接拨打“120”急救电话，在确认得到有效救治后，可同时或事后通知乙方，以便获得进一步有利于病情恢复的医疗技术服务。</li>
+                    <li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4、甲方有权向丙方提出更换家庭医生。</li>
+                </ul>
+            </div>
+            <div class="stage">
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;五、乙方的权利和义务：
+                <ul>
+                    <li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1、负责常见健康问题的诊治和全方位、全过程的管理、包括疾病的干预、转诊、康复服务。</li>
+                    <li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2、提供签订的服务项目的相关服务。</li>
+                    <li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3、应尽可能的为甲方提供协调性服务，包括双向转诊，协调甲方家庭得到保健机构或其他专业医疗资源的服务。</li>
+                    <li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4、不能私自泄露甲方的个人信息、健康信息，严格执行保密制度。</li>
+                    <li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;5、在甲方遇到急诊时，在获得相关信息后，应主动为甲方提供必要的技术帮助。</li>
+                    <li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;6、乙方应严格按照行业职业道德和职业纪律履行职务。</li>
+                </ul>
+            </div>
+            <div class="stage">
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;六、丙方职责：
+                <ul>
+                    <li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1、丙方有义务为甲方的诊治提供力所能及的客观条件。</li>
+                    <li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2、丙方有义务为甲方免收挂号费、诊查费。</li>
+                </ul>
+            </div>
+            <div class="stage">
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;七、本协议自{{signData.startY}}年{{signData.startM}}月{{signData.startD}}日至{{signData.endY}}年{{signData.endM}}月{{signData.endD}}日，有效期为期壹年。在有效期内，三方均有权利经协商后终止协议。有效期结束后，三方可根据自己的意愿重新签约。
+            </div>
+            <div class="stage">
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;八、免责声明：
+                <ul>
+                    <li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1、对于甲方未及时告知个人身体变化情况和真实健康信息而造成的错误诊断和错误指导，乙、丙方不承担任何责任。</li>
+                    <li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2、甲方的身体病症以医疗机构出具的诊断结论为准，乙方接受健康咨询得出的结论意见不具有医疗机构出具的诊断结论的效力，乙、丙方对此不承担任何责任。</li>
+                </ul>
+            </div>
+            <div class="stage">
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;九、本协议为试行版本，如与国家法律法规相冲突时，以国家法律法规为准。未尽事宜三方协商解决，三方协商未果的，由任一方申请卫生行政管理部门协调解决。
+            </div>
+            <div class="stage">
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;本协议一式三份，甲、乙、丙方各执一份，自三方签字之日起生效。
+            </div>
+        </div>
+        <!--    签字 -->
+        <div class="sign">
+            <div class="sign_name">
+                <span>甲方（签字）:</span>
+                <span v-show="type=='name'">{{typeCon}}</span>
+                <img class="sign_img" v-show="type=='url'" :src="typeCon">
+                <span>{{signData.appY}}年{{signData.appM}}月{{signData.appD}}日</span>
+            </div>
+            <div class="sign_name">
+                <span>已方（签字）:</span>
+                <span>{{signData.leaderName}}</span>
+                <span>{{signData.audY}}年{{signData.audM}}月{{signData.audD}}日</span>
+            </div>
+        </div>
+        <!-- 丙方 签字 -->
+        <div class="third sign_name">
+            <span>丙方（盖章）：</span>
+            <span></span>
+            <span></span>
+        </div>
+        <div class="sign_time">
+            <span>签约时间:{{signData.startY}}年{{signData.startM}}月{{signData.startD}}日</span>
+        </div>
+        <!-- 附近  服务包 -->
+        <div class="pack">
+            <span>附件:</span>
+            <span class="pack_title">签约服务项目（服务包）</span>
+        </div>
+        <div class="free_pack">
+            <span>一、免费包：基本服务项目</span>
+        </div>
+        <div class="tab">
+            <table class="big_table">
+                <tr><th colspan="4">签约基本服务包</th></tr>
+                <tr>
+                    <th class="big">大类</th>
+                    <th class="small">小类</th>
+                    <th>服务项目</th>
+                    <th class="server_people">服务人群</th>
+                </tr>
+                <tr>
+                    <td rowspan="4">信息管理</td>
+                    <td rowspan="3">健康档案</td>
+                    <td>为签约居民建立健康档案</td>
+                    <td>所有人群</td>
+                </tr>
+                <tr>
+                    <td>健康档案更新</td>
+                    <td>所有人群</td>
+                    <!--<td></td>
+                    <td></td>-->
+                </tr>
+                <tr>
+                    <td>建立家庭健康档案</td>
+                    <td>所有人群</td>
+                    <!--<td></td>
+                    <td></td>-->
+                </tr>
+                <tr>
+                    <td>网络信息化</td>
+                    <td>健康档案信息化管理</td>
+                    <td>所有人群</td>
+                    <!--<td></td>-->
+                </tr>
+
+                <!-- 慢性病 -->
+                <tr>
+                    <td rowspan="6">慢性病管理</td>
+                    <td rowspan="3">高血压管理</td>
+                    <td>每年4次的随访服务</td>
+                    <td>高血压患者</td>
+                    <!--<td></td>
+                    <td></td>-->
+                </tr>
+                <tr>
+                    <td>每年1次的体格检查</td>
+                    <td>高血压患者</td>
+                   <!-- <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>-->
+                </tr>
+                <tr>
+                    <td>每年4次的血压情况分析</td>
+                    <td>高血压患者</td>
+                    <!--<td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>-->
+                </tr>
+                <tr>
+                    <td rowspan="3">糖尿病管理</td>
+                    <td>每年4次的随访服务</td>
+                    <td>糖尿病患者</td>
+                    <!--<td></td>
+                    <td></td>
+                    <td></td>-->
+                </tr>
+                <tr>
+                    <td>每年1次的体格检查</td>
+                    <td>糖尿病患者</td>
+                    <!--<td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>-->
+                </tr>
+                <tr>
+                    <td>每年4次的血糖检查和血糖控制情况分析</td>
+                    <td>糖尿病患者</td>
+                    <!--<td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>-->
+                </tr>
+                <!-- 老年人管理 -->
+                <tr>
+                    <td rowspan="2">老年人管理</td>
+                    <td>65岁以上老年人体检</td>
+                    <td>每年1次包含血、尿常规、肝、肾功能、空腹血糖、血脂和心电图检查的健康体检</td>
+                    <td>65岁以上老人</td>
+                </tr>
+                <tr>
+                    <td rowspan="1">中医体质辨识</td>
+                    <td>65岁以上老年人每年一次中医体质辨识</td>
+                    <td>65岁以上老人</td>
+                    <!--<td></td>-->
+                </tr>
+                <!-- 妇女保健 -->
+                <tr>
+                    <td rowspan="6">妇女保健</td>
+                    <td rowspan="5">孕产妇保健</td>
+                    <td>早孕门诊</td>
+                    <td>孕产妇</td>
+                </tr>
+                <tr>
+                    <td>孕中期健康管理</td>
+                    <td>孕产妇</td>
+                    <!--<td></td>-->
+                    <!--<td></td>-->
+                </tr>
+                <tr>
+                    <td>孕晚期健康管理</td>
+                    <td>孕产妇</td>
+                    <!--<td></td>-->
+                    <!--<td></td>-->
+                </tr>
+                <tr>
+                    <td>产后访视</td>
+                    <td>孕产妇</td>
+                    <!--<td></td>-->
+                    <!--<td></td>-->
+                </tr>
+                <tr>
+                    <td>产后42天健康检查</td>
+                    <td>孕产妇</td>
+                    <!--<td></td>-->
+                    <!--<td></td>-->
+                </tr>
+                <tr>
+                    <td rowspan="1">更年期保健</td>
+                    <td> 更年期保健咨询、指导</td>
+                    <td>更年期女性</td>
+                    <!--<td></td>-->
+                </tr>
+                <!--儿童保健-->
+                <tr>
+                    <td rowspan="6">儿童保健</td>
+                    <td rowspan="5">0-6岁儿童保健</td>
+                    <td>新生儿家庭访视</td>
+                    <td>0-6岁儿童</td>
+                </tr>
+                <tr>
+                    <td>新生儿满月健康管理</td>
+                    <td>0-6岁儿童</td>
+                    <!--<td></td>-->
+                    <!--<td></td>-->
+                </tr>
+                <tr>
+                    <td>婴幼儿健康管理</td>
+                    <td>0-6岁儿童</td>
+                    <!--<td></td>-->
+                    <!--<td></td>-->
+                </tr>
+                <tr>
+                    <td>4-6儿童健康管理</td>
+                    <td>0-6岁儿童</td>
+                    <!--<td></td>-->
+                    <!--<td></td>-->
+                </tr>
+                <tr>
+                    <td>0-6岁儿童口腔保健服务</td>
+                    <td>0-6岁儿童</td>
+                    <!--<td></td>-->
+                    <!--<td></td>-->
+                </tr>
+                <tr>
+                    <td rowspan="1">0-36个月儿童中医调养</td>
+                    <td>0-36个月儿童每年2次包括饮食起居和捏脊穴位按摩等指导</td>
+                    <td>0-36个月儿童</td>
+                    <!--<td></td>-->
+                </tr>
+                <!-- 传染病 -->
+                <tr>
+                    <td rowspan="4">传染病防治</td>
+                    <td rowspan="3">传染病防治</td>
+                    <td>传染病疫情处理</td>
+                    <td>所有人群</td>
+                </tr>
+                <tr>
+                    <td>医学观察</td>
+                    <td>所有人群</td>
+                    <!--<td></td>-->
+                    <!--<td></td>-->
+                </tr>
+                <tr>
+                    <td>传染病转诊</td>
+                    <td>传染病患者</td>
+                    <!--<td></td>-->
+                    <!--<td></td>-->
+                </tr>
+                <tr>
+                    <td rowspan="1">预防接种</td>
+                    <td>常规疫苗接种（I类）</td>
+                    <td>所有人群</td>
+                    <!--<td></td>-->
+                </tr>
+                <!--  精神卫生-->
+                <tr>
+                    <td rowspan="2">精神卫生</td>
+                    <td rowspan="2">精神病人管理</td>
+                    <td>一年4次的精神病人随访</td>
+                    <td>精神病患者</td>
+                </tr>
+                <tr>
+                    <td>一年1次包含血常规、转氨酶、血糖和心电图的体格检查</td>
+                    <td>精神病患者</td>
+                    <!--<td></td>
+                    <td></td>-->
+                </tr>
+                <!--  健康教育-->
+                <tr>
+                    <td rowspan="2">健康教育</td>
+                    <td rowspan="1">健康教育活动</td>
+                    <td>发放每年不少于6份健教材料；组织签约成员进行健康大课堂和健康教育讲座等健康活动每年不少于2次</td>
+                    <td>所有人群</td>
+                </tr>
+                <tr>
+                    <td rowspan="1">健康促进</td>
+                    <td>每年1次健康状况评估，并根据评估结果，为签约居民制定1份全面的健康计划</td>
+                    <td>所有人群</td>
+                    <!--<td></td>-->
+                </tr>
+                <!-- 计划生育技术指导 -->
+                <tr>
+                    <td rowspan="3">技术指导与药具发放</td>
+                    <td rowspan="3">技术指导与药具发放</td>
+                    <td>避孕技术指导</td>
+                    <td>成年人群</td>
+                </tr>
+                <tr>
+                    <td>计划生育服务</td>
+                    <td>成年人群</td>
+                    <!--<td></td>
+                    <td></td>-->
+                </tr>
+                <tr>
+                    <td>避孕药具发放</td>
+                    <td>成年人群</td>
+                    <!--<td></td>
+                    <td></td>-->
+                </tr>
+                <!--  基本医疗服务-->
+                <tr>
+                    <td rowspan="4">基本医疗服务</td>
+                    <td rowspan="4">优惠和转诊服务</td>
+                    <td>签约居民在社区卫生服务中心可得到免挂号费、诊查费的优惠</td>
+                    <td>所有人群</td>
+                </tr>
+                <tr>
+                    <td>优先就诊、优先检查</td>
+                    <td>所有人群</td>
+                    <!--<td></td>-->
+                    <!--<td></td>-->
+                </tr>
+                <tr>
+                    <td>指导合理用药</td>
+                    <td>所有人群</td>
+                    <!--<td></td>
+                    <td></td>-->
+                </tr>
+                <tr>
+                    <td>就医路径指导和定点医疗机构转诊预约</td>
+                    <td>所有人群</td>
+                    <!--<td></td>
+                    <td></td>-->
+                </tr>
+
+            </table>
+        </div>
+    </div>
+</div>
+</body>
+<script type="text/javascript">
+    new Vue({
+        el:'#app',
+        data(){
+            return{
+                signData:{},
+                type:'',
+                typeCon:''
+            }
+        },
+        mounted(){
+            this.getMemberReport();
+        },
+        methods:{
+        // 获取签约协议信息
+            getMemberReport(){
+                let url=$.formateUrl('/wechat/user/protocol');
+                $.ajax({
+                    url:url,
+                    type: 'get',
+                    async:false,
+                    success:res=>{
+                        if(res.code==0){
+                            this.signData=res.content;
+                            this.type=this.signData.memSign.type;
+                            this.typeCon=this.signData.memSign.content;
+                        }else {
+                            this.$toast(res.message);
+                        }
+                    }
+                });
+            }
+
+        }
+    })
+</script>
+
+</html>

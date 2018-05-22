@@ -1,0 +1,135 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="pragma" content="no-cache"/>
+    <meta http-equiv="cache-control" content="no-cache"/>
+    <meta name="screen-orientation" content="portrait"/>
+    <meta name="x5-orientation" content="portrait"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="green"/>
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <title>修改手机号</title>
+    <script type="text/javascript" src="/js/jquery.min.js"></script>
+    <script type="text/javascript" src="/js/link.js"></script>
+    <link rel="stylesheet" type="text/css" href="/common/common.css">
+    <link rel="stylesheet" type="text/css" href="/common/style.css">
+    <link rel="stylesheet" type="text/css" href="/css/user/changePhoneNum.css">
+    <script type="text/javascript" src="/common/mint-ui.js"></script>
+    <link rel="stylesheet" href="/common/mint-ui.css">
+
+</head>
+<body>
+<div id="app" v-cloak>
+    <!-- 二级导航部分 -->
+    <p class="navigator">
+        <span class="icon-arrow-left"></span>
+        修改手机号
+    </p>
+    <form id="edit_phone">
+        <div class="contentPart">
+            <p class="longLine">
+                <span class="preTag" id="old_phone">原手机号码</span>
+                <input type="tel" placeholder="请输入原手机号码" v-model="phoneData.oldtel" vname="old_phone" vtype="mobilePhone" validator="notNull" maxlength="11" class="longLineInput" name="mobile"/>
+            </p>
+            <p class="longLine">
+                <span class="preTag" id="new_phone">新手机号码</span>
+                <input type="tel" placeholder="请输入新手机号码" v-model='phoneData.newtel' vname="new_phone" vtype="mobilePhone" validator="notNull" maxlength="11" class="longLineInput" name="newMobile"/>
+            </p>
+        </div>
+        <div class="codePart clearfix">
+            <p class="shortLine">
+                <span class="preTag" id="code_label">验证码</span>
+                <input type="tel" vname="code_label" v-model='phoneData.code' validator="notNull" maxlength="6" placeholder="请输入短信验证码" class="shortLineInput" name="verify_code"/>
+            </p>
+            <!-- 获取验证码以前的样式 -->
+             <p class="getCodeBtn" v-show="!flagTime" @click="getCode">获取验证码</p>
+            <!-- 倒计时样式 -->
+            <p class="getCodeBtnTwo" v-show="flagTime">{{count}}S</p>
+        </div>
+        <div class="wrongTips errorText"></div>
+        <!-- 可以提交 -->
+        <button type="button" class="submitOne" @click="sub">提交</button>
+        <!-- 不能提交 -->
+        <!-- <button type="submit" class="submitTwo">提交</button>  -->
+    </form>
+    <!-- 提示框 -->
+    <div class="toast" v-if="flag">
+        <p>修改成功</p>
+        <p>正在跳转...</p>
+    </div>
+</div>
+</body>
+<script type="text/javascript">
+    new Vue({
+        el: '#app',
+        data() {
+            return{
+                flag:false,
+                phoneData:{},
+                flagTime: false,
+                count: '',
+                timer: null,
+            }
+        },
+        created(){
+
+        },
+        methods:{
+            // 获取验证码
+            getCode() {
+                if (this.phoneData.oldtel == '' || this.phoneData.oldtel == undefined) {
+                    $('.wrongTips').text('请原输入手机号');
+                    return false;
+                }
+                if (this.phoneData.newtel == '' || this.phoneData.newtel == undefined) {
+                    $('.wrongTips').text('请新输入手机号');
+                    return false;
+                }
+                this.flagTime = true;
+                const TIME_COUNT = 120;
+                if (!this.timer) {
+                    this.count = TIME_COUNT;
+                    this.timer = setInterval(() => {
+                        if (this.count > 0 && this.count <= TIME_COUNT) {
+                            this.count--;
+                        } else {
+                            this.flagTime = false;
+                            clearInterval(this.timer);
+                            this.timer = null;
+                        }
+                    }, 1000);
+                    //     发送验证码
+                    let url = $.formateUrl('mobile-captcha/send');
+                    let params = {
+                        receiver: this.phoneData.newtel
+                    };
+                    $.post(url, params, res => {
+                        if (res.code == 0) {
+                            this.$toast(res.message);
+                        } else {
+                            this.$toast(res.message);
+                        }
+                    })
+                }
+            },
+            sub(){
+                if(validateForm(edit_phone)){
+                    let url=$.formateUrl('wechat/user/modify-mobile');
+                    var formData = $('#edit_phone').serialize();
+                    $.post(url,formData,res=>{
+                        if(res.code==0){
+                            this.flag=true;
+                            setTimeout(function () {
+                                window.location.href=health.homeUrl+'/health/user/my_profile.html';
+                            }, 1000);
+                        }else {
+                            this.$toast(res.message);
+                        }
+                    })
+                }
+            }
+        }
+    })
+</script>
+</html>

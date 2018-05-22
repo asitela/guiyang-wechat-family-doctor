@@ -1,0 +1,87 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="pragma" content="no-cache"/>
+    <meta http-equiv="cache-control" content="no-cache"/>
+    <meta name="screen-orientation" content="portrait"/>
+    <meta name="x5-orientation" content="portrait" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="green"/>
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <title>我的家人</title>
+    <script type="text/javascript" src="/js/jquery.min.js"></script>
+    <script type="text/javascript" src="/js/link.js"></script>
+    <link rel="stylesheet" type="text/css" href="/common/common.css">
+    <link rel="stylesheet" type="text/css" href="/common/style.css">
+    <link rel="stylesheet" type="text/css" href="/css/user/myFamily.css">
+    <script type="text/javascript" src="/common/mint-ui.js"></script>
+    <link rel="stylesheet" href="/common/mint-ui.css">
+</head>
+<body>
+<div id="app">
+    <!-- 二级导航部分 -->
+    <p class="navigator">
+        <span class="icon-arrow-left"></span>
+        我的家人
+        <!--<a class="addMember" href="javascript:void(0);" @click="addMember">添加成员</a>-->
+    </p>
+    <div class="memberPart">
+        <div class="singleMember" @click="sign(item.id,item.sign_status)" v-for="item in family">
+            <p class="lineOne">
+                <span class="memberName">{{item.relat_msg}}</span>
+                <span class="memberOtherInfo">{{item.name}}</span>
+                <span class="memberOtherInfo">{{item.age}}</span>
+                <span class="memberOtherInfo">{{item.gender}}</span>
+                <span class="memberStatusThree" v-html="item.sign_status_msg"></span>
+                <span class="memberStatusThree noSign" v-if="item.sign_status_msg==''">未签约</span>
+            </p>
+            <p class="lineTwo clearfix dot" v-html="item.tags">
+
+            </p>
+            <p class="lineThree" v-if="item.sign_status==defined.signStatusSuccess ">
+                家庭医生签约将于
+                <span class="memberUseTime">{{item.sign_end_date}}</span>
+                到期
+            </p>
+        </div>
+    </div>
+</div>
+</body>
+    <script type="text/javascript">
+        new Vue({
+            el: "#app",
+            data() {
+                return {
+                    family:[]
+                }
+            },
+            created() {
+                this.getMyFamily();
+            },
+            methods: {
+                // 获取我的家人
+                getMyFamily(){
+                    this.$indicator.open();
+                    let url= $.formateUrl('wechat/user/family-member');
+                    $.get(url,res=>{
+                        if (res.code == 0) {
+                            this.$indicator.close();
+                            this.family=res.content;
+                        } else {
+                            this.$toast(res.message);
+                        }
+                        this.$indicator.close();
+                    })
+                },
+                sign(id,state) {
+                    if(state==defined.signStatusExamine||state==defined.signStatusSuccess){
+                        return false;
+                    }else {
+                        window.location.href = health.homeUrl + 'health/doctor/other_member_sign.html?userId='+id;
+                    }
+                },
+            },
+        })
+</script>
+</html>

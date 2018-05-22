@@ -1,0 +1,81 @@
+.navigator{
+    width: 10rem;
+    text-align: center;
+    font-size: 0.4rem;
+    color: #fff;
+    background-color: #10B9B9;
+    height: 1.194444rem;
+    line-height: 1.194444rem;
+    position: fixed;
+    left: 0;
+    top: 0;
+    right: 0;
+}
+span.icon-arrow-left:before{
+    content: "\e903";
+    font-size: 0.6rem;
+    color: #fff;
+    position: absolute;
+    left: 0.444444rem;
+    top: 0.3rem;
+    display: block;
+}
+.clearfix:after {       
+    content: ".";    
+    display: block;  
+    clear: both;     
+    visibility: hidden;    
+    line-height: 0;
+    height: 0;     
+    font-size:0;   
+}
+.clearfix { *zoom:1;}
+.showImg{
+    display: block;
+    width: 3.435185rem;
+    height: 1.971429rem;
+    margin: 0 3.277778rem 1.333333rem;
+    padding-top: 3.283333rem;
+}
+.cardInfoStatus{
+    text-align: center;
+    font-size: 0.388889rem;
+    margin-bottom: 0.12rem;
+}
+.goToSupplyLine{
+    text-align: center;
+}
+a.goToSupply{
+    color: #10B9B9;
+    text-decoration: underline;
+    font-size: 0.416667rem;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,133 @@
+@font-face {
+  font-family: 'icomoon';
+  src:  url('fonts/icomoon.eot?2zaap9');
+  src:  url('fonts/icomoon.eot?2zaap9#iefix') format('embedded-opentype'),
+    url('fonts/icomoon.ttf?2zaap9') format('truetype'),
+    url('fonts/icomoon.woff?2zaap9') format('woff'),
+    url('fonts/icomoon.svg?2zaap9#icomoon') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+[class^="icon-"], [class*=" icon-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'icomoon' !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+.icon-service:before {
+  content: "\e923";
+}
+.icon-agreement:before {
+  content: "\e900";
+}
+.icon-arrowblack-right:before {
+  content: "\e901";
+}
+.icon-arrow-down:before {
+  content: "\e902";
+}
+.icon-arrow-left:before {
+  content: "\e903";
+}
+.icon-arrow-right:before {
+  content: "\e904";
+}
+.icon-contract-record:before {
+  content: "\e905";
+}
+.icon-corpulent:before {
+  content: "\e906";
+}
+.icon-date:before {
+  content: "\e907";
+}
+.icon-del:before {
+  content: "\e908";
+}
+.icon-doctor:before {
+  content: "\e909";
+}
+.icon-doctor-select:before {
+  content: "\e90a";
+}
+.icon-family:before {
+  content: "\e90b";
+}
+.icon-hc-blood-pressure:before {
+  content: "\e90c";
+}
+.icon-hc-blood-suger:before {
+  content: "\e90d";
+}
+.icon-hc-ecg:before {
+  content: "\e90e";
+}
+.icon-hc-fat:before {
+  content: "\e90f";
+}
+.icon-hc-health-report:before {
+  content: "\e910";
+}
+.icon-hc-Lipid:before {
+  content: "\e911";
+}
+.icon-hc-oxygan:before {
+  content: "\e912";
+}
+.icon-hc-urine:before {
+  content: "\e913";
+}
+.icon-hc-weight:before {
+  content: "\e914";
+}
+.icon-healthcontrol:before {
+  content: "\e915";
+}
+.icon-healthcontrol-select:before {
+  content: "\e916";
+}
+.icon-hint:before {
+  content: "\e917";
+}
+.icon-personal:before {
+  content: "\e918";
+}
+.icon-personal-select:before {
+  content: "\e919";
+}
+.icon-picture:before {
+  content: "\e91a";
+}
+.icon-plump:before {
+  content: "\e91b";
+}
+.icon-position:before {
+  content: "\e91c";
+}
+.icon-relocation:before {
+  content: "\e91d";
+}
+.icon-search:before {
+  content: "\e91e";
+}
+.icon-slim:before {
+  content: "\e91f";
+}
+.icon-thin:before {
+  content: "\e920";
+}
+.icon-warning:before {
+  content: "\e921";
+}
+.icon-well-built:before {
+  content: "\e922";
+}

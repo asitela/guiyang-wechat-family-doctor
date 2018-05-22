@@ -1,0 +1,290 @@
+body{
+    background-color: #e5e5e5;
+}
+.navigator{
+    width: 10rem;
+    text-align: center;
+    font-size: 0.4rem;
+    color: #fff;
+    background-color: #10B9B9;
+    height: 1.194444rem;
+    line-height: 1.194444rem;
+    left: 0;
+    top: 0;
+    right: 0;
+    position: fixed;
+    z-index: 99;
+}
+.navigator img{
+    display: block;
+    float: left;
+    margin-left: 0.555556rem;
+    width: 0.277778rem;
+    margin-top: 0.31rem;
+}
+.gruopInfo{
+    background-color: #fff;
+    height: 1.296296rem;
+    line-height: 1.296296rem;
+    font-size: 0.370370rem;
+    color: #333333;
+    margin-top: 1.194444rem;
+}
+.gruopInfo span.groupName{
+    float: left;
+    margin-left: 0.629630rem;
+}
+.gruopInfo span.gruopPatientNum{
+    float: right;
+    margin-right: 0.629630rem;
+}
+.basicInfo .basicInfoTag{
+    height: 1rem;
+    line-height: 1rem;
+    margin-left: 0.629630rem;
+    font-size: 0.370370rem;
+    color: #666666;
+}
+.basicInfoList{
+    background-color: #fff;
+    padding: 0.15rem 0;
+}
+.basicInfoList li{
+    height: 1rem;
+    line-height: 1rem;
+    font-size: 0.370370rem;
+    color: #333333;
+    position: relative;
+}
+.basicInfoList li .basicInfoLeft{
+    float: left;
+    margin-left: 0.629630rem;
+}
+.basicInfoList li .basicInfoRight{
+    float: right;
+    margin-right: 0.629630rem;
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+.infoPart .infoPartTag{
+    height: 1rem;
+    line-height: 1rem;
+    margin-left: 0.629630rem;
+    font-size: 0.370370rem;
+    color: #666666;
+}
+.valueMessageList{
+    background-color: #fff;
+}
+.valueMessage{
+    border-bottom: 1px solid #666666;
+    padding: 0.4rem 0 0.3rem 0.185185rem;
+    margin: 0 0.444444rem;
+}
+.valueMessageTag{
+    font-size: 0.370370rem;
+    color: #999999;
+    margin-bottom: 0.15rem;
+}
+.valueMessageTag span.redColor{
+    font-size: 0.333333rem;
+    color: #ff3300;
+}
+.valueMessageTag span.greyColor{
+    font-size: 0.333333rem;
+    color: #333333;
+}
+input.infoWrite{
+    display: block;
+    width: 8.8rem;
+    border: none;
+    outline: none;
+    font-size: 0.388889rem;
+    color: #333333;
+}
+
+.clearfix:after {       
+    content: ".";    
+    display: block;  
+    clear: both;     
+    visibility: hidden;    
+    line-height: 0;
+    height: 0;     
+    font-size:0;   
+}
+.clearfix { *zoom:1;}
+.pictures{
+    background-color: #fff;
+    border-bottom: 1px solid #666666;
+}
+.picturesTag{
+    color: #333333;
+    font-size: 0.351852rem;
+    padding: 0.444444rem 0 0.462963rem 0.629630rem;
+}
+.pictureList{
+    width: 8.740740rem;
+    margin: 0 auto 0.277778rem;
+}
+.pictureList .selectPicture,.pictureList .singlePicture{
+    width: 2.037037rem;
+    height: 2.037037rem;
+    border: 1px solid #999999;
+    float: left;
+    margin-right: 0.462963rem;
+    position: relative;
+}
+.pictureList .singlePicture img{
+    width: 2.037037rem;
+    height: 2.037037rem;
+    display: block;
+}
+.pictureList .selectPicture{
+    position: relative;
+}
+.pictureList .selectPicture img{
+    display: block;
+    width: 0.851852rem;
+    height: 0.740741rem;
+    margin: 0.462963rem auto;
+}
+span.icon-del:before{
+    content: "\e908";
+    color: #fff;
+    font-size: 0.32rem;
+    background-color: #666666;
+    width: 0.45rem;
+    height: 0.45rem;
+    line-height: 0.45rem;
+    text-align: center;
+    border-radius: 0.225rem;
+    top: -0.2rem;right: -0.2rem;
+    display: block;
+    position: absolute;
+}
+.pictureList .selectPicture input{
+    display: block;
+    width: 2.037037rem;
+    height: 2.037037rem;
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    opacity: 0;
+}
+.pictureList .selectPicture  span{
+    color: #999999;
+    font-size: 0.333333rem;
+    display: block;
+    float: left;
+    margin-top: -0.25rem;
+    margin-left: 0.75rem;
+}
+button.shortInfo{
+    display: block;
+    width: 9.111111rem;
+    height: 1.111111rem;
+    line-height: 1.111111rem;
+    text-align: center;
+    border-radius: 5px;
+    margin: 0.648148rem auto 0.648148rem;
+    font-size: 0.416667rem;
+    background: #999999;
+    color: #fff;
+}
+button.fullInfo{
+    display: block;
+    width: 9.111111rem;
+    height: 1.111111rem;
+    line-height: 1.111111rem;
+    text-align: center;
+    border-radius: 5px;
+    margin: 0.648148rem auto 0.648148rem;
+    font-size: 0.416667rem;
+    background: #10b9b9;
+    color: #fff;
+}
+span.icon-arrow-left:before{
+    content: "\e903";
+    font-size: 0.6rem;
+    color: #fff;
+    position: absolute;
+    left: 0.444444rem;
+    top: 0.3rem;
+    display: block;
+}
+span.icon-picture:before{
+    content: "\e91a";
+    color: #999999;
+    font-size: 1rem;
+    margin-top: 0.45rem;
+    margin-bottom: 0.45rem;
+    margin-left: -0.2rem;
+    display: block;
+    float: left;
+}
+.selectOption{
+    display: inline-block;
+    float: right;
+    width: 1.8rem;
+    margin-right: 0.185185rem;
+}
+span.icon-date:before{
+    content: "\e907";
+    display: block;
+    float: right;
+    width: 0.5rem;
+    height: 0.5rem;
+    font-size: 0.5rem;
+    margin-right: 0.629630rem;
+    margin-top: 0.24rem;
+}
+.dataPart{
+    display: inline-block;
+    width: 2rem;
+    height: 0.8rem;
+    float: right;
+    margin-right: 0.3rem;
+}
+input.dateInput{
+    display: block;
+    float: right;
+    width: 2.5rem;
+    margin-right: 0.1rem;
+    border: none;
+    margin-top: 0.25rem;
+}
+.mint-datetime-action{
+    color: #10b9b9;
+    font-size: 0.38rem;
+    line-height: 0.9rem;
+}
+.picker-toolbar{
+    height: 0.9rem;
+    line-height: 0.9rem;
+}
+.picker-items,.picker-slot{
+    font-size: 0.34rem;
+}
+.picker-items{
+    min-height: 5rem;
+}
+.picker-slot.picker-slot-center{
+    min-height: 5rem;
+}
+.picker-slot-wrapper{
+     min-height: 5rem;
+}
+
+
+
+
+
+
+
+
+
+
+

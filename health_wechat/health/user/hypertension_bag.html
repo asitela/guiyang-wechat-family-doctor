@@ -1,0 +1,79 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="pragma" content="no-cache"/>
+    <meta http-equiv="cache-control" content="no-cache"/>
+    <meta name="screen-orientation" content="portrait"/>
+    <meta name="x5-orientation" content="portrait"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="green"/>
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <title>服务包详情</title>
+    <script type="text/javascript" src="/js/jquery.min.js"></script>
+    <script type="text/javascript" src="/js/link.js"></script>
+    <link rel="stylesheet" type="text/css" href="/common/common.css">
+    <link rel="stylesheet" type="text/css" href="/common/style.css">
+    <link rel="stylesheet" type="text/css" href="/css/user/hypertensionBag.css">
+    <script type="text/javascript" src="/common/mint-ui.js"></script>
+    <link rel="stylesheet" href="/common/mint-ui.css">
+</head>
+<body>
+<div id="app" v-cloak>
+    <!-- 二级导航部分 -->
+    <p class="navigator">
+        <span class="icon-arrow-left"></span>
+        {{name}}服务包
+    </p>
+    <div class="contentPart">
+        <div class="titleLine">
+            <!--<span class="lineOne">服务项编码</span>-->
+            <span class="lineTwo">服务项名称</span>
+            <span class="lineThree">服务次数</span>
+            <span class="lineFour">执行频次</span>
+        </div>
+        <div class="bodyLine" v-for="item in packItem">
+            <!--<span class="lineOne">{{item.code}}</span>-->
+            <span class="lineTwo dot">{{item.name}}</span>
+            <span class="lineFour">{{item.time}}</span>
+            <span class="lineThree">{{item.frequency}}</span>
+
+        </div>
+    </div>
+</div>
+</body>
+<script type="text/javascript">
+    new Vue({
+        el: '#app',
+        data() {
+            return {
+                packItem: [],
+                name: ''
+            }
+        },
+        created() {
+            this.getServerItem();
+        },
+        methods: {
+            //     获取服务项
+            getServerItem() {
+                this.$indicator.open();
+                let url = $.formateUrl('wechat/user/pack-detail');
+                let params = {
+                    pack_id: $.getQueryString('packId')
+                };
+                $.get(url, params, res => {
+                    if (res.code == 0) {
+                        this.$indicator.close();
+                        this.packItem = res.content.items;
+                        this.name = res.content.pack_name;
+                    } else {
+                        this.$toast(res.message);
+                    }
+                    this.$indicator.close();
+                })
+            }
+        }
+    })
+</script>
+</html>

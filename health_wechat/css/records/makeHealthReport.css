@@ -1,0 +1,188 @@
+.navigator{
+    width: 10rem;
+    text-align: center;
+    font-size: 0.4rem;
+    color: #fff;
+    background-color: #10B9B9;
+    height: 1.194444rem;
+    line-height: 1.194444rem;
+    left: 0;
+    top: 0;
+    right: 0;
+    position: fixed;
+}
+span.icon-arrow-left:before{
+    content: "\e903";
+    font-size: 0.6rem;
+    color: #fff;
+    position: absolute;
+    left: 0.444444rem;
+    top: 0.3rem;
+    display: block;
+}
+.infoPart{
+    width: 9.111111rem;
+    margin: 0 auto;
+    margin-top: 1.194444rem;
+}
+.CardType{
+    border-bottom: 1px solid #a0a0a0;
+    position: relative;
+    height: 2.14rem;
+}
+.CardType .cardTag {
+    font-size: 0.370370rem;
+    color: #999999;
+    padding: 0.444444rem 0 0.1rem 0.185185rem;
+}
+.clearfix:after {       
+    content: ".";    
+    display: block;  
+    clear: both;     
+    visibility: hidden;    
+    line-height: 0;
+    height: 0;     
+    font-size:0;   
+}
+.clearfix { *zoom:1;}
+.icon-date{
+    width: 0.462963rem;
+    height: 0.462963rem;
+    display: block;
+    float: right;
+    margin-top: 0.32rem;
+    padding-right: 0.2rem;
+}
+.icon-date:before {
+    content: "\e907";
+    float: right;
+    display: block;
+    font-size: 0.462963rem;
+    color: #999999;
+}
+.dateLine{
+    padding-top: 0.444444rem;
+    padding-bottom: 0.185185rem;
+    padding-left: 0.1rem;
+}
+.dateLinePre{
+    float: left;
+    font-size: 0.370370rem;
+    color: #999999;
+    margin-top: 0.35rem;
+    margin-right: 0.1rem;
+}
+.dateLineRight{
+    width: 7.41rem;
+    /*padding: 0 0.1rem;*/
+    float: left;
+    border-bottom: 1px solid #a0a0a0;
+}
+.dateLineRight input{
+    border: none;
+    display: inline-block;
+    width: 6rem;
+    font-size: 0.370370rem;
+    color: #999999;
+    text-align: center;
+    margin-top: 9px;
+}
+button.shortInfo{
+    display: block;
+    width: 9.111111rem;
+    height: 1.111111rem;
+    line-height: 1.111111rem;
+    text-align: center;
+    border-radius: 3px;
+    margin-top: 0.648148rem;
+    font-size: 0.416667rem;
+    background: #999999;
+    color: #fff;
+}
+button.fullInfo{
+    display: block;
+    width: 9.111111rem;
+    height: 1.111111rem;
+    line-height: 1.111111rem;
+    text-align: center;
+    border-radius: 3px;
+    margin-top: 0.648148rem;
+    font-size: 0.416667rem;
+    background: #10b9b9;
+    color: #fff;
+}
+.selectOption{
+    width: 9.12rem;
+}
+.label-foucs{
+    border: none;
+}
+.bottomPart{
+    width: 10rem;
+    background-color: #f1f1f1;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    border-top: 1px solid #e5e5e5;
+}
+.bottomPart div{
+    width: 33.3%;
+    text-align: center;
+    float: left;
+}
+.bottomPart div img{
+    display: block;
+    height: 0.611111rem;
+    width: auto;
+    margin: 0.185185rem auto 0;
+}
+.bottomPart div span{
+    display: block;
+    font-size: 0.3rem;
+    margin-top: 0.185185rem;
+    margin-bottom: 0.185185rem;
+    color: #666666;
+}
+.selectedPart{
+    color: #10B9B9;
+}
+.selectedPart span.selectedPartSpan{
+    color: #10B9B9;
+} 
+.bottomPart span.icon-healthcontrol-select:before{
+    content: "\e916";
+    color: #10B9B9;
+    font-size: 0.416667rem;
+}
+span.icon-doctor:before{
+    content: "\e909";
+    color: #666666;
+    font-size: 0.416667rem;
+}
+span.icon-personal:before{
+    content: "\e918";
+    color: #666666;
+    font-size: 0.416667rem;
+}
+.mint-datetime-action{
+    color: #10b9b9;
+    font-size: 0.38rem;
+    line-height: 0.9rem;
+}
+.picker-toolbar{
+    height: 0.9rem;
+    line-height: 0.9rem;
+}
+.picker-items,.picker-slot{
+    font-size: 0.34rem;
+}
+.picker-items{
+    min-height: 5rem;
+}
+.picker-slot.picker-slot-center{
+    min-height: 5rem;
+}
+.picker-slot-wrapper{
+     min-height: 5rem;
+}

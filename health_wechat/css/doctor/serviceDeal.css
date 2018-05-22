@@ -1,0 +1,43 @@
+.navigator{
+    width: 10rem;
+    text-align: center;
+    font-size: 0.4rem;
+    color: #fff;
+    background-color: #10B9B9;
+    height: 1.194444rem;
+    line-height: 1.194444rem;
+    left: 0;
+    top: 0;
+    right: 0;
+    position: fixed;
+}
+.navigator img{
+    display: block;
+    float: left;
+    margin-left: 0.555556rem;
+    width: 0.277778rem;
+    margin-top: 0.31rem;
+}
+.dealTitle{
+    height: 1.2rem;
+    line-height: 1.2rem;
+    font-size: 0.416667rem;
+    text-align: center;
+    color: #333333;
+    margin-top: 1.194444rem;
+}
+.dealContent{
+    margin: 0 0.629630rem;
+    line-height: 1.8;
+    font-size: 0.370370rem;
+    color: #333333;
+}
+span.icon-arrow-left:before{
+    content: "\e903";
+    font-size: 0.6rem;
+    color: #fff;
+    position: absolute;
+    left: 0.444444rem;
+    top: 0.3rem;
+    display: block;
+}

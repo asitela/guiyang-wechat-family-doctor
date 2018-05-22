@@ -1,0 +1,322 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="pragma" content="no-cache"/>
+    <meta http-equiv="cache-control" content="no-cache"/>
+    <meta name="screen-orientation" content="portrait"/>
+    <meta name="x5-orientation" content="portrait"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="green"/>
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <title>签约</title>
+    <script type="text/javascript" src="/js/jquery.min.js"></script>
+    <script type="text/javascript" src="/js/link.js"></script>
+    <link rel="stylesheet" type="text/css" href="/common/common.css">
+    <link rel="stylesheet" type="text/css" href="/common/style.css">
+    <link rel="stylesheet" href="/common/cyrillic.css">
+    <link rel="stylesheet" href="/common/material-icons.css">
+    <link rel="stylesheet" type="text/css" href="/common/muse.css">
+    <link rel="stylesheet" href="/common/mint-ui.css">
+    <link rel="stylesheet" type="text/css" href="/css/doctor/otherMemberSign.css">
+    <script type="text/javascript" src="/common/muse-ui.js"></script>
+    <script type="text/javascript" src="/common/mint-ui.js"></script>
+</head>
+<body>
+<div id="app" v-cloak>
+    <!-- 二级导航部分 -->
+    <p class="navigator">
+        <span class="icon-arrow-left"></span>
+        签约
+    </p>
+    <!-- 团队信息 -->
+    <p class="gruopInfo">
+        <span class="groupName">{{teamData.name}}</span>
+        <span class="gruopPatientNum">{{num}}人</span>
+    </p>
+    <!-- 基本信息 -->
+    <div class="basicInfo" id="wrap">
+        <p class="basicInfoTag">基本信息</p>
+        <ul class="basicInfoList">
+            <li>
+                <span class="basicInfoLeft">居民姓名</span>
+                <span class="basicInfoRight">{{memberInfo.name}}</span>
+            </li>
+            <li>
+                <span class="basicInfoLeft">性别</span>
+                <!-- <span class="basicInfoRight">男</span> -->
+                <template>
+                    <div class="selectOption">
+                        <mu-select-field v-model="sexyTypeOne" underlineShow="false" name="sexyType" fullWidth="true"
+                                         autoWidth="true" @change="changesSexy">
+                            <mu-menu-item v-for="text,index in sexyType" :key="text.id" :value="text.id"
+                                          :title="text.sexy"/>
+                        </mu-select-field>
+                        <br/>
+                    </div>
+                </template>
+            </li>
+            <li>
+                <span class="basicInfoLeft">证件类型</span>
+                <span class="basicInfoRight" v-if="memberInfo.id_type==1">居民身份证</span>
+                <span class="basicInfoRight" v-else>出生证</span>
+            </li>
+            <li>
+                <span class="basicInfoLeft">证件号码</span>
+                <span class="basicInfoRight">{{memberInfo.identity_card}}</span>
+            </li>
+            <li>
+                <span class="basicInfoLeft">出生日期</span>
+                <!-- <span class="basicInfoRight">1988-09-28</span> -->
+                <span class="icon-date" @click="openPicker"></span>
+                <input type="text" class="dateInput" name="birthDay" v-model="birthday"/>
+                <mt-datetime-picker ref="picker" v-model="pickerValue" year-format="{value} 年" month-format="{value} 月"
+                                    date-format="{value} 日" v-model="pickerVisible" type="date"
+                                    :start-date="start_date" :end-date="new Date()"
+                                    @confirm="handleConfirm"></mt-datetime-picker>
+            </li>
+            <li>
+                <span class="basicInfoLeft">年龄</span>
+                <span class="basicInfoRight">{{memberInfo.age}}</span>
+            </li>
+        </ul>
+    </div>
+    <!-- 联系方式 -->
+    <div class="infoPart">
+        <form id="sign_member">
+            <p class="infoPartTag">联系方式</p>
+            <div class="valueMessageList">
+                <div class="valueMessage">
+                    <p class="valueMessageTag">
+                        <span id="label_address">联系地址</span>
+                        <span class="redColor">*必填项</span>
+                    </p>
+                    <input type="text" vname="label_address" maxlength="200" validator="notNull" placeholder="请输入联系地址"
+                           class="infoWrite" v-model="signData.address"/>
+                </div>
+                <div class="valueMessage">
+                    <p class="valueMessageTag">
+                        <span id="label_phone">联系手机</span>
+                        <span class="redColor">*必填项</span>
+                    </p>
+                    <input type="tel" vname="label_phone" validator="notNull" maxlength="11" vtype="mobilePhoneNull" placeholder="请输入手机号" class="infoWrite" v-model="signData.phone"/>
+                </div>
+                <div class="valueMessage">
+                    <p class="valueMessageTag">
+                        <span id="label_tel">固定电话</span>
+                        <span class="greyColor">(选填项)</span>
+                        <!--<span class="redColor">*区号＋电话号码，与手机号二选一必填</span>-->
+                    </p>
+                    <input type="text" vname="label_tel" validator="Null" maxlength="18" vtype="fixedTelephone" placeholder="请输入座机号" class="infoWrite" v-model="signData.tel_phone"/>
+                </div>
+                <div class="valueMessage">
+                    <p class="valueMessageTag">
+                        <span id="label_email">邮箱地址</span>
+                        <span class="greyColor">(选填项)</span>
+                    </p>
+                    <input type="email" vname="label_email" validator="Null" vtype="emailNull" placeholder="请输入邮箱"
+                           class="infoWrite" v-model="signData.email"/>
+                </div>
+            </div>
+            <div class="pictures">
+                <p class="picturesTag">添加附件</p>
+                <div class="pictureList clearfix">
+                    <div class="singlePicture" v-for="(item,index) in imgArr">
+                        <img :src="item">
+                        <span class="icon-del" @click="delImg(index)"></span>
+                    </div>
+                    <div class="selectPicture" v-if="imgArr.length<3">
+                        <span class="icon-picture"></span>
+                        <input type="file" accept="image/*" ref="upfile" multiple @change="changePic" name="files"/>
+                        <span>{{number}}/3</span>
+                    </div>
+                </div>
+            </div>
+            <div class="wrongTips errorText"></div>
+            <!-- 确认绑定样式一 -->
+            <button type="button" class="fullInfo" @click="subBinding">下一步</button>
+            <!-- 确认绑定样式二 -->
+            <!--<button type="button" class="shortInfo">下一步</button>-->
+        </form>
+    </div>
+</div>
+</body>
+<script type="text/javascript">
+    new Vue({
+        el: '#app',
+        data() {
+            return {
+                sexyTypeOne: 1,
+                sexyType: [{
+                    sexy: '男',
+                    id: 1
+                }, {
+                    sexy: '女',
+                    id: 2
+                }],
+                pickerValue: new Date(),
+                start_date: new Date(),
+                value: '2018年05月10日',
+                birthday: '',
+                teamId: '',
+                teamData: '',
+                num: '',
+                memberInfo: {},
+                imgArr: [],
+                number: 0,
+                files: [],
+                myInfo: {},
+                fileIdArr: [],
+                signData: {},
+                orgId: '',
+            }
+        },
+        created() {
+            this.start_date.setFullYear(this.start_date.getFullYear() - 120);
+            this.teamId = JSON.parse(window.localStorage.getItem('teamId'));
+            this.getTeamDetail();
+            this.getMemberInfo();
+        },
+        methods: {
+            openPicker() {
+                this.$refs.picker.open();
+            },
+            handleConfirm() {
+                this.birthday = this.formatDate(this.$refs.picker.value);
+                Vue.set(this.memberInfo, 'age', $.calcAge(this.birthday));
+            },
+            formatDate(date) {
+                const y = date.getFullYear();
+                let m = date.getMonth() + 1;
+                m = m < 10 ? '0' + m : m;
+                let d = date.getDate();
+                d = d < 10 ? ('0' + d) : d;
+                return y + '-' + m + '-' + d
+            },
+            // 上传图片
+            changePic() {
+                var fileArr = this.$refs.upfile.files;
+                if (parseInt(this.number) + fileArr.length > 3) {
+                    this.$toast('最多上传3张图片');
+                    return false;
+                }
+                var formData = new FormData();
+                for (let i = 0; i < fileArr.length; i++) {
+                    formData.append("files[]", fileArr[i]);
+                }
+                this.$indicator.open();
+                let url = $.formateUrl('upload');
+                $.ajax({
+                    url: url,
+                    type: 'POST',
+                    data: formData,
+                    contentType: false,
+                    processData: false
+                }).success(res => {
+                    let data = res.content;
+                    data.forEach(item => {
+                        this.fileIdArr.push(item.file_id);
+                    });
+                    for (let i = 0; i < fileArr.length; i++) {
+                        this.number = this.number + 1;
+                        let img = new FileReader();
+                        img.readAsDataURL(fileArr[i]);
+                        img.onloadend = (a) => {
+                            this.imgArr.push(a.target.result);
+                        };
+                    }
+                    this.$indicator.close();
+                });
+            },
+            // 删除图片
+            delImg(index) {
+                this.$messagebox.confirm('是否删除该图片?')
+                    .then(() => {
+                        this.$indicator.open();
+                        let url = $.formateUrl('upload/delete');
+                        let params = {
+                            file_id: this.fileIdArr[index]
+                        };
+                        $.post(url, params, res => {
+                            if (res.code == 0) {
+                                this.$indicator.close();
+                                this.fileIdArr.splice(index, 1);
+                                this.files.splice(index, 1);
+                                this.number = this.number - 1;
+                                this.imgArr.splice(index, 1);
+                            } else {
+                                this.$toast(res.message);
+                            }
+                        })
+                    })
+            },
+            // 性别改变
+            changesSexy(val) {
+                this.sexyTypeOne = val;
+            },
+            // 获取团队详情
+            getTeamDetail() {
+                let url = $.formateUrl('wechat/team/detail');
+                let params = {
+                    team_id: this.teamId
+                };
+                $.get(url, params, res => {
+                    if (res.code == 0) {
+                        this.orgId = res.content.orgid;
+                        this.teamData = res.content;
+                        this.num = res.content.doctors.length;
+                    } else {
+                        this.$toast(res.message);
+                    }
+                })
+            },
+            // 获取成员信息信息
+            getMemberInfo() {
+                this.$indicator.open();
+                let url = $.formateUrl('wechat/sign/member');
+                let params = {
+                    user_id: $.getQueryString('userId')
+                };
+                $.get(url, params, res => {
+                    if (res.code == 0) {
+                        this.$indicator.close();
+                        this.memberInfo = res.content;
+                        this.sexyTypeOne = res.content.gender;
+                        this.birthday = res.content.birthday;
+                        Vue.set(this.memberInfo, 'age', $.calcAge(this.birthday));
+                    } else {
+                        this.$toast(res.message);
+                    }
+                    this.$indicator.close();
+                })
+            },
+            // 确定绑定
+            subBinding() {
+                if (validateForm(sign_member)) {
+                    /*if ((this.signData.phone == '' || this.signData.phone == undefined) && (this.signData.tel_phone == '' || this.signData.tel_phone == undefined)) {
+                        $('.wrongTips').text('请输入联系手机或固定电话');
+                        return false;
+                    }*/
+                    let signInfo={
+                        id_type:this.memberInfo.id_type,
+                        name:this.memberInfo.name,
+                        gender: this.sexyTypeOne,
+                        identity_card:this.memberInfo.identity_card,
+                        birthday: this.birthday,
+                        address: this.signData.address,
+                        mobile: this.signData.phone,
+                        orgid: this.orgId,
+                        team_id: this.teamId,
+                        tel_phone: this.signData.tel_phone,
+                        email: this.signData.email,
+                        files: this.fileIdArr
+                    };
+                    window.localStorage.setItem('signInfo', JSON.stringify(signInfo));
+                    window.location.href = health.homeUrl + 'health/doctor/sign.html';
+                }
+            }
+        }
+    })
+</script>
+</html>

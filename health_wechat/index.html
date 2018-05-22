@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:v-bind="http://www.w3.org/1999/xhtml" xmlns:v-on="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8">
+    <title>跳转中</title>
+    <meta name="description" content="">
+    <meta name="screen-orientation" content="portrait">
+    <meta name="x5-orientation" content="portrait">
+    <meta id="metaEle" name="viewport"
+          content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no">
+    <script type="text/javascript" src="/js/jquery.min.js"></script>
+    <script type="text/javascript" src="/js/link.js"></script>
+<body>
+<script type="text/javascript">
+    $(document).ready(function () {
+        let openid = $.getQueryString('openid');
+        if (openid) {
+            let cookieOptions = {};
+            cookieOptions.path = '/';
+            cookieOptions.expires = 365;
+            $.cookie(health.cookie_key, openid, cookieOptions);
+            window.location.href = '/health/index.html';
+        } else {
+            let token = $.cookie(health.cookie_key);
+            if (token == undefined || token == false) {
+                let authUrl = '{0}?returnUrl={1}index.html';
+                window.location.href = authUrl.format(health.authUrl, health.homeUrl);
+            } else {
+                window.location.href = '/health/index.html';
+            }
+        }
+    });
+
+</script>
+</body>
+</html>

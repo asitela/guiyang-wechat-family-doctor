@@ -1,0 +1,156 @@
+.navigator{
+    width: 10rem;
+    text-align: center;
+    font-size: 0.4rem;
+    color: #fff;
+    background-color: #10B9B9;
+    height: 1.194444rem;
+    line-height: 1.194444rem;
+    position: fixed;
+    left: 0;
+    top: 0;
+    right: 0;
+}
+span.icon-arrow-left:before{
+    content: "\e903";
+    font-size: 0.6rem;
+    color: #fff;
+    position: absolute;
+    left: 0.444444rem;
+    top: 0.3rem;
+    display: block;
+}
+.clearfix:after {       
+    content: ".";    
+    display: block;  
+    clear: both;     
+    visibility: hidden;    
+    line-height: 0;
+    height: 0;     
+    font-size:0;   
+}
+.clearfix { *zoom:1;}
+.contentPart{
+    margin-top: 1.194444rem;
+}
+.longLine{
+    margin: 0 0.407470rem;
+    padding: 0.666667rem 0.222222rem 0.259259rem;
+    border-bottom: 1px solid #a0a0a0;
+}
+.preTag{
+    color: #333333;
+    display: inline-block;
+    width: 2.4rem;
+    font-size: 0.370370rem;
+} 
+.longLineInput{
+    color: #333333;
+    font-size: 0.370370rem;
+    border: none;
+    display: inline-block;
+    width: 6rem;
+}
+.codePart{
+    margin: 0 0.407470rem;
+}
+.shortLine{
+    float: left;
+    padding: 0.666667rem 0.222222rem 0.259259rem;
+    border-bottom:  1px solid #a0a0a0;
+}
+.shortLineInput{
+    color: #333333;
+    font-size: 0.370370rem;
+    border: none;
+    display: inline-block;
+    width: 3.5rem;
+}
+.getCodeBtn{
+    float: right;
+    width: 2.2rem;
+    text-align: center;
+    display: block;
+    height: 0.814815rem;
+    line-height: 0.814815rem;
+    border: 1px solid #10B9B9;
+    color: #10B9B9;
+    font-size: 0.351852rem;
+    border-radius: 5px;
+    margin-top: 0.66rem;
+}
+.getCodeBtnTwo{
+    float: right;
+    width: 2.2rem;
+    text-align: center;
+    display: block;
+    height: 0.814815rem;
+    line-height: 0.814815rem;
+    border: 1px solid #999999;
+    color: #fff;
+    font-size: 0.351852rem;
+    border-radius: 5px;
+    margin-top: 0.66rem;
+    background-color: #999999;
+}
+button.submitOne{
+    display: block;
+    margin: 0.648148rem auto;
+    width: 9.111111rem;
+    height: 1.111111rem;
+    line-height: 1.111111rem;
+    text-align: center;
+    color: #fff;
+    font-size: 0.416667rem;
+    background-color: #10B9B9;
+    border-radius: 5px;
+}
+button.submitTwo{
+    display: block;
+    margin: 0.648148rem auto;
+    width: 9.111111rem;
+    height: 1.111111rem;
+    line-height: 1.111111rem;
+    text-align: center;
+    color: #fff;
+    font-size: 0.416667rem;
+    background-color: #999999;
+    border-radius: 5px;
+}
+.toast{
+    background-color: rgba(0,0,0,0.8);
+    position: fixed;
+    width: 2rem;
+    height: 1.2rem;
+    padding: 0.4rem 0;
+    border-radius: 0.12rem;
+    color: #fff;
+    top: 6rem;
+    left: 4rem;
+}
+.toast p{
+    line-height: 0.6rem;
+    padding-left: 0.2rem;
+    font-size: 0.34rem;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

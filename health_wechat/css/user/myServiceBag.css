@@ -1,0 +1,63 @@
+body{
+    background-color: #e5e5e5;
+}
+.navigator{
+    width: 10rem;
+    text-align: center;
+    font-size: 0.4rem;
+    color: #fff;
+    background-color: #10B9B9;
+    height: 1.194444rem;
+    line-height: 1.194444rem;
+    left: 0;
+    top: 0;
+    right: 0;
+    position: fixed;
+}
+span.icon-arrow-left:before{
+    content: "\e903";
+    font-size: 0.6rem;
+    color: #fff;
+    position: absolute;
+    left: 0.444444rem;
+    top: 0.3rem;
+    display: block;
+}
+.contentPart{
+    margin-top: 1.194444rem;
+}
+.singleService {
+    background-color: #fff;
+    border-top: 1px solid #a0a0a0;
+    border-bottom: 1px solid #a0a0a0;
+    padding: 0.629630rem;
+    margin-bottom: 0.185185rem;
+}
+.serviceInfo{
+    margin-bottom: 0.333333rem;
+}
+.serviceName{
+    font-size: 0.416667rem;
+    color: #10B9B9;
+    display: inline-block;
+}
+.serviceCode{
+    float: right;
+    font-size: 0.388889rem;
+    color: #666666;
+    margin-top: 0.08rem;
+}
+.clearfix:after {       
+    content: ".";    
+    display: block;  
+    clear: both;     
+    visibility: hidden;    
+    line-height: 0;
+    height: 0;     
+    font-size:0;   
+}
+.clearfix { *zoom:1;}
+.serviceContent{
+    color: #999999;
+    font-size: 0.351852rem;
+}

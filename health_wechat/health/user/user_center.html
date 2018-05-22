@@ -1,0 +1,191 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="pragma" content="no-cache"/>
+    <meta http-equiv="cache-control" content="no-cache"/>
+    <meta name="screen-orientation" content="portrait"/>
+    <meta name="x5-orientation" content="portrait"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="green"/>
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <title>个人中心</title>
+    <script type="text/javascript" src="/js/jquery.min.js"></script>
+    <script type="text/javascript" src="/js/link.js"></script>
+    <script type="text/javascript" src="/common/mint-ui.js"></script>
+    <link rel="stylesheet" href="/common/mint-ui.css">
+    <link rel="stylesheet" type="text/css" href="/common/common.css">
+    <link rel="stylesheet" type="text/css" href="/common/style.css">
+    <link rel="stylesheet" type="text/css" href="/css/user/userCenter.css">
+</head>
+<body>
+<div id="app" v-cloak>
+    <!-- 头部 -->
+    <div class="headerPart" @click="myProfile">
+        <p class="memberStatus">
+            <span class="memberStatusRight">{{myInfo.status_msg}}</span>
+            <!-- <span class="memberStatusRight">已签约</span> -->
+            <!--<span class="memberStatusLeft"><span class="icon-arrow-right" ></span></span>-->
+            <!-- <span class="memberStatusLeft">已完善</span> -->
+        </p>
+        <div class="memberProfile clearfix">
+            <div class="memberAvatar">
+                <img src="/img/pic_girl.png" v-if="myInfo.gender==defined.woman">
+                <img src="/img/pic_001.png" v-if="myInfo.gender==defined.man">
+            </div>
+            <!-- 已经签约的状态 -->
+            <div class="memberDetailInfo">
+                <p class="lineOne">
+                    <span class="memberName">{{myInfo.name}}</span>
+                    <span class="memberOtherInfo">{{myInfo.age}}岁</span>
+                    <span class="memberOtherInfo">{{myInfo.gender_msg}}</span>
+                </p>
+                <p class="lineTwo dotTwo clearfix">
+                    <span v-for="(item,index) in myInfo.tags">
+                        <span class="memberIll">{{item.name}}</span>
+                        <span v-if="index!=myInfo.tags.length-1" class="line">|</span>
+                    </span>
+                </p>
+                <p class="lineThree" v-if="myInfo.status==defined.signStatusSuccess">
+                    家庭医生签约将于
+                    <span class="memberUseTime">{{myInfo.sign_end_date}}</span>
+                    到期
+                </p>
+            </div>
+            <!-- 未签约的状态  -->
+            <!--<div class="memberSimpleInfo">
+               <p class="lineOne">
+                   <span class="memberName">张三三</span>
+                   <span class="memberOtherInfo">100岁</span>
+                   <span class="memberOtherInfo">男</span>
+               </p>
+           </div> -->
+        </div>
+    </div>
+    <!-- 中间部分 -->
+    <div class="infoClass">
+        <div class="singleInfo clearfix" @click="myDoctor">
+            <span class="infoIcon icon-doctor"></span>
+            <p class="infoEntry">
+                <span class="infoName">我的医生</span>
+                <span class="icon-arrow-right"></span>
+            </p>
+        </div>
+        <div class="singleInfo clearfix" @click="myFamily">
+            <span class="infoIcon icon-family "></span>
+            <p class="infoEntry">
+                <span class="infoName">我的家人</span>
+                <span class="icon-arrow-right"></span>
+            </p>
+        </div>
+        <div class="singleInfo clearfix" @click="signHistory">
+            <span class="infoIcon icon-contract-record"></span>
+            <p class="infoEntry">
+                <span class="infoName">签约记录</span>
+                <span class="icon-arrow-right"></span>
+            </p>
+        </div>
+        <div class="singleInfo clearfix" @click="myServer">
+            <span class="infoIcon icon-service"></span>
+            <p class="infoEntry">
+                <span class="infoName">我的服务包</span>
+                <span class="icon-arrow-right"></span>
+            </p>
+        </div>
+        <div class="singleInfo clearfix" @click="toSignProtocol">
+            <span class="infoIcon icon-agreement"></span>
+            <p class="infoEntry">
+                <span class="infoName">签约协议</span>
+                <span class="icon-arrow-right"></span>
+            </p>
+        </div>
+    </div>
+    <!-- 底部固定栏 -->
+    <div class="bottomPart">
+        <div @click="toHealth">
+            <span class="icon-hc-health-report"></span>
+            <span>健康管理</span>
+        </div>
+        <div @click="toIndex">
+            <span class="icon-doctor"></span>
+            <span>家庭医生</span>
+        </div>
+        <div class="selectedPart">
+            <span class="icon-personal-select"></span>
+            <span>个人中心</span>
+        </div>
+    </div>
+</div>
+</body>
+<script type="text/javascript">
+    new Vue({
+        el: "#app",
+        data() {
+            return {
+                myInfo: {},
+                teamId: ''
+            }
+        },
+        created() {
+            this.GetMyInfo();
+        },
+        methods: {
+            //获取成员详细信息
+            GetMyInfo() {
+                this.$indicator.open();
+                let url = $.formateUrl('wechat/user/user-info');
+                let params = {
+                    user_id: ''
+                };
+                $.get(url, res => {
+                    if (res.code == 0) {
+                        this.$indicator.close();
+                        this.myInfo = res.content;
+                        this.teamId = this.myInfo.team_id;
+                    } else {
+                        this.$toast(res.message);
+                    }
+                    this.$indicator.close();
+                })
+            },
+            // 我的信息
+            myProfile() {
+                window.location.href = health.homeUrl + 'health/user/my_profile.html';
+            },
+            // 我的医生
+            myDoctor() {  // 先判断是否签约   否跳到   go_to_sign
+                if (this.myInfo.status == defined.signStatusSuccess) {
+                    window.location.href = health.homeUrl + 'health/user/my_doctor.html?teamId=' + this.teamId;
+                } else {
+                    window.location.href = health.homeUrl + 'health/user/go_to_sign.html';
+                }
+            },
+            // 我的家人
+            myFamily() {
+                window.location.href = health.homeUrl + 'health/user/my_family.html';
+            },
+            // 签约记录
+            signHistory() {
+                window.location.href = health.homeUrl + 'health/user/sign_history.html';
+            },
+            // 我的服务包
+            myServer() {
+                window.location.href = health.homeUrl + 'health/user/my_service_bag.html';
+            },
+            toIndex() {
+                window.location.href = health.homeUrl + 'health/index.html';
+            },
+            toHealth() {
+                window.location.href = health.homeUrl + 'health/records/health_manage.html';
+            },
+            toSignProtocol(){
+                if (this.myInfo.status == defined.signStatusSuccess) {
+                    window.location.href = health.homeUrl + 'health/user/sign_protocol.html';
+                } else {
+                    this.$toast('您未签约，请先签约');
+                }
+            }
+        },
+    })
+</script>
+</html>

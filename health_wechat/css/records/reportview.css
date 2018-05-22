@@ -1,0 +1,65 @@
+body{
+ margin: 0;
+}
+.reportbox{min-height: 100%;box-sizing:border-box;padding-top:3.25rem;font-size:0.9rem;color:#999;line-height: 1.6rem;word-break: break-all;}
+/*重要健康指标数据趋势分析*/
+.report-bd [class^="icon-"]{font-size: 1.25rem;margin-right:0.4rem;vertical-align: sub;}
+.reportbox>div{margin-left:1.5rem;margin-right:1.5rem;}
+.r_logo{text-align: right;height: 3.25rem;line-height: 3.25rem;}
+.report-logo{width:3.975rem;height: 0.8rem;display:inline-block;margin-right: 0.625rem;}
+.r_logo>span{font-size:0.75rem;color:#646464;}
+.report-title{font-size: 1.875rem;color:#fff; text-align: center;height: 8.75rem;line-height: 8.75rem; background: -webkit-linear-gradient(#a2a7fc, #6db4fa); 
+ background: linear-gradient(#a2a7fc, #6db4fa);}
+.user-info{margin-top:0.875rem;color:#666;}
+.user-info>div{margin-top:0.625rem;}
+.report-Prompt{font-size: 0.8rem;margin-top:1.5rem;padding-top:0.75rem;border-top:1px solid #333;}
+.report-bd{margin-top:4.0rem;}
+.report-bd .repbd-h3{font-size: 1.2rem;color:#6ba6ff;}
+.report-bd .repbd-indent{font-size:0.95rem;color:#646464;margin:1.25rem 0 2.625rem;}
+.report-bd .repbd-title{font-size: 1.125rem;color:#6ba6ff;}
+
+.repbd-img{margin-bottom: 1.125rem;}
+.report-bd .repbd-img-prompt{font-size:1.0rem;color:#333;margin:1.125rem 0;}
+.report-bd .repbd-border{padding:1.0rem;border:0.1rem dashed #6ba6ff;border-radius: 0.5rem;}
+.report-bd .repbd-border>.repbd-text{margin-top:1.55rem;}
+.Parentheses{margin-right:0.2rem;color:#666;}
+.repbd-title2{font-size: 1.0rem;color:#333;margin:1.625rem 0 1rem;}
+.repbd-text2{margin-top:1.625rem;margin-bottom: 2.625rem;}
+.repbd-red{margin-top:1.125rem;color:#6ba6ff;font-size: 0.95rem;}
+.repbd-tips{font-size: 0.95rem;}
+/*整体健康状况*/
+.data-acc{height: 2.0rem;line-height:2.0rem; margin:1.25rem 0 1px;padding-left:1.25rem;color:#fff;background: #69a5ff;}
+.data-title{text-align: center;padding-left:1.25rem;height: 2.125rem;line-height: 2.125rem;color:#666;display: flex;background: #dcdcdc;}
+.data_icon{display: flex;padding-left:1.25rem;text-align: center;line-height: 2.75rem;border-bottom: 1px solid #666;}
+.data_icon>span,.data-title>span{flex:1;}
+.data-title>span:first-child,.data_icon>span:first-child{flex:1;text-align: left;}
+.data_icon>span:first-child{color:#69a5ff;}
+.data_icon>.spanblack{color:#333;}
+.data_icon>.spanorg{color:#ff6600;}
+.data_icon>span>i{margin-right:1.25rem !important;}
+.repbd-title3{font-size: 1.0rem;color:#333;margin:1.625rem 0 0;}
+.indent-Explain{margin-top: 1.25rem;}
+.indent-Explain>span{margin-right:0.25rem;}
+.split_border{border-bottom: 1px solid #6ba6ff;margin:2.375rem 0 2.5rem;}
+.detail_mar{margin-bottom: 1.25rem;}
+.detail_title{font-size: 1.2rem;color:#69a5ff;margin-bottom:1.9rem;text-align: center;}
+.detail_title1{font-size: 1.0rem;color:#333;}
+/*底部表格*/
+.detail_header{text-align: center;height: 2.125rem;line-height: 2.125rem;color:#666;display: flex;background: #dcdcdc;}
+.detail_header>span,.detail_td>span{flex:1;}
+.detail_header>span:nth-child(2),.detail_td>span:nth-child(2){flex:2.2}
+.detail_bd{margin-bottom: 1.875rem;}
+.detail_td{display: flex;text-align: center;line-height: 2.75rem;border-bottom: 1px solid #666;font-size: 0.95rem;color:#333;}
+
+.detail_header1>span:nth-child(2),.detail_bd1 .detail_td>span:nth-child(2){flex:3.2}
+.fixed_td{padding-left: 1rem;width:4.0rem;box-sizing:border-box;flex:none !important;}
+
+@media only screen and (max-width: 349px){
+ .detail_header>span:nth-child(2), .detail_td>span:nth-child(2) {
+  flex: 2.3;
+ }
+}
+.retnav{position: fixed;}
+.retnav .icon-date{position: absolute;right:0rem;left:0rem;top: 1.0rem ; font-size: 1.25rem;display: inline-block;color:#fff;width: 3rem;height: 100%;}
+.retnav>span{padding: 0 3rem 0 2.625rem;word-break: break-all;display: inline-block;line-height: 1.4;  }
+.validnav,.retnav{z-index: 10;font-size:1.15rem;background: #69a5ff;text-align: center;color:#fff;line-height: 3.25rem;height: 3.25rem;box-sizing: border-box;width: 100%;top:0;}

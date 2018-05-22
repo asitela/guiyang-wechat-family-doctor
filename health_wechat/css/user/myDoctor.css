@@ -1,0 +1,231 @@
+body{
+    background-color: #e5e5e5;
+}
+.navigator{
+    width: 10rem;
+    text-align: center;
+    font-size: 0.4rem;
+    color: #fff;
+    background-color: #10B9B9;
+    height: 1.194444rem;
+    line-height: 1.194444rem;
+    left: 0;
+    top: 0;
+    right: 0;
+    position: fixed;
+}
+.navigator img{
+    display: block;
+    float: left;
+    margin-left: 0.555556rem;
+    width: 0.277778rem;
+    margin-top: 0.31rem;
+}
+.hospitalArea{
+    color: #999999;
+    font-size: 0.351852rem;
+    padding-left: 0.629630rem;
+    height: 1.018519rem;
+    line-height: 1.018519rem;
+    margin-top: 1.194444rem;
+}
+.hospitalInfoPart{
+    background-color: #fff;
+    padding: 0.5rem;
+}
+.hospitalInfoPart .hospitalGroup{
+    font-size: 0.407407rem;
+    color: #10b9b9;
+    margin-bottom: 0.222222rem;
+}
+.hospitalInfoPart .hospitalDetailInfo{
+    font-size: 0.351852rem;
+    color: #666666;
+    line-height: 1.5;
+}
+.doctorList{
+    border-top: 1px solid #999999;
+    background-color: #fff;
+    margin-bottom:  0.4rem;
+    border-bottom: 1px solid #999999;
+}
+.doctorList .singleDoctor{
+    margin: 0 0.555556rem;
+    width: 8.888889rem;
+    border-bottom: 1px solid #a0a0a0;
+}
+.doctorList .singleDoctor:last-child{
+    border-bottom: none;
+}
+.clearfix:after {       
+    content: ".";    
+    display: block;  
+    clear: both;     
+    visibility: hidden;    
+    line-height: 0;
+    height: 0;     
+    font-size:0;   
+}
+.clearfix { *zoom:1;}
+.singleDoctor .doctorAvatar{
+    float: left;
+    width: 1.481481rem;
+    height: 1.481481rem;
+    border-radius: 0.740741rem;
+    margin-top: 0.462963rem;
+    margin-bottom: 0.462963rem;
+    margin-right: 0.462963rem;
+}
+.singleDoctor .doctorAvatar img{
+    width: 1.48rem;
+    height: 1.48rem;
+    border-radius: 0.74rem;
+    display: block;
+    border: 1px solid #999999;
+}
+.singleDoctor .doctorInfo {
+    float: left;
+    width: 6.944444rem;
+}
+.singleDoctor .doctorInfo p.introduction{
+    width: 6.944444rem;
+    float: left;
+    margin-top: 0.5rem;
+    margin-bottom: 0.16rem;
+    height: 0.666667rem;
+    line-height: 0.666667rem;
+}
+.singleDoctor .doctorInfo p.introduction span.doctorName{
+    float: left;
+    color: #333333;
+    font-size: 0.416667rem;
+}
+.singleDoctor .doctorInfo p.introduction span.doctorPostage{
+    float: left;
+    color: #666666;
+    font-size: 0.370370rem;
+    margin-left: 0.462963rem;
+}
+.singleDoctor .doctorInfo p.introduction span.chairman{
+    float: right;
+    color: #10b9b9;
+    font-size: 0.370370rem;
+    display: block;
+    width: 2.407407rem;
+    height: 0.666667rem;
+    line-height: 0.666667rem;
+    border-radius: 0.333333rem;
+    border: 1px solid #10b9b9;
+    text-align: center;
+}
+.singleDoctor .doctorInfo p.advantage{
+    font-size: 0.351852rem;
+    color: #999999;
+    width: 6.944444rem;
+    overflow: hidden;
+    text-overflow:ellipsis;
+    white-space: nowrap;
+    float: left;
+}
+span.icon-arrow-left:before{
+    content: "\e903";
+    font-size: 0.6rem;
+    color: #fff;
+    position: absolute;
+    left: 0.444444rem;
+    top: 0.3rem;
+    display: block;
+}
+span.icon-hint:before{
+    content: "\e917";
+    font-size: 0.42rem;
+    color: #10b9b9;
+    margin-left: 0.555556rem;
+}
+.loseUseTime{
+    text-align: center;
+    font-size: 0.351852rem;
+    color: #333333;
+}
+.loseUseTime span{
+    font-size: 0.351852rem;
+    color: #10b9b9;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

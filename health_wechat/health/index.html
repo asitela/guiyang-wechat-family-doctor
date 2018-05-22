@@ -1,0 +1,137 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="pragma" content="no-cache"/>
+    <meta http-equiv="cache-control" content="no-cache"/>
+    <meta name="screen-orientation" content="portrait"/>
+    <meta name="x5-orientation" content="portrait"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="green"/>
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <title>主页</title>
+    <script type="text/javascript" src="/js/jquery.min.js"></script>
+    <script type="text/javascript" src="/js/link.js"></script>
+    <link rel="stylesheet" type="text/css" href="/common/common.css">
+    <link rel="stylesheet" type="text/css" href="/common/style.css">
+    <link rel="stylesheet" type="text/css" href="/css/doctor/index.css">
+    <script type="text/javascript" src="/common/mint-ui.js"></script>
+    <link rel="stylesheet" href="/common/mint-ui.css">
+    <script type="text/javascript"
+            src="http://api.map.baidu.com/api?v=2.0&ak=9IBeDDaqnqQGP96q7AeTQE4b1lWYUTDf"></script>
+</head>
+<body>
+<div id="app" v-cloak>
+    <!-- 头部图片 -->
+    <img src="/img/pic_banner.png" class="bannerImg">
+    <!-- 进入医院列表 -->
+    <p class="hospitalPart" @click="toSelectHospital">
+        <span class="leftTag">全部医院</span>
+        <span class="trangle"></span>
+    </p>
+    <div class="hospitalList">
+        <div class="singleHospital clearfix" v-for="item in HospitalData" @click="toHospital(item.orgid)">
+            <div class="hospitalImg">
+                <img v-lazy="item.file_path">
+            </div>
+            <div class="hospitalInfo">
+                <p class="hospitalName dot">{{item.cn_name}}</p>
+                <p class="hospitalAddress dot">{{item.address}}</p>
+                <p class="hospitalPosition">
+                    <span class="icon-position"></span>
+                    <span>{{item.distance}}</span>
+                </p>
+            </div>
+        </div>
+    </div>
+    <!-- 底部固定栏 -->
+    <div class="bottomPart">
+        <div  @click="health">
+            <span class="icon-hc-health-report"></span>
+            <span>健康管理</span>
+        </div>
+        <div class="selectedPart">
+            <span class="icon-doctor-select"></span>
+            <span>家庭医生</span>
+        </div>
+        <div  @click="toUser">
+            <span class="icon-personal"></span>
+            <span>个人中心</span>
+        </div>
+    </div>
+</div>
+</body>
+<script type="text/javascript">
+    new Vue({
+        el: "#app",
+        data() {
+            return {
+                Hospital: {},
+                HospitalData: [],
+            }
+        },
+        beforeCreate() {
+                var geolocation = new BMap.Geolocation();
+                geolocation.getCurrentPosition(r => {
+                    Vue.set(this.Hospital, 'lng', r.longitude);
+                    Vue.set(this.Hospital, 'lat', r.latitude);
+                    this.getAllHospital();
+                    window.localStorage.setItem('longitude', JSON.stringify(this.Hospital.lng));
+                    window.localStorage.setItem('latitude', JSON.stringify(this.Hospital.lat));
+                });
+        },
+        methods: {
+            toSelectHospital() {
+                window.location.href = health.homeUrl + 'health/doctor/choose_hospital.html';
+            },
+
+            //    获取全部医院url
+            getAllHospital() {
+                this.$indicator.open();
+                let url = $.formateUrl('wechat/org/list');
+                let params = {
+                    page_size: defined.indexPageSize,
+                    lon: this.Hospital.lng,
+                    lat: this.Hospital.lat,
+                };
+                $.get(url, params, res => {
+                    if (res.code == 0) {
+                        this.$indicator.close();
+                        this.HospitalData = res.content.data;
+                    } else {
+                        this.$toast(res.message);
+                    }
+                })
+            },
+        //    跳医院详情
+            toHospital(orgid){
+                window.location.href = health.homeUrl + 'health/doctor/hospital_info.html?id='+orgid;
+            },
+        // 健康管理
+            health(){
+                // 判断是否绑定微信
+                let url= $.formateUrl('wechat/user-guest/user');
+                $.get(url,res=>{
+                    if(res.code==0){
+                        window.location.href = health.homeUrl + 'health/records/health_manage.html';
+                    }else {  //未绑定
+                        window.location.href=health.homeUrl + 'health/doctor/sign_member_info.html';
+                    }
+                })
+            },
+            toUser(){
+                let url= $.formateUrl('wechat/user-guest/user');
+                $.get(url,res=>{
+                    if(res.code==0){
+                        window.location.href = health.homeUrl + 'health/user/user_center.html';
+                    }else {  //未绑定
+                        window.location.href=health.homeUrl + 'health/doctor/sign_member_info.html';
+                    }
+                })
+            }
+        },
+
+
+    })
+</script>
+</html>

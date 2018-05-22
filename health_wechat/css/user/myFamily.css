@@ -1,0 +1,191 @@
+.navigator{
+    width: 10rem;
+    text-align: center;
+    font-size: 0.4rem;
+    color: #fff;
+    background-color: #10B9B9;
+    height: 1.194444rem;
+    line-height: 1.194444rem;
+    position: fixed;
+    left: 0;
+    top: 0;
+    right: 0;
+    z-index: 99;
+}
+span.icon-arrow-left:before{
+    content: "\e903";
+    font-size: 0.6rem;
+    color: #fff;
+    position: absolute;
+    left: 0.444444rem;
+    top: 0.3rem;
+    display: block;
+}
+span.icon-arrowFamily-left:before{
+    content: "\e903";
+    font-size: 0.6rem;
+    color: #fff;
+    position: absolute;
+    left: 0.444444rem;
+    top: 0.3rem;
+    display: block;
+}
+.clearfix:after {       
+    content: ".";    
+    display: block;  
+    clear: both;     
+    visibility: hidden;    
+    line-height: 0;
+    height: 0;     
+    font-size:0;   
+}
+.clearfix { *zoom:1;}
+a.addMember{
+    position: fixed;
+    right: 0.629630rem;
+    top: 0;
+    color: #fff;
+}
+.memberPart{
+    margin-top: 1.194444rem;
+    background-color: #fff;
+    padding: 0 0.444444rem;
+}
+.singleMember{
+    border-bottom: 1px solid #a0a0a0;
+}
+.singleMember p{
+    margin-left: 0.185185rem;
+    margin-right: 0.185185rem;
+}
+.singleMember .lineOne {
+    padding-top: 0.5rem;
+    margin-bottom: 0.253704rem;
+    height: 0.703704rem;
+    line-height: 0.703704rem;
+}
+.singleMember .lineOne .memberName{
+    display: block;
+    float: left;
+    font-size: 0.416667rem;
+    color: #333333;
+    margin-right: 0.4rem;
+}
+.singleMember .lineOne .memberOtherInfo{
+    display: block;
+    float: left;
+    font-size: 0.370370rem;
+    color: #999999;
+    margin-right: 0.25rem;
+}
+.singleMember .lineOne .memberStatusOne {
+    float: right;
+    display: block;
+    height: 0.685185rem;
+    line-height: 0.685185rem;
+    width: 1.851852rem;
+    border: 1px solid #10B9B9;
+    border-radius: 5px;
+    text-align: center;
+    color: #10B9B9;
+    font-size: 0.370370rem;
+}
+.singleMember .lineOne .memberStatusTwo{
+    float: right;
+    display: block;
+    height: 0.685185rem;
+    line-height: 0.685185rem;
+    width: 1.851852rem;
+    border: 1px solid #0099ff;
+    border-radius: 5px;
+    text-align: center;
+    color: #0099ff;
+    font-size: 0.370370rem;
+}
+.singleMember .lineOne .memberStatusThree{
+    float: right;
+    display: block;
+    height: 0.685185rem;
+    line-height: 0.685185rem;
+    /*width: 1.851852rem;*/
+    /*border: 1px solid #ff3300;*/
+    border-radius: 5px;
+    text-align: center;
+    color: #ff3300;
+    font-size: 0.370370rem;
+}
+.noSign{
+    border-radius: 5px;
+    /*padding: 0.1rem;*/
+    padding: 0.0233rem 0.1rem;
+    color: #ff3300;
+    border: 1px solid #ff3300!important;
+}
+.rev-application{
+    border-radius: 5px;
+    padding: 0.1rem;
+    color: #EC971F;
+    border: 1px solid #EC971F!important;
+}
+.dismissal{
+    border-radius: 5px;
+    padding: 0.1rem;
+    color: #337AB7!important;
+    border: 1px solid #337AB7!important;
+}
+.surrender{
+    border-radius: 5px;
+    padding: 0.1rem;
+    color:#20191a8f!important;
+    border: 1px solid #20191a8f!important;
+}
+.member-state-su{
+    border-radius: 5px;
+    padding: 0.1rem;
+    color: #10b9b9!important;
+    border: 1px solid #10b9b9!important;
+}
+
+.member-state-fa{
+    border-radius: 5px;
+    padding: 0.1rem;
+    color: #7e57c2!important;
+    border: 1px solid #7e57c2!important;
+}
+.lineTwo{
+    margin-bottom: 0.222222rem;
+}
+.lineTwo .memberIll{
+    display: block;
+    float: left;
+    color: #666666;
+    font-size: 0.370370rem;
+}
+.lineTwo .line{
+    display: block;
+    float: left;
+    color: #666666;
+    font-size: 0.370370rem;
+    margin: 0 0.2rem;
+}
+.lineThree{
+    font-size: 0.351852rem;
+    color: #999999;
+    margin-bottom: 0.4rem;
+}
+.lineThree span{
+    color: #10B9B9;
+    font-size: 0.351852rem;
+}
+
+
+
+
+
+
+
+
+
+
+
+

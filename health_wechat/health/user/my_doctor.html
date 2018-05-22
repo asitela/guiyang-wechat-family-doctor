@@ -1,0 +1,91 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="pragma" content="no-cache"/>
+    <meta http-equiv="cache-control" content="no-cache"/>
+    <meta name="screen-orientation" content="portrait"/>
+    <meta name="x5-orientation" content="portrait"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="green"/>
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <title>我的医生</title>
+    <script type="text/javascript" src="/js/jquery.min.js"></script>
+    <script type="text/javascript" src="/js/link.js"></script>
+    <script type="text/javascript" src="/common/mint-ui.js"></script>
+    <link rel="stylesheet" href="/common/mint-ui.css">
+    <link rel="stylesheet" type="text/css" href="/common/common.css">
+    <link rel="stylesheet" type="text/css" href="/common/style.css">
+    <link rel="stylesheet" type="text/css" href="/css/user/myDoctor.css">
+</head>
+<body>
+<div id="app" v-cloak>
+
+    <!-- 二级导航部分 -->
+    <p class="navigator">
+        <span class="icon-arrow-left"></span>
+        我的医生
+    </p>
+    <p class="hospitalArea">{{doctor.org_name}}</p>
+    <!-- 医院信息部分 -->
+    <div class="hospitalInfoPart">
+        <p class="hospitalGroup">{{doctor.name}}</p>
+        <div class="hospitalDetailInfo">
+            {{doctor.description}}
+        </div>
+    </div>
+    <!-- 医生列表 -->
+    <div class="doctorList">
+        <div class="singleDoctor clearfix" v-for="item in doctor.doctors">
+            <div class="doctorAvatar">
+                <img v-lazy="item.file_path">
+            </div>
+            <div class="doctorInfo clearfix">
+                <p class="introduction clearfix">
+                    <span class="doctorName">{{item.username}}</span>
+                    <span class="doctorPostage">{{item.title}}</span>
+                    <span class="chairman" v-if="item.is_leader==defined.leader">团队负责人</span>
+                </p>
+                <p class="advantage">
+                    {{item.specialty}}
+                </p>
+            </div>
+        </div>
+    </div>
+    <!-- 底部 -->
+    <!--<p class="loseUseTime">您的家庭医生签约将于<span>2018-02-07</span>到期</p>-->
+</div>
+</body>
+<script type="text/javascript">
+    new Vue({
+        el: '#app',
+        data() {
+            return {
+                doctor: {}
+            }
+        },
+        created() {
+            this.GetMyDoctor();
+        },
+        methods: {
+            //     获取我的医生
+            GetMyDoctor() {
+                this.$indicator.open();
+                let url = $.formateUrl('wechat/team/detail');
+                let params = {
+                    team_id: $.getQueryString('teamId')
+                };
+                $.get(url, params, res => {
+                    if (res.code == 0) {
+                        this.$indicator.close();
+                        this.doctor = res.content;
+                    } else {
+                        this.$toast(res.message);
+                    }
+                    this.$indicator.close();
+                })
+            }
+        }
+    })
+</script>
+</html>

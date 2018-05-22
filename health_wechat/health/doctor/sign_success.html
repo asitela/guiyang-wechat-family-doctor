@@ -1,0 +1,95 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="pragma" content="no-cache"/>
+    <meta http-equiv="cache-control" content="no-cache"/>
+    <meta name="screen-orientation" content="portrait"/>
+    <meta name="x5-orientation" content="portrait"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="green"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <title>签约成功</title>
+    <script type="text/javascript" src="/js/jquery.min.js"></script>
+    <script type="text/javascript" src="/js/link.js"></script>
+    <link rel="stylesheet" type="text/css" href="/common/common.css">
+    <link rel="stylesheet" type="text/css" href="/common/style.css">
+    <link rel="stylesheet" type="text/css" href="/css/doctor/signSuccess.css">
+    <script type="text/javascript" src="/common/mint-ui.js"></script>
+    <link rel="stylesheet" href="/common/mint-ui.css">
+</head>
+<body>
+<div id="app">
+    <!-- 二级导航部分 -->
+    <p class="navigator">
+        <!--<span class="icon-arrow-left"></span>-->
+        签约成功
+        <span class="done" @click="done">完成</span>
+    </p>
+    <div class="topPart">
+        <img src="/img/pic_done.png">
+        <p class="topPartLineOne">签约申请发送成功！</p>
+        <p class="topPartLineTwo">您的签约申请发送成功，请您耐心等待医生的审核！</p>
+    </div>
+    <p class="interval"></p>
+    <div class="bottomPart">
+        <p class="bottomPartLineOne">您签约的家庭医生</p>
+        <p class="bottomPartLineTwo">{{signOrg.org_name}}</p>
+        <p class="bottomPartLineThree">{{signOrg.team_name}}</p>
+        <div class="bottomPicList clearfix" style="display: flex; flex-direction: row;width: 100%;flex-wrap: wrap">
+            <span v-for="item in signData" style="display: flex; flex-direction:column">
+                <img v-lazy="item.file_path">
+                <span>{{item.name}}</span>
+            </span>
+        </div>
+    </div>
+</div>
+</body>
+<script type="text/javascript">
+
+    $(function () {
+        history.pushState(null, null, document.URL);
+        window.addEventListener('popstate', function () {
+            history.pushState(null, null, document.URL);
+        });
+    });
+
+    new Vue({
+        el: "#app",
+        data() {
+            return {
+                SignId: $.getQueryString('signId'),
+                signData: [],
+                signOrg: {}
+            }
+        },
+        created() {
+            this.getSignInfo();
+        },
+        methods: {
+            getSignInfo() {
+                this.$indicator.open();
+                let url = $.formateUrl('wechat/sign/team-info');
+                let params = {
+                    sign_id: this.SignId
+                };
+                $.get(url, params, res => {
+                    if (res.code == 0) {
+                        this.$indicator.close();
+                        this.signData = res.content.doctors;
+                        this.signOrg = res.content;
+                    } else {
+                        this.$toast(res.message);
+                    }
+                    this.$indicator.close();
+                })
+            },
+            // 完成
+            done() {
+                window.location.href = health.homeUrl + 'health/index.html';
+            }
+        }
+    })
+</script>
+</html>

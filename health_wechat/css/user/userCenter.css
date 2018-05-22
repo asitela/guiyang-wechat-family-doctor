@@ -1,0 +1,262 @@
+body{
+    background-color: #e5e5e5;
+}
+.clearfix:after {       
+    content: ".";    
+    display: block;  
+    clear: both;     
+    visibility: hidden;    
+    line-height: 0;
+    height: 0;     
+    font-size:0;   
+}
+.clearfix { *zoom:1;}
+.bottomPart{
+    width: 10rem;
+    /*height: 2.379629rem;*/
+    background-color: #fff;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    border-top: 1px solid #999999;
+}
+.bottomPart div{
+    width: 33.3%;
+    text-align: center;
+    float: left;
+}
+.bottomPart div img{
+    display: block;
+    height: 0.611111rem;
+    width: auto;
+    margin: 0.185185rem auto 0;
+}
+.bottomPart div span{
+    display: block;
+    font-size: 0.3rem;
+    margin-top: 0.185185rem;
+    margin-bottom: 0.185185rem;
+}
+.selectedPart{
+    color: #10B9B9;
+}
+.bottomPart span.icon-hc-health-report:before{
+    content: "\e910";
+    color: #666666;
+    font-size: 0.416667rem;
+}
+span.icon-doctor:before{
+    content: "\e909";
+    color: #666666;
+    font-size: 0.416667rem;
+}
+span.icon-personal-select:before{
+    content: "\e919";
+    color: #10B9B9;
+    font-size: 0.416667rem;
+}
+span.icon-position:before{
+    content: "\e91c";
+    color: #ff6600;
+    font-size: 0.34rem;
+    margin-right: 0.2rem;
+    float: left;
+    margin-top: 0.12rem;
+}
+.singleInfo .icon-doctor:before {
+    content: "\e909";
+    font-size: 0.6rem;
+    color: #33ccff;
+}
+.icon-family:before {
+    content: "\e90b";
+    font-size: 0.6rem;
+    color: #66cc00;
+}
+.icon-contract-record:before {
+    content: "\e905";
+    font-size: 0.6rem;
+    color: #c88ce5;
+}
+.icon-service:before{
+    content: "\e923";
+    color: #33cccc;
+    font-size: 0.6rem;
+}
+.icon-agreement:before {
+    content: "\e900";
+    font-size: 0.6rem;
+    color: #f5a000;
+}
+.icon-arrow-right:before {
+    content: "\e904";
+}
+.headerPart{
+    height: 3.9rem;
+    width: 10rem;
+    background-image: url('/img/bg.png');
+    background-size: 100% 100%;
+    margin-bottom: 0.185185rem;
+    padding-top: 0.483333rem;
+}
+.headerPart .memberStatus{
+    height: 0.740741rem;
+    line-height: 0.740741rem;
+    margin-bottom: 0.462963rem;
+}
+.headerPart .memberStatus span{
+    float: right;
+}
+.headerPart .memberStatus .memberStatusLeft{
+    font-size: 0.351852rem;
+    color: #333333;
+    margin-right: 0.583333rem;
+}
+.headerPart .memberStatus .memberStatusLeft span.icon-arrow-right{
+    float: right;
+    margin-top: 0.18rem;
+    font-size: 0.4rem;
+    color: #333333;
+}
+
+.headerPart .memberStatus .memberStatusRight{
+    font-size: 0.370370rem;
+    color: #fff;
+    height: 0.703704rem;
+    line-height: 0.703704rem;
+    /*border: 2px solid #fff;*/
+    /*border-radius: 0.370370rem;*/
+    padding: 0 0.65rem;
+    margin-right: 0.65rem;
+    margin-top: 0;
+}
+.memberProfile .memberAvatar{
+    float: left;
+    width: 1.759259rem;
+    height: 1.759259rem;
+    margin-left: 0.65rem;
+    margin-right: 0.694444rem;
+}
+.memberProfile .memberAvatar img{
+    width: 1.685185rem;
+    height: 1.685185rem;
+    border: 4px solid #fff;
+    border-radius: 0.879630rem;
+}
+.memberDetailInfo{
+    float: left;
+    width: 6.203704rem;
+}
+.memberDetailInfo p{
+    width: 6.203704rem;
+    font-weight: 500;
+}
+.memberSimpleInfo{
+    float: left;
+    width: 6.203704rem;
+    margin-top: 0.55rem;
+}
+.memberSimpleInfo p{
+    width: 6.203704rem;
+    font-weight: 500;
+}
+.lineOne {
+    margin-bottom: 0.2rem;
+    height: 0.6rem;
+    line-height: 0.6rem;
+}
+.lineOne .memberName{
+    display: block;
+    float: left;
+    font-size: 0.444444rem;
+    color: #fff;
+    margin-right: 0.4rem;
+}
+.lineOne .memberOtherInfo{
+    display: block;
+    float: left;
+    font-size: 0.351852rem;
+    color: #333333;
+    margin-right: 0.25rem;
+}
+.lineTwo{
+    margin-bottom: 0.12rem;
+}
+.lineTwo .memberIll{
+    display: block;
+    float: left;
+    color: #fff;
+    font-size: 0.370370rem;
+}
+.lineTwo .line{
+    display: block;
+    float: left;
+    color: #fff;
+    font-size: 0.370370rem;
+    margin: 0 0.2rem;
+}
+.lineThree{
+    font-size: 0.333333rem;
+    color: #666666;
+    margin-bottom: 0.462963rem;
+}
+.lineThree span{
+    color: #33ffff;
+    font-size: 0.333333rem;
+}
+.infoClass{
+    background-color: #fff;
+    border-top: 1px solid #a0a0a0;
+    border-bottom: 1px solid #a0a0a0;
+}
+.singleInfo{
+    width: 10rem;
+}
+span.infoIcon{
+    float: left;
+    display: inline-block;
+    width: 0.65rem;
+    height: 0.65rem;
+    margin-left: 0.407407rem;
+    margin-top: 0.63rem;
+    margin-right: 0.222222rem;
+}
+.infoEntry{
+    float: left;
+    display: inline-block;
+    width: 8rem;
+    border-bottom: 1px solid #999999;
+    height: 1.851852rem;
+    line-height: 1.851852rem;
+}
+.infoEntry span.infoName{
+    font-size: 0.370370rem;
+    color: #333333;
+    padding-left: 0.185185rem;
+}
+.infoEntry .icon-arrow-right {
+    font-size: 0.6rem;
+    color: #999999;
+    float: right;
+    margin-right: 0.185185rem;
+    display: block;
+    margin-top: 0.6rem;
+}
+
+.singleInfo:last-child .infoEntry{
+    border-bottom: none;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+

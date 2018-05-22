@@ -1,0 +1,302 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="pragma" content="no-cache"/>
+    <meta http-equiv="cache-control" content="no-cache"/>
+    <meta name="screen-orientation" content="portrait"/>
+    <meta name="x5-orientation" content="portrait"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="green"/>
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <title>我的资料</title>
+    <script type="text/javascript" src="/js/jquery.min.js"></script>
+    <script type="text/javascript" src="/js/link.js"></script>
+    <script type="text/javascript" src="/common/mint-ui.js"></script>
+    <script type="text/javascript" src="/common/muse-ui.js"></script>
+    <link rel="stylesheet" href="/common/mint-ui.css">
+
+    <link rel="stylesheet" type="text/css" href="/common/common.css">
+    <link rel="stylesheet" type="text/css" href="/common/style.css">
+    <link rel="stylesheet" href="/common/material-icons.css">
+    <link rel="stylesheet" href="/common/cyrillic.css">
+
+    <link rel="stylesheet" type="text/css" href="/common/muse.css">
+    <link rel="stylesheet" type="text/css" href="/css/user/myProfile.css">
+</head>
+<body>
+<div id="app" v-cloak>
+    <!-- 二级导航部分 -->
+    <p class="navigator">
+        <span class="icon-arrow-left"></span>
+        我的资料
+        <a class="addMember" href="javascript:void(0);" @click="edit" v-if="flag">编辑</a>
+        <a class="addMember" href="javascript:void(0);" v-if="!flag" @click="sub">保存</a>
+    </p>
+    <form id="myInfo">
+        <!-- 基本信息 -->
+        <div class="basicInfo">
+            <p class="basicInfoTag">基本信息</p>
+            <ul class="basicInfoList">
+                <li>
+                    <span class="basicInfoLeft">居民头像</span>
+                    <!--<img :src="/img/pic_girl.png" class="avatar">-->
+                    <img :src="myInfo.gender==1?'/img/pic_001.png':'/img/pic_girl.png'" class="avatar">
+                </li>
+                <li>
+                    <span class="basicInfoLeft">居民姓名</span>
+                    <span class="basicInfoRight">{{myInfo.name}}</span>
+                </li>
+                <li>
+                    <span class="basicInfoLeft">证件号码</span>
+                    <span class="basicInfoRight">{{myInfo.identity_card}}</span>
+                    <!--<input type="hidden" name="id_type" v-model="myInfo.id_type">-->
+                </li>
+                <li>
+                    <span class="basicInfoLeft">出生日期</span>
+                    <span class="icon-date" @click="openPicker" v-show="!flag"></span>
+                    <input type="text" class="dateInput" name="birthday" :class="flag?'':'edit_color'" readonly v-model="myInfo.birthday"/>
+                    <mt-datetime-picker ref="picker" v-model="pickerValue" year-format="{value} 年" month-format="{value} 月"
+                                        date-format="{value} 日" v-model="pickerVisible" type="date"
+                                        :start-date="start_date" :end-date="new Date()"
+                                        @confirm="handleConfirm"></mt-datetime-picker>
+                    <!--<span class="basicInfoRight">{{myInfo.birthday}}</span>-->
+                </li>
+                <li>
+                    <span class="basicInfoLeft">性别</span>
+                    <span class="basicInfoRight">{{myInfo.gender_msg}}</span>
+                </li>
+                <li>
+                    <span class="basicInfoLeft" id="label_address">联系地址</span>
+                    <input type="text"
+                           name="address"
+                           class="dot"
+                           maxlength="200"
+                           placeholder="请输入联系地址"
+                           :readonly="flag"
+                           :class="flag?'':'edit_color'"
+                           vname="label_address"
+                           validator="notNull"
+                           v-model="myInfo.address">
+                </li>
+                <li>
+                    <span class="basicInfoLeft">联系电话</span>
+                    <input type="tel"
+                           style="color: #333"
+                           placeholder="请输入联系电话"
+                           readonly
+                           @click="editPhone"
+                           v-if="myInfo.mobile"
+                           v-model="myInfo.mobile"
+                    >
+                    <input type="tel"
+                           style="color: #333"
+                           placeholder="请输入联系电话"
+                           v-else
+                           @click="editPhone"
+                           maxlength="11"
+                           v-model="myInfo.tel_phone"
+                           readonly>
+                </li>
+                <li>
+                    <span class="basicInfoLeft">邮箱地址</span>
+                    <input type="text"
+                           name="email"
+                           placeholder="请输入邮箱地址"
+                           :class="flag?'':'edit_color'"
+                           :readonly="flag"
+                           v-model="myInfo.email">
+                </li>
+            </ul>
+        </div>
+        <div class="wrongTips errorText"></div>
+        <!-- 健康资料 -->
+        <div class="healthInfo">
+            <p class="healthInfoTag">健康资料</p>
+            <ul class="healthInfoList">
+                <li>
+                    <span class="healthInfoLeft">疾病史</span>
+                    <input type="text"
+                           class="dot"
+                           name="past_history"
+                           placeholder="请输入疾病史"
+                           maxlength="200"
+                           :class="flag?'':'edit_color'"
+                           :readonly="flag"
+                           v-model="myInfo.past_history">
+                </li>
+                <li>
+                    <span class="healthInfoLeft">过敏史</span>
+                    <input type="tel"
+                           class="dot"
+                           name="allergy_history"
+                           placeholder="请输入过敏史"
+                           maxlength="200"
+                           :class="flag?'':'edit_color'"
+                           :readonly="flag"
+                           v-model="myInfo.allergy_history">
+                </li>
+                <li>
+                    <span class="healthInfoLeft">居民标签</span>
+                    <!--<input type="text" name="userMail" placeholder="请输入居民标签">-->
+                    <span class="member_title dot">{{myTag}}</span>
+                </li>
+                <li>
+                    <span class="healthInfoLeft">血型</span>
+                    <!--  <input type="text" name="userMail" placeholder="请输入邮箱地址"> -->
+                    <template>
+                        <div class="RhOption">
+                            <mu-select-field v-model="RhTypeOne"
+                                             :disabled="flag"
+                                             underlineShow="false"
+                                             fullWidth="true"
+                                             @change="RhTypeChange"
+                                             autoWidth="true">
+                                <mu-menu-item v-for="text,index in RhType" :key="text.id" :value="text.id"
+                                              :title="text.name"/>
+                            </mu-select-field>
+                            <input type="hidden" v-model="RhTypeOne" name="rh_blood">
+                            <br/>
+                        </div>
+                    </template>
+                    <template>
+                        <div class="bloodOption">
+                            <mu-select-field v-model="bloodTypeOne"
+                                             :disabled="flag"
+                                             underlineShow="false"
+                                             fullWidth="true"
+                                             @change="bloodTypeChange"
+                                             autoWidth="true">
+                                <mu-menu-item v-for="text,index in bloodType" :key="text.id" :value="text.id"
+                                              :title="text.name"/>
+                            </mu-select-field>
+                            <input type="hidden" v-model="bloodTypeOne" name="blood">
+                            <br/>
+                        </div>
+                    </template>
+                </li>
+            </ul>
+        </div>
+    </form>
+</div>
+</body>
+<script type="text/javascript">
+    new Vue({
+        el: '#app',
+        data() {
+            return {
+                RhTypeOne: '',
+                RhType: [{
+                    id: '',
+                    name: '请选择血型'
+                }, {
+                    id: 'Rh(+)',
+                    name: 'Rh(+)血型'
+                }, {
+                    id: 'Rh(-)',
+                    name: 'Rh(-)血型'
+                }],
+                bloodTypeOne: '',
+                bloodType: [{
+                    id: '',
+                    name: '请选择血型'
+                }, {
+                    id: 'A',
+                    name: 'A型'
+                }, {
+                    id: 'B',
+                    name: 'B型'
+                }, {
+                    id: 'AB',
+                    name: 'AB型'
+                }, {
+                    id: 'O',
+                    name: 'O型'
+                }],
+                myInfo: {},
+                myTag: [],
+                birthday:'',
+                pickerValue: new Date(),
+                start_date: new Date(),
+                flag:true
+            }
+        },
+        created() {
+            this.start_date.setFullYear(this.start_date.getFullYear() - 120);
+            this.GetMyInfo();
+        },
+        methods: {
+            //     获取基本信息
+            GetMyInfo() {
+                this.$indicator.open();
+                let url = $.formateUrl('wechat/user/user-info');
+                $.get(url, res => {
+                    if (res.code == 0) {
+                        this.$indicator.close();
+                        this.myInfo = res.content;
+                        let myTag = [];
+                        for (let i = 0; i < this.myInfo.tags.length; i++) {
+                            myTag.push(this.myInfo.tags[i].name)
+                        }
+                        this.myTag = myTag.toString();
+                        this.RhTypeOne=res.content.rh_blood;
+                        this.bloodTypeOne=res.content.blood;
+                    } else {
+                        this.$toast(res.message);
+                    }
+                    this.$indicator.close();
+                })
+            },
+            openPicker() {
+                this.$refs.picker.open();
+            },
+            handleConfirm() {
+                // this.birthday = this.formatDate(this.$refs.picker.value);
+                // Vue.set(this.memberInfo, 'age', $.calcAge(this.birthday));
+                this.myInfo.birthday=this.formatDate(this.$refs.picker.value);
+            },
+            formatDate(date) {
+                const y = date.getFullYear();
+                let m = date.getMonth() + 1;
+                m = m < 10 ? '0' + m : m;
+                let d = date.getDate();
+                d = d < 10 ? ('0' + d) : d;
+                return y + '-' + m + '-' + d
+            },
+            //  编辑
+            edit(){
+                this.flag=false;
+            },
+            RhTypeChange(val){
+                this.RhTypeOne=val;
+            },
+            bloodTypeChange(val){
+                this.bloodTypeOne=val;
+            },
+        //    保存
+            sub(){
+                if(validateForm(myInfo)){
+                    this.$indicator.open();
+                    var formData = $('#myInfo').serialize();
+                    let url=$.formateUrl('wechat/user/update');
+                    $.post(url,formData,res=>{
+                        if(res.code==0){
+                            this.$indicator.close();
+                            this.$toast('保存成功');
+                            this.flag=true;
+                            this.GetMyInfo();
+                        }else {
+                            this.$toast(res.message);
+                        }
+                        this.$indicator.close();
+                    })
+                }
+            },
+            // 修改手机号
+            editPhone(){
+                window.location.href=health.homeUrl + 'health/user/change_phone_num.html';
+            }
+        },
+    })
+</script>
+</html>

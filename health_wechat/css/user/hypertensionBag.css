@@ -1,0 +1,59 @@
+.navigator{
+    width: 10rem;
+    text-align: center;
+    font-size: 0.4rem;
+    color: #fff;
+    background-color: #10B9B9;
+    height: 1.194444rem;
+    line-height: 1.194444rem;
+    left: 0;
+    top: 0;
+    right: 0;
+    position: fixed;
+}
+span.icon-arrow-left:before{
+    content: "\e903";
+    font-size: 0.6rem;
+    color: #fff;
+    position: absolute;
+    left: 0.444444rem;
+    top: 0.3rem;
+    display: block;
+}
+.contentPart{
+    margin-top: 1.194444rem;
+    padding-top: 0.370370rem;
+}
+.titleLine{
+    margin: 0 0.370370rem;
+    background-color: #e9e9e9;
+    border-radius: 5px;
+    height: 0.833333rem;
+    line-height: 0.833333rem;
+}
+.titleLine span{
+    display: inline-block;
+    width: 33.33%;
+    float: left;
+    height: 0.833333rem;
+    line-height: 0.833333rem;
+    text-align: center;
+    color: #333333;
+    font-size: 0.370370rem;
+}
+.bodyLine{
+    height: 0.925926rem;
+    line-height: 0.925926rem;
+    margin: 0 0.444444rem;
+    border-bottom: 1px solid #a0a0a0;
+}
+.bodyLine span{
+    display: inline-block;
+    width: 33.33%;
+    float: left;
+    height: 0.925926rem;
+    line-height: 0.925926rem;
+    text-align: center;
+    font-size: 0.370370rem;
+    color: #666666;
+}

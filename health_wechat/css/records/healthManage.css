@@ -1,0 +1,133 @@
+body{
+    background-color: #e5e5e5;
+}
+.navigator{
+    width: 10rem;
+    text-align: center;
+    font-size: 0.4rem;
+    color: #fff;
+    background-color: #10B9B9;
+    height: 1.194444rem;
+    line-height: 1.194444rem;
+    left: 0;
+    top: 0;
+    right: 0;
+    position: fixed;
+}
+.clearfix:after {       
+    content: ".";    
+    display: block;  
+    clear: both;     
+    visibility: hidden;    
+    line-height: 0;
+    height: 0;     
+    font-size:0;   
+}
+.clearfix { *zoom:1;}
+span.icon-arrow-left:before{
+    content: "\e903";
+    font-size: 0.6rem;
+    color: #fff;
+    position: absolute;
+    left: 0.444444rem;
+    top: 0.3rem;
+    display: block;
+}
+.bottomPart{
+    width: 10rem;
+    /*height: 2.379629rem;*/
+    background-color: #fff;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    border-top: 1px solid #999999;
+}
+.bottomPart div{
+    width: 33.3%;
+    text-align: center;
+    float: left;
+}
+.bottomPart div img{
+    display: block;
+    height: 0.611111rem;
+    width: auto;
+    margin: 0.185185rem auto 0;
+}
+.bottomPart div span{
+    display: block;
+    font-size: 0.3rem;
+    margin-top: 0.185185rem;
+    margin-bottom: 0.185185rem;
+}
+.selectedPart{
+    color: #10B9B9;
+}
+.bottomPart span.icon-healthcontrol-select:before{
+    content: "\e916";
+    color: #10B9B9;
+    font-size: 0.416667rem;
+}
+span.icon-doctor:before{
+    content: "\e909";
+    color: #666666;
+    font-size: 0.416667rem;
+}
+span.icon-personal:before{
+    content: "\e918";
+    color: #666666;
+    font-size: 0.416667rem;
+}
+.contentPart{
+    margin-top: 1.194444rem;
+    background-color: #fff;
+    border-bottom: 1px solid #a0a0a0;
+}
+p.line{
+    height: 1.481481rem;
+    line-height: 1.481481rem;
+    margin: 0 0.444444rem;
+    padding: 0 0.203704rem;
+    border-bottom: 1px solid #a0a0a0;
+}
+p.line:last-child{
+    border-bottom: none;
+}
+span.preTag{
+    display: block;
+    float: left;
+    height: 1.481481rem;
+    line-height: 1.481481rem;
+    color: #10B9B9;
+    font-size: 0.388889rem;
+}
+span.rightPart{
+    float: right;
+    height: 1.481481rem;
+    line-height: 1.481481rem;
+    display: block;
+    color: #999999;
+    font-size: 0.351852rem;
+}
+span.icon-arrowblack-right:before{
+    content: "\e901";
+    font-size: 0.314815rem;
+    color: #333333;
+}
+span.trangle{
+    display: inline-block;
+    width: 0.314815rem;
+    height: 0.314815rem;
+    margin-left: 0.694444rem;
+}
+
+
+
+
+
+
+
+
+
+
+

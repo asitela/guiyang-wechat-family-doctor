@@ -1,0 +1,114 @@
+body{
+    background-color: #fff;
+}
+.interval{
+    height: 20px;
+    background-color: #e5e5e5;
+}
+.navigator{
+    width: 10rem;
+    text-align: center;
+    font-size: 0.4rem;
+    color: #fff;
+    background-color: #10B9B9;
+    height: 1.194444rem;
+    line-height: 1.194444rem;
+    left: 0;
+    top: 0;
+    right: 0;
+    position: fixed;
+    z-index: 99;
+}
+.navigator img{
+    display: block;
+    float: left;
+    margin-left: 0.555556rem;
+    width: 0.277778rem;
+    margin-top: 0.31rem;
+}
+.topPart{
+    background-color: #fff;
+    border-bottom: 1px solid #999999;
+    padding-top: 0.833333rem;
+    margin-top: 1.194444rem;
+}
+.topPart img{
+    display: block;
+    width: 2.481481rem;
+    height: 2.287037rem;
+    margin: 0 auto 0.675926rem;
+}
+.topPartLineOne{
+    color: #333333;
+    font-size: 0.416667rem;
+    text-align: center;
+    margin-bottom: 0.2rem;
+    text-align: center;
+}
+.topPartLineTwo{
+    color: #999999;
+    font-size: 0.351852rem;
+    text-align: center;
+    margin: 0 2.3rem 0.55926rem; 
+}
+.bottomPart{
+    border-top: 1px solid #999999;
+    background-color: #fff;
+}
+.bottomPartLineOne{
+    font-size: 0.388889rem;
+    color: #10B9B9;
+    padding: 0.35rem 0 0.12rem 0.894815rem;
+}
+.bottomPartLineTwo{
+    font-size: 0.388889rem;
+    color: #333333;
+    padding: 0 0 0.12rem 0.894815rem;
+}
+.bottomPartLineThree{
+    font-size: 0.0.351852;
+    color: #666666;
+    padding: 0 0 0.277778rem 0.894815rem;
+}
+.bottomPicList{
+    margin: 0 0 0 0.629630rem;
+    padding: 0.444444rem 0rem 0 0.185185rem;
+    border-top: 1px solid #999999;
+}
+.clearfix:after {       
+    content: ".";    
+    display: block;  
+    clear: both;     
+    visibility: hidden;    
+    line-height: 0;
+    height: 0;     
+    font-size:0;   
+}
+.clearfix { *zoom:1;}
+.bottomPicList img{
+    display: block;
+    float: left;
+    width: 1.388889rem;
+    height: 1.388889rem;
+    border-radius: 0.694444rem;
+    margin-right: 0.4rem;
+    margin-bottom: 0.444444rem
+}
+span.icon-arrow-left:before{
+    content: "\e903";
+    font-size: 0.6rem;
+    color: #fff;
+    position: absolute;
+    left: 0.444444rem;
+    top: 0.3rem;
+    display: block;
+}
+
+.done{
+    font-size: 0.4rem;
+    color: #fff;
+    position: absolute;
+    right: 0.3rem;
+    top: 0rem;
+    display: block;
+}

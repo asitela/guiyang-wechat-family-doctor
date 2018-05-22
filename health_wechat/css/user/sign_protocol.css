@@ -1,0 +1,180 @@
+body{
+    background-color: #e5e5e5;
+}
+.navigator{
+    width: 10rem;
+    text-align: center;
+    font-size: 0.4rem;
+    color: #fff;
+    background-color: #10B9B9;
+    height: 1.194444rem;
+    line-height: 1.194444rem;
+    position: fixed;
+    left: 0;
+    top: 0;
+    right: 0;
+    z-index: 9999;
+}
+span.icon-arrow-left:before{
+    content: "\e903";
+    font-size: 0.6rem;
+    color: #fff;
+    position: absolute;
+    left: 0.444444rem;
+    top: 0.3rem;
+    display: block;
+}
+.con{
+    background-color: #ffffff;
+    padding: 0 0.2rem;
+}
+.title{
+    margin-top: 1.194444rem;
+    font-size: 0.8rem;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+.protocol{
+    height: 10rem;
+    font-size: 0.6rem;
+    width: 1rem;
+    margin: 0 auto;
+    line-height: 3rem;
+}
+.host {
+    padding: 1rem 0;
+    text-align: center;
+}
+.host span{
+    display: inline-block;
+    font-size: 0.355rem;
+    font-weight: 700;
+}
+.page{
+    margin-top: 1rem;
+}
+.title_two{
+    font-size: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+.people{
+    margin-top: 1rem;
+}
+.name_title{
+    display: inline-block;
+    font-size: 0.4rem;
+    font-weight: 600;
+}
+.address{
+    display: inline-block;
+    width:8rem;
+    height: auto;
+    vertical-align: text-top;
+    position: relative;
+    top: -7px;
+    word-break: break-all;
+}
+.name{
+    display: inline-block;
+    font-size: 0.4rem;
+    margin-top: 0.2rem;
+}
+.page_size{
+    margin-top: 1rem;
+    text-align: center;
+}
+.stage_first{
+    padding-top: 1rem;
+}
+.stage{
+    font-size: 0.4rem;
+    line-height: 0.8rem;
+}
+.sign{
+    display: flex;
+    flex-direction: row;
+    font-size: 0.4rem;
+    padding-top: 1rem;
+}
+.sign_name{
+    width: 50%;
+}
+.sign_name span{
+    height: 1rem;
+}
+.sign_img{
+    width: 100px;
+    height: 70px;
+}
+.sign span{
+    display: block;
+}
+.third{
+    padding-top: 0.5rem;
+    font-size: 0.4rem;
+}
+.third span{
+    display: block;
+}
+.sign_time{
+    text-align: right;
+    margin-right: 1rem;
+    font-size: 0.4rem;
+    font-weight: 600;
+}
+
+.pack{
+    text-align: center;
+    padding-top: 1rem;
+}
+.pack span{
+    display: inline-block;
+    font-size: 0.6rem;
+}
+.pack_title{
+    margin-left: 0.5rem;
+    font-weight: 600;
+}
+.free_pack{
+    text-align: center;
+}
+.free_pack span{
+    display: block;
+    font-size: 0.4rem;
+    font-weight: 600;
+}
+.tab{
+    height: auto;
+    border: 1px solid transparent;
+    overflow: auto;
+    padding-bottom: 1rem;
+    text-align: center;
+}
+
+
+.big_table{
+    width: 15rem;
+}
+.big,.small,.server_people{
+    width: 3rem;
+}
+table tr,table td, table th{
+    border: 1px solid #000000;
+}
+table td{
+    height: 0.5rem;
+}
+table th{
+    text-align: center;
+    font-size: 0.4rem;
+    font-weight: 600;
+}
+
+
+
+
+
+

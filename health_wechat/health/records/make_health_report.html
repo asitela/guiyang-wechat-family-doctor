@@ -1,0 +1,179 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="pragma" content="no-cache"/>
+    <meta http-equiv="cache-control" content="no-cache"/>
+    <meta name="screen-orientation" content="portrait"/>
+    <meta name="x5-orientation" content="portrait" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="green"/>
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <title>健康报告</title>
+    <script type="text/javascript" src="/js/jquery.min.js"></script>
+    <script type="text/javascript" src="/js/link.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="/common/common.css">
+    <link rel="stylesheet" type="text/css" href="/common/style.css">
+    <link rel="stylesheet" href="/common/material-icons.css">
+    <link rel="stylesheet" href="/common/cyrillic.css">
+    <link rel="stylesheet" href="/common/mint-ui.css">
+    <link rel="stylesheet" type="text/css" href="/common/muse.css">
+    <link rel="stylesheet" type="text/css" href="/css/records/makeHealthReport.css">
+
+    <script type="text/javascript" src="/common/mint-ui.js"></script>
+    <script type="text/javascript" src="/common/monthPicker.js"></script>
+    <script type="text/javascript" src="/common/muse-ui.js"></script>
+</head>
+<body>
+    <div id="app">
+        <!-- 二级导航部分 -->
+        <p class="navigator">
+            <span class="icon-arrow-left"></span>
+            健康报告
+        </p>
+        <div class="infoPart">
+            <form>
+                <div class="CardType">
+                    <p class="cardTag">选择成员</p>
+                    <template>
+                        <div class="selectOption">
+                          <mu-select-field   v-model="relationOne" underlineShow="false" name="relation"  fullWidth="true" autoWidth="true" @change="memberChange">
+                            <mu-menu-item v-for="text,index in relationType" :key="text.id" :value="text.id" :title="text.name" />
+                          </mu-select-field>
+                          <br/>
+                        </div>
+                    </template>
+                </div>
+                <div class="datePart">
+                    <div class="dateLine clearfix">
+                        <div class="dateLinePre">开始日期</div>
+                        <div class="dateLineRight">
+                            <input type="text" v-model="startDate" name="startDate" />
+                            <span class="icon-date" @click="openStartPicker"></span>
+                            <mt-datetime-picker ref="startPicker" v-model="pickerValue"
+                                                year-format="{value} 年"
+                                                month-format="{value} 月"
+                                                date-format="{value} 日"
+                                                v-model="pickerVisible"
+                                                type="date"
+                                                :end-date="new Date()"
+                                                :start-date="start_date"
+                                                @confirm="startDateConfirm"></mt-datetime-picker>
+                        </div>
+                    </div>
+                    <div class="dateLine clearfix">
+                        <div class="dateLinePre">结束日期</div>
+                        <div class="dateLineRight">
+                            <input type="text" v-model="endDate" name="endDate"  />
+                            <span class="icon-date" @click="openEndPicker"></span>
+                            <mt-datetime-picker ref="endPicker"
+                                                v-model="pickerValue"
+                                                year-format="{value} 年"
+                                                month-format="{value} 月"
+                                                date-format="{value} 日"
+                                                v-model="pickerVisible"
+                                                type="date"
+                                                :start-date="start_date"
+                                                :end-date="new Date()"
+                                                @confirm="endDateConfirm"></mt-datetime-picker>
+                        </div>
+                    </div>
+                </div>
+                <!-- <p class="wrongTips">居民姓名与身份证号码不匹配，请重新输入 !</p> -->
+                <!-- 确认绑定样式一 -->
+                <button type="button" class="fullInfo" @click="report">生成报告</button>
+                <!-- 确认绑定样式二 -->
+                <!-- <button ype="submit" class="shortInfo">下一步</button> -->
+            </form>
+        </div>
+    </div>
+</body>
+<script type="text/javascript">
+    new Vue({
+        el: "#app",
+        data() {
+            return {
+                pickerValue:new Date(),
+                relationOne:'',
+                relationType:[],
+                start_date: new Date(),
+                startDate:new Date(),
+                endDate:this.formatDate(new Date()),
+            }
+        },
+        created() {
+            this.start_date.setFullYear(this.start_date.getFullYear() - 120);
+            let s_time=this.startDate.setMonth(this.startDate.getMonth() - 6);
+            this.startDate=this.formatDate(new Date(s_time));
+            this.getMemberList();
+        },
+        methods: {
+            // 获取成员
+            getMemberList(){
+                this.$indicator.open();
+                let url=$.formateUrl('wechat/user/family-member');
+                $.get(url,res=>{
+                    if(res.code==0){
+                        this.$indicator.close();
+                        console.log(res);
+                        let data=res.content;
+                        for(let i=0;i<data.length;i++){
+                            if(data[i].relat=='1'){
+                                data[i].name=data[i].relat_msg;
+                                this.relationOne=data[i].id;
+                            }
+                            this.relationType.push({
+                                id:data[i].id,
+                                name:data[i].name,
+                            });
+                        }
+                    }else {
+                        this.$toast(res.message);
+                    }
+                    this.$indicator.close();
+                })
+            },
+            memberChange(val){
+                this.relationOne=val;
+            },
+            //  生成报告
+            report(){
+                let url=$.formateUrl('wechat/health/report');
+                let params={
+                    user_id:this.relationOne,
+                    start_time:this.startDate,
+                    end_time:this.endDate
+                };
+                $.get(url,params,res=>{
+                    if(res.code==0){
+                        window.location.href=health.homeUrl+'health/records/health_report_view.html'
+                    }else {
+                        this.$toast(res.message);
+                    }
+                })
+            },
+            openStartPicker() {
+                this.$refs.startPicker.open();
+            },
+            openEndPicker() {
+                this.$refs.endPicker.open();
+            },
+            startDateConfirm(){
+                this.startDate=this.formatDate(this.$refs.startPicker.value)
+            },
+            endDateConfirm(){
+                this.endDate=this.formatDate(this.$refs.endPicker.value)
+            },
+            formatDate(date) {
+                const y = date.getFullYear();
+                let m = date.getMonth() + 1;
+                m = m < 10 ? '0' + m : m;
+                let d = date.getDate();
+                d = d < 10 ? ('0' + d) : d;
+                return y + '-' + m + '-' + d
+            }
+        },
+    })
+</script>
+</html>

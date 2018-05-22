@@ -1,0 +1,32 @@
+.navigator{
+    width: 10rem;
+    text-align: center;
+    font-size: 0.4rem;
+    color: #fff;
+    background-color: #10B9B9;
+    height: 1.194444rem;
+    line-height: 1.194444rem;
+    position: fixed;
+    left: 0;
+    top: 0;
+    right: 0;
+    z-index: 999;
+}
+span.icon-arrow-left:before{
+    content: "\e903";
+    font-size: 0.6rem;
+    color: #fff;
+    position: absolute;
+    left: 0.444444rem;
+    top: 0.3rem;
+    display: block;
+}
+.contentPart{
+    margin-top: 1.194444rem;
+    width: 10rem;
+    padding: 0.277778rem 0.277778rem 0;
+}
+.contentPart img{
+    display: block;
+    width: 9.444444rem;
+}

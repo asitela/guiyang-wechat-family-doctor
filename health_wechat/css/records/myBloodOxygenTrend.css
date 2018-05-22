@@ -1,0 +1,323 @@
+body{
+    background-color: #e5e5e5;
+}
+.navigator{
+    width: 10rem;
+    text-align: center;
+    font-size: 0.4rem;
+    color: #fff;
+    background-color: #10B9B9;
+    height: 1.194444rem;
+    line-height: 1.194444rem;
+    position: fixed;
+    left: 0;
+    top: 0;
+    right: 0;
+    z-index: 999;
+}
+span.icon-arrow-left:before{
+    content: "\e903";
+    font-size: 0.6rem;
+    color: #fff;
+    position: absolute;
+    left: 0.444444rem;
+    top: 0.3rem;
+    display: block;
+}
+.clearfix:after {       
+    content: ".";    
+    display: block;  
+    clear: both;     
+    visibility: hidden;    
+    line-height: 0;
+    height: 0;     
+    font-size:0;   
+}
+.clearfix { *zoom:1;}
+.icon-date{
+    position: absolute;
+    right: 0.648148rem;
+    color: #fff;
+    top: 0.370370rem;
+    width: 0.462963rem;
+    height: 0.462963rem;
+    display: block;
+}
+.icon-date:before {
+    content: "\e907";
+    display: block;
+    font-size: 0.462963rem;
+}
+.headTabs{
+    background-color: #fff;
+    border-bottom: 1px solid #a0a0a0;
+    height: 1.296296rem;
+    margin-top: 1.194444rem;
+}
+.headTabs div{
+    display: inline-block;
+    width: 50%;
+    text-align: center;
+    float: left;
+    height: 1.222222rem;
+    line-height: 1.222222rem;
+    margin-bottom: 8px;
+    font-size: 0.351852rem;
+    color: #999999;
+}
+.headTabs div.selectedTab{
+    border-bottom: 0.074074rem solid #10B9B9;
+    color: #10B9B9;
+    font-size: 0.388889rem;
+}
+.reportItemPart{
+    padding: 0.138889rem 0;
+    height: 0.925926rem;
+    background-color: #eeeeee;
+    color: #666666;
+    font-size: 0.333333rem;
+}
+.reportItemPartLeft{
+    float: left;
+    height: 0.925926rem;
+    width: 60%;
+    text-indent: 0.629630rem;
+}
+.lastTime{
+    height: 0.833333rem;
+    line-height: 0.833333rem;
+    padding-left: 0.629630rem;
+    font-size: 0.333333rem;
+    color: #999999;
+}
+.singleRecord .recordDate{
+    height: 0.833333rem;
+    line-height: 0.833333rem;
+    padding-left: 0.629630rem;
+    font-size: 0.333333rem;
+    color: #999999;
+} 
+.singleRecord .recordList{
+    background-color: #fff;
+}
+.icon-warning:before {
+    content: "\e921";
+    color: #ff3300;
+    display: inline-block;
+    font-size: 0.462963rem;
+    float: left;
+}
+.icon-hc-ecg:before {
+    content: "\e90e";
+    color: #10B9B9;
+    display: inline-block;
+    font-size: 0.462963rem;
+    float: left;
+}
+.icon-hc-oxygan:before {
+    content: "\e912";
+    color: #10B9B9;
+    display: inline-block;
+    font-size: 0.462963rem;
+    float: left;
+}
+.recordLine{
+    margin: 0 0.407407rem;
+    padding: 0 0.222222rem;
+    border-bottom: 1px solid #a0a0a0;
+    height: 1.111111rem;
+}
+.recordLineLast{
+    border-bottom: none;
+}
+.recordLineLeft{
+    float: left;
+    height: 1.111111rem;
+    width: 3.5rem;
+}
+.deleteIcon , .bloodPressureIcon, .heartIcon{
+    display: inline-block;
+    width: 0.462963rem;
+    height: 0.462963rem;
+    float: left;
+}
+.deleteIcon{
+    margin-right: 0.185185rem;
+    margin-top: 0.354074rem;
+}
+.bloodPressureIcon{
+    margin-top: 0.354074rem;
+    margin-right: 0.185185rem;
+}
+.beatNum{
+    color: #10B9B9;
+    font-size: 0.351852rem;
+    display: inline-block;
+    float: left;
+    padding-top: 0.354074rem;
+}
+.recordLineMiddle{
+    float: left;
+    height: 1.111111rem;
+    width: 2rem;
+}
+.heartIcon{
+    margin-right: 0.25rem;
+    float: left;
+    margin-top: 0.354074rem;
+}
+.heartBeatTime{
+    color: #10B9B9;
+    font-size: 0.351852rem;
+    display: inline-block;
+    float: left;
+    padding-top: 0.314074rem;
+}
+.recordLineRight{
+    float: right;
+    height: 1.111111rem;
+}
+.heartBeatRecordTime{
+    display: inline-block;
+    font-size: 0.351852rem;
+    color: #999999;
+    float: right;
+    padding-top: 0.314074rem;
+}
+.trendPart{
+    width: 10rem;
+    height: auto;
+}
+.trendPart img{
+    width: 10rem;
+    height: auto;
+}
+.mint-datetime-action{
+    color: #10b9b9;
+    font-size: 0.38rem;
+    line-height: 0.9rem;
+}
+.picker-toolbar{
+    height: 0.9rem;
+    line-height: 0.9rem;
+}
+.picker-items,.picker-slot{
+    font-size: 0.34rem;
+}
+.picker-items{
+    min-height: 5rem;
+}
+.picker-slot.picker-slot-center{
+    min-height: 5rem;
+}
+.picker-slot-wrapper{
+     min-height: 5rem;
+}
+
+@media  screen and (max-width: 320px){
+    .reportItemPart p.reportItemLineTwo{
+        line-height: 1;
+    }
+    .reportItemPartLeft{
+        margin-top: -3px;
+    }
+    .reportItemPartRight{
+        margin-top: -9px;
+    }
+}
+@media screen and (min-width: 321px) and (max-width: 414px){
+    .reportItemPartLeft{
+        margin-top: -3px;
+    }
+    .reportItemPartRight{
+        margin-top: -3px;
+    }
+}
+
+table{
+    width: 44%;
+    float: left;
+    display: inline-block;
+}
+@media  screen and (max-width: 320px) {
+   .ta_calendar table thead th {
+        padding: 4px 4px;
+    }
+    .ta_calendar table tbody td {
+        padding: 4px 4px;
+    }
+    .ta_calendar td.today {
+        background-position: -99px 2px;
+    }
+    .ta_calendar td.first {
+        background-position: -134px 2px;
+    }
+    .ta_calendar td.last {
+        background-position: -208px 2px;
+    }
+    .ta_calendar table{
+        margin: 0px;
+    }
+    .ta_calendar table:nth-child(1){
+        margin-right: 20px;
+    }
+}
+@media screen and (min-width: 321px) and (max-width: 375px) {
+    .ta_calendar table thead th {
+        padding: 4px 5px;
+    }
+    .ta_calendar table tbody td {
+        padding: 4px 5px;
+    }
+    .ta_calendar td.today {
+        background-position: -98px 2px;
+    }
+    .ta_calendar td.first {
+        background-position: -132px 2px;
+    }
+    .ta_calendar td.last {
+        background-position: -207px 2px;
+    }
+}
+@media screen and (min-width: 376px) and (max-width: 414px) {
+    .ta_calendar table thead th {
+        padding: 4px 6px;
+    }
+    .ta_calendar table tbody td {
+        padding: 4px 6px;
+    }
+    .ta_calendar td.today {
+        background-position: -97px 2px;
+    }
+    .ta_calendar td.first {
+        background-position: -132px 2px;
+    }
+    .ta_calendar td.last {
+        background-position: -207px 2px;
+    }
+}
+.ta_date{
+    position: fixed;
+    top: 0.2rem;
+    right: 0.3rem;
+    z-index: 999;
+    width: 0.8rem;
+    height: 0.8rem;
+    opacity: 0;
+}
+.ta_date .date_title {
+    padding: 0;
+    width: 0.8rem;
+    height: 0.8rem;
+    display: block;
+}
+.ta_date .opt_sel {
+     width: 0px; 
+     height: 0;
+}
+.ta_btn_primary {
+    background-color: #10b9b9;
+    background-image: -moz-linear-gradient(center top , #C7E184, #A2CC59);
+    border: 1px solid #10b9b9;
+    color: #fff;
+}

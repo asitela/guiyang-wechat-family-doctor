@@ -1,0 +1,202 @@
+body{
+    background-color: #e5e5e5;
+}
+.navigator{
+    width: 10rem;
+    text-align: center;
+    font-size: 0.4rem;
+    color: #fff;
+    background-color: #10B9B9;
+    height: 1.194444rem;
+    line-height: 1.194444rem;
+    position: fixed;
+    left: 0;
+    top: 0;
+    right: 0;
+    z-index: 999;
+}
+span.icon-arrow-left:before{
+    content: "\e903";
+    font-size: 0.6rem;
+    color: #fff;
+    position: absolute;
+    left: 0.444444rem;
+    top: 0.3rem;
+    display: block;
+}
+.clearfix:after {       
+    content: ".";    
+    display: block;  
+    clear: both;     
+    visibility: hidden;    
+    line-height: 0;
+    height: 0;     
+    font-size:0;   
+}
+.clearfix { *zoom:1;}
+a.addMember{
+    position: absolute;
+    right: 0.629630rem;
+    color: #fff;
+    top: 0rem;
+}
+.basicInfo{
+    margin-top: 1.194444rem;
+}
+.basicInfo .basicInfoTag,.healthInfoTag,.familyDoctorTag{
+    height: 1rem;
+    line-height: 1rem;
+    margin: 0 0.629630rem;
+    font-size: 0.370370rem;
+    color: #666666;
+}
+.familyDoctorTag{
+    width: 8.74074rem;
+    position: relative;
+}
+.basicInfoList,.healthInfoList,.familyDoctorList{
+    background-color: #fff;
+    padding: 0.3rem 0 0.15rem;
+}
+.relation{
+    background-color: #fff;
+}
+.basicInfoList li,.healthInfoList li,.relation,.familyDoctorList li{
+    height: 1rem;
+    line-height: 1rem;
+    font-size: 0.370370rem;
+    color: #333333;
+    position: relative;
+}
+.basicInfoList li .basicInfoLeft ,.healthInfoList li .healthInfoLeft,.relationLeft ,.familyDoctorList li .familyDoctorLeft{
+    float: left;
+    margin-left: 0.629630rem;
+}
+.basicInfoList li .basicInfoRight,.relationRight,.familyDoctorList li .basicInfoRight{
+    float: right;
+    margin-right: 0.629630rem;
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+.healthInfoList li .basicInfoRight{
+    float: right;
+    margin-right: 0.629630rem;
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 6rem;
+    text-align: right;
+}
+.basicInfoList li img{
+    display: block;
+    float: right;
+    width: 1rem;
+    height: 1rem;
+    margin-right: 0.629630rem;
+}
+.basicInfoList li input , .healthInfoList li input , .familyDoctorList li input{
+    display: block;
+    float: right;
+    margin-right: 0.629630rem;
+    width: 6.5rem;
+    text-align: right;
+    height: 1rem;
+    line-height: 1rem;
+    border: none;
+    font-size: 0.370370rem;
+    color: #333333;
+}
+.bloodOption{
+    float: right;
+    width: 3.5rem;
+}
+.RhOption{
+    float: right;
+    width: 3.5rem;
+}
+.mu-dropDown-menu{
+    font-size:0.370370rem;
+}
+.familyDoctorTag span{
+    position: absolute;
+    right: 0rem;
+    top: 0rem;
+}
+a.checkDeal{
+    display: block;
+    color: #10B9B9;
+    font-size: 0.388889rem;
+    text-decoration: underline;
+    margin-left: 0.629630rem;
+    margin-top: 0.462963rem;
+    margin-bottom: 0.648148rem;
+}
+button{
+    display: block;
+    margin: 0.648148rem auto;
+    width: 9.111111rem;
+    height: 1.111111rem;
+    line-height: 1.111111rem;
+    text-align: center;
+    color: #fff;
+    font-size: 0.416667rem;
+    background-color: #10B9B9;
+    border-radius: 5px;
+}
+.dialog{
+    position: fixed;
+    background: rgba(51,51,51,0.5);
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 99999;
+}
+.content{
+    position: absolute;
+    top: 4.5rem;
+    width: 7.777778rem;
+    left: 50%;
+    margin-left: -3.888889rem;
+}
+.content .dialogTitle{
+    background: #fff;
+    border-radius: 0.092593rem 0.092593rem 0 0;
+    padding: 1.3rem 0;
+    text-align: center;
+    border-bottom: 1px solid #a0a0a0;
+}
+.content .dialogTitle p{
+    width: 60%;
+    margin: 0 auto;
+    text-align: center;
+    color: #666666;
+    font-size: 0.388889rem;
+}
+.content .dialogBtns{
+    height: 1.296296rem;
+    line-height: 1.296296rem;
+}
+.content .dialogBtns a.cancleBtn{
+    display: block;
+    float: left;
+    width: 50%;
+    text-align: center;
+    color: #666666;
+    font-size: 0.388889rem;
+    background: #fff;
+    border-radius: 0 0 0 0.092593rem;
+}
+.content .dialogBtns a.certainBtn{
+    display: block;
+    float: left;
+    width: 50%;
+    text-align: center;
+    color: #fff;
+    font-size: 0.388889rem;
+    background: #10B9B9;
+    border-radius: 0 0 0.092593rem 0;
+}

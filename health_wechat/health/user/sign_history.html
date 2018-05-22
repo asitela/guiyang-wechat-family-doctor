@@ -1,0 +1,224 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="pragma" content="no-cache"/>
+    <meta http-equiv="cache-control" content="no-cache"/>
+    <meta name="screen-orientation" content="portrait"/>
+    <meta name="x5-orientation" content="portrait"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="green"/>
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <title>签约记录</title>
+    <script type="text/javascript" src="/js/jquery.min.js"></script>
+    <script type="text/javascript" src="/js/link.js"></script>
+    <script type="text/javascript" src="/common/mint-ui.js"></script>
+    <link rel="stylesheet" href="/common/mint-ui.css">
+    <link rel="stylesheet" type="text/css" href="/common/common.css">
+    <link rel="stylesheet" type="text/css" href="/common/style.css">
+    <link rel="stylesheet" type="text/css" href="/css/user/signHistory.css">
+</head>
+<body>
+<div id="app" v-cloak>
+    <!-- 二级导航部分 -->
+    <p class="navigator">
+        <span class="icon-arrow-left"></span>
+        签约记录
+    </p>
+    <div class="contentPart"
+         v-infinite-scroll="loadMore"
+         infinite-scroll-disabled="loading"
+         infinite-scroll-distance="200">
+        <div class="singleSign" v-for="item in signHistory" @click="signDetails(item.sign_id)">
+            <div class="signTopPart">
+                <p class="signInfo">
+                    <span class="signAddress">{{item.org_name}}</span>
+                    <span class="signStatusOne" v-html="item.audit_class"></span>
+                </p>
+                <p class="signTime">{{item.start_time}}</p>
+            </div>
+            <div class="signBottomPart clearfix">
+                <div class="avatar">
+                    <img v-if="item.gender==defined.woman" src="/img/pic_girl.png">
+                    <img v-else src="/img/pic_001.png">
+                </div>
+                <div class="signProgress">
+                    <!-- 待审核 -->
+                    <p class="signContext" v-if="item.audit_status==defined.signStatusExamine">
+                        {{item.name}}向{{item.org_name}}{{item.team_name}}发起了签约申请，等待医生审核中
+                        <a class="cancleApply" href="javascript:void(0);" @click.stop="cancel(item.sign_id)">撤消申请</a>
+                    </p>
+                    <!-- 撤销申请 -->
+                    <p class="signContext" v-if="item.audit_status==defined.signStatusCancel">
+                        {{item.name}}已撤回签约申请
+                    </p>
+                    <!-- 已签约 -->
+                    <p class="signContext" v-if="item.audit_status==defined.signStatusSuccess">
+                        {{item.name}}成功签约{{item.org_name}}{{item.team_name}}
+                    </p>
+                    <!-- 已驳回 -->
+                    <p class="signContext" v-if="item.audit_status==defined.signStatusReject">
+                        {{item.name}}与{{item.org_name}}{{item.team_name}}的申请已经被驳回 <br>
+                        驳回原因:{{item.remark}}
+                    </p>
+                    <!-- 已解约 -->
+                    <p class="signContext" v-if="item.audit_status==defined.signStatusSurrender">
+                        {{item.name}}与{{item.org_name}}{{item.team_name}}的签约已经被解除 <br>
+                        解约原因:{{item.remark}}
+                    </p>
+                </div>
+            </div>
+        </div>
+        <!--<div class="singleSign">
+            <div class="signTopPart">
+                <p class="signInfo">
+                    <span class="signAddress">北京市海淀区上地社区卫生服务中心</span>
+                    <span class="signStatusTwo">已签约</span>
+                </p>
+                <p class="signTime">2018-02-06 18:05:06</p>
+            </div>
+            <div class="signBottomPart clearfix">
+                <div class="avatar">
+                    <img src="/img/pic_girl.png">
+                </div>
+                <div class="signProgress">
+                    <p class="signContext">
+                        张三三向北京市海淀区上地社区卫生服务中心发起了签约申请，等待医生审核中
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="singleSign">
+            <div class="signTopPart">
+                <p class="signInfo">
+                    <span class="signAddress">北京市海淀区上地社区卫生服务中心</span>
+                    <span class="signStatusThree">已取消</span>
+                </p>
+                <p class="signTime">2018-02-06 18:05:06</p>
+            </div>
+            <div class="signBottomPart clearfix">
+                <div class="avatar">
+                    <img src="/img/pic_girl.png">
+                </div>
+                <div class="signProgress">
+                    <p class="signContext">
+                        张三三向北京市海淀区上地社区卫生服务中心发起了签约申请，等待医生审核中
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="singleSign">
+            <div class="signTopPart">
+                <p class="signInfo">
+                    <span class="signAddress">北京市海淀区上地社区卫生服务中心</span>
+                    <span class="signStatusThree">已解约</span>
+                </p>
+                <p class="signTime">2018-02-06 18:05:06</p>
+            </div>
+            <div class="signBottomPart clearfix">
+                <div class="avatar">
+                    <img src="/img/pic_girl.png">
+                </div>
+                <div class="signProgress">
+                    <p class="signContext">
+                        张三三向北京市海淀区上地社区卫生服务中心发起了签约申请，等待医生审核中,张三三向北京市海淀区上地社区卫生服务中心发起了签约申请，等待医生审核中
+                    </p>
+                </div>
+            </div>
+        </div>-->
+    </div>
+    <!-- 弹出框 -->
+    <div class="dialog" v-show="dialogFlag">
+        <div class="content">
+            <div class="dialogTitle">
+                <p>您确定要撤销本次申请吗？</p>
+            </div>
+            <p class="dialogBtns">
+                <a href="javascript:void(0);" class="cancleBtn" @click="cancelDialog">取消</a>
+                <a href="javascript:void(0);" class="certainBtn" @click="sub">确定</a>
+            </p>
+        </div>
+    </div>
+</div>
+</body>
+<script type="text/javascript">
+    new Vue({
+        el: "#app",
+        data() {
+            return {
+                dialogFlag: false,
+                page:0,
+                signHistory:[],
+                sign_id:'',
+                loading: false,
+                queryLoading: true,
+                signData:'',
+            }
+        },
+        created(){
+        },
+        methods: {
+            loadMore() {
+                //  数据全部加载完
+                if (this.page >= this.signData.pages) {
+                    this.loading = true;
+                    return false;
+                }
+                this.page += 1;
+                this.GetSignList();
+            },
+            //获取签约列表
+            GetSignList(){
+                let url=$.formateUrl('wechat/user/sign-list');
+                let params={
+                    page_size:defined.SignHistory,
+                    page:this.page
+                };
+                $.ajax({
+                    url:url,
+                    type: 'get',
+                    data: params,
+                    async: false,
+                    success: res => {
+                        if(res.code==0){
+                            this.signData=res.content;
+                            for(let i=0;i<res.content.data.length;i++){
+                                this.signHistory.push(res.content.data[i]);
+                            }
+                        }else {
+                            this.$toast(res.message);
+                        }
+                    }
+                });
+            },
+
+            signDetails(id){
+                window.location.href = health.homeUrl + 'health/user/sign_detail.html?signID='+id;
+            },
+            //  取消申请
+            cancel(id) {
+                this.sign_id=id;
+                this.dialogFlag = true;
+            },
+            //  取消申请 确定
+            sub(){
+                let url=$.formateUrl('wechat/sign/cancel');
+                let params={
+                    sign_id:this.sign_id
+                };
+                $.post(url,params,res=>{
+                   if(res.code==0){
+                       this.dialogFlag = false;
+                       this.$toast('成功取消申请');
+                   } else {
+                       this.$toast(res.message);
+                   }
+                });
+            },
+            cancelDialog(){
+                this.dialogFlag = false;
+            },
+        }
+    })
+</script>
+</html>

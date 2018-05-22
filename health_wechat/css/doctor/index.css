@@ -1,0 +1,172 @@
+body{
+    background-color: #e5e5e5;
+}
+img.bannerImg{
+    display: block;
+    width: 10rem;
+    height: auto;
+}
+.hospitalPart{
+    height: 1.2963rem;
+    line-height: 1.2963rem;
+    border-top: 1px solid #999999;
+    border-bottom: 1px solid #999999;
+    background-color: #fff;
+}
+.hospitalPart span.leftTag{
+    font-size: 0.407407rem;
+    color: #333333;
+    margin-left: 0.555556rem;
+    display: block;
+    float: left;
+}
+.hospitalPart span.trangle{
+    float: right;
+    margin-right: 0.974359rem;
+    width: 0;
+    height: 0;
+    border-width: 0.24rem 0 0.24rem 0.18rem;
+    border-style: solid;
+    border-color: transparent  transparent transparent #333333;
+    margin-top: 0.38rem;
+}
+.hospitalList{
+    background-color: #fff;
+    margin-bottom: 1.632667rem;
+}
+.singleHospital{
+    width: 9.055556rem;
+    margin: 0 auto;
+    padding: 0.555556rem 0;
+    height: 1.666667rem;
+    border-bottom: 1px solid #a0a0a0;
+}
+.clearfix:after {       
+    content: ".";    
+    display: block;  
+    clear: both;     
+    visibility: hidden;    
+    line-height: 0;
+    height: 0;     
+    font-size:0;   
+}
+.clearfix { *zoom:1;}
+.hospitalImg{
+    float: left;
+    width: 2.222222rem;
+    height: 1.666667rem;
+    margin-left: 0.083333rem;
+    margin-right: 0.537037rem;
+}
+.hospitalImg img{
+    width: 2.222222rem;
+    height: 1.666667rem;
+    display: block;
+}
+.hospitalInfo{
+    float: left;
+    width: 5.666667rem;
+    height: 1.537037rem;
+    padding: 0 0 0.055556rem 0;
+}
+.hospitalInfo .hospitalName{
+    font-size: 0.407407rem;
+    color: #333333;
+    float: left;
+    width: 6.2rem;
+    margin-bottom: 0.05rem;
+}
+.hospitalInfo .hospitalAddress{
+    font-size: 0.333333rem;
+    color: #999999;
+    margin-bottom: 0.05rem;
+    float: left;
+    width: 6.2rem;
+}
+.hospitalInfo .hospitalPosition {
+    float: left;  
+    width: 6.2rem;
+}
+.hospitalInfo .hospitalPosition img{
+    display: block;
+    float: left;
+    width: 0.277778rem;
+    height: 0.370370rem;
+    margin-right: 0.259259rem;
+    margin-top: 0.05rem;
+}
+.hospitalInfo .hospitalPosition span{
+    color: #ff6600;
+    font-size: 0.370370rem;
+    float: left;
+}
+.bottomPart{
+    width: 10rem;
+    /*height: 2.379629rem;*/
+    background-color: #fff;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    border-top: 1px solid #999999;
+}
+.bottomPart div{
+    width: 33.3%;
+    text-align: center;
+    float: left;
+}
+.bottomPart div img{
+    display: block;
+    height: 0.611111rem;
+    width: auto;
+    margin: 0.185185rem auto 0;
+}
+.bottomPart div span{
+    display: block;
+    font-size: 0.3rem;
+    margin-top: 0.185185rem;
+    margin-bottom: 0.185185rem;
+}
+.selectedPart{
+    color: #10B9B9;
+}
+span.icon-hc-health-report:before{
+    content: "\e910";
+    color: #666666;
+    font-size: 0.416667rem;
+}
+span.icon-doctor-select:before{
+    content: "\e90a";
+    color: #10B9B9;
+    font-size: 0.416667rem;
+}
+span.icon-personal:before{
+    content: "\e918";
+    color: #666666;
+    font-size: 0.416667rem;
+}
+span.icon-position:before{
+    content: "\e91c";
+    color: #ff6600;
+    font-size: 0.34rem;
+    margin-right: 0.2rem;
+    float: left;
+    margin-top: 0.12rem;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

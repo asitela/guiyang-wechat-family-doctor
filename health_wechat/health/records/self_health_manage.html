@@ -1,0 +1,240 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="pragma" content="no-cache"/>
+    <meta http-equiv="cache-control" content="no-cache"/>
+    <meta name="screen-orientation" content="portrait"/>
+    <meta name="x5-orientation" content="portrait" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="green"/>
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <title>自己的健康管理</title>
+    <script type="text/javascript" src="/js/jquery.min.js"></script>
+    <script type="text/javascript" src="/js/link.js"></script>
+    <script type="text/javascript" src="/common/mint-ui.js"></script>
+    <link rel="stylesheet" href="/common/mint-ui.css">
+    <link rel="stylesheet" type="text/css" href="/common/common.css">
+    <link rel="stylesheet" type="text/css" href="/common/style.css">
+    <link rel="stylesheet" type="text/css" href="/css/records/selfHealthManage.css">
+</head>
+<body>
+<div id="app" v-cloak>
+    <!-- 二级导航部分 -->
+    <p class="navigator">
+        <span class="icon-arrow-left"></span>
+        自己的健康管理
+    </p>
+    <!-- 内容区 -->
+    <!-- 头部tabs -->
+    <div class="headTabs">
+        <div :class="index==nowIndex?'selectedTab':''" style="width: 33.33%" v-for="(item,index) in titleArr"
+        @click="changeTab(index)">{{item}}</div>
+        <!--<div>子女</div>-->
+        <!--<div>亲属</div>-->
+    </div>
+    <p class="lastTime">
+        最后测量时间：{{time}}
+    </p>
+    <div class="reportPart clearfix" v-show="nowIndex==0">
+        <div class="singleReport" @click="ecg" id="ecg">
+            <span class="reportIcon icon-hc-ecg"></span>
+            <p>心电记录</p>
+        </div>
+        <div class="singleReport" @click="fat" id="fat">
+            <span class="reportIcon icon-hc-fat"></span>
+            <p>脂肪记录</p>
+        </div>
+        <div class="singleReport" @click="pressure" id="pressure">
+            <span class="reportIcon icon-hc-blood-pressure"></span>
+            <p>血压记录</p>
+        </div>
+        <div class="singleReport" @click="suger" id="suger">
+            <span class="reportIcon icon-hc-blood-suger"></span>
+            <p>血糖记录</p>
+        </div>
+        <div class="singleReport" @click="oxygan" id="oxygan">
+            <span class="reportIcon icon-hc-oxygan"></span>
+            <p>血氧记录</p>
+        </div>
+        <div class="singleReportGrey">
+            <span class="reportIcon icon-hc-weight"></span>
+            <p>体重记录</p>
+        </div>
+        <div class="singleReportGrey">
+            <span class="reportIcon icon-hc-Lipid"></span>
+            <p>血脂记录</p>
+        </div>
+        <div class="singleReportGrey">
+            <span class="reportIcon icon-hc-urine"></span>
+            <p>尿液记录</p>
+        </div>
+        <div class="singleReport" @click="healthcontrol" id="healthcontrol">
+            <span class="reportIcon icon-healthcontrol"></span>
+            <p>健康报告</p>
+        </div>
+    </div>
+    <!-- 病例管理 -->
+    <div v-show="nowIndex===1" class="case">
+        <ul>
+            <li class="info" v-for="(item,index) in caseList" @click="toCaseDetails(item.case_id)">
+                <div class="info_big">
+                    <div class="title">
+                        <span class="dot name">{{item.title}}</span>
+                        <span></span>
+                    </div>
+                    <div class="title time">
+                        <span>{{item.create_user}}</span>
+                        <span>{{item.time}}</span>
+                        <span>{{item.time_slot}}</span>
+                    </div>
+                </div>
+                <span class="icon-arrowblack-right "></span>
+            </li>
+
+        </ul>
+        <div class="add_case" @click="addCase">
+            <span class="add">添加病历</span>
+        </div>
+    </div>
+<!-- 体检报告 -->
+    <div v-show="nowIndex===2" class="case">
+        <ul>
+            <li class="info" v-for="(item,index) in examList" @click="toCaseDetails(item.case_id)">
+                <div class="info_big">
+                    <div class="title">
+                        <span class="dot name">{{item.title}}</span>
+                        <span></span>
+                    </div>
+                    <div class="title time">
+                        <span>{{item.create_user}}</span>
+                        <span>{{item.time}}</span>
+                        <span>{{item.time_slot}}</span>
+                    </div>
+                </div>
+                <span class="icon-arrowblack-right "></span>
+            </li>
+
+        </ul>
+        <div class="add_case" @click="addReport">
+            <span class="add">添加报告</span>
+        </div>
+    </div>
+</div>
+</body>
+<script type="text/javascript">
+    new Vue({
+        el: "#app",
+        data() {
+            return {
+                titleArr:['测量记录','病历管理','体检报告'],
+                nowIndex:0,
+                memberId:$.getQueryString('memberId'),
+                time:'',
+                caseList: [],
+                examList: []
+            }
+        },
+        created(){
+            window.localStorage.setItem('memberId',this.memberId);
+            this.getLastTime();
+            this.getCaseList();
+            this.getExamList();
+        },
+        methods: {
+            getCaseList(){
+                this.$indicator.open();
+                let url=$.formateUrl('wechat/case/list');
+                let params={
+                    mem_id:this.memberId,
+                    category:defined.FollowCase
+                };
+                $.get(url,params,res=>{
+                    if(res.code==0){
+                        this.$indicator.close();
+                        this.caseList = res.content;
+                    }else {
+                        this.$toast(res.message);
+                    }
+                    this.$indicator.close();
+                })
+            },
+            getExamList(){
+                this.$indicator.open();
+                let url=$.formateUrl('wechat/case/list');
+                let params={
+                    mem_id:this.memberId,
+                    category:defined.PhysicalExamination
+                };
+                $.get(url,params,res=>{
+                    if(res.code==0){
+                        this.$indicator.close();
+                        this.examList = res.content;
+                    }else {
+                        this.$toast(res.message);
+                    }
+                    this.$indicator.close();
+                })
+            },
+            // 跳转病例详情
+            toCaseDetails(id){
+                window.location.href=health.homeUrl+'/health/records/case_details.html?id='+id+'&memberId='+this.memberId;
+            },
+            // 添加病例
+            addCase(){
+                window.location.href=health.homeUrl+'/health/records/add_case.html?memberId='+this.memberId+'&type='+defined.FollowCase;
+            },
+
+            //  添加报告
+            addReport(){
+                window.location.href=health.homeUrl+'/health/records/add_case.html?memberId='+this.memberId+'&type='+defined.PhysicalExamination;
+            },
+            changeTab(index){
+                this.nowIndex=index;
+            },
+            //获取最后测量时间
+            getLastTime(){
+                this.$indicator.open();
+                let url=$.formateUrl('wechat/user');
+                let params={
+                    user_id:this.memberId
+                };
+                $.get(url,params,res=>{
+                    if(res.code==0){
+                        this.$indicator.close();
+                        this.time=res.content.last_collect_time;
+                    }else {
+                        this.$toast(res.message);
+                    }
+                    this.$indicator.close();
+                })
+            },
+            // 心电记录
+            ecg() {
+                $('#ecg').addClass('singleReportWhite');
+                window.location.href = health.homeUrl + 'health/records/my_heart_beat_record.html';
+            },
+            fat(){
+                $('#fat').addClass('singleReportWhite');
+                window.location.href = health.homeUrl + 'health/records/my_fat_trend.html';
+            },
+            pressure(){
+                $('#pressure').addClass('singleReportWhite');
+                window.location.href = health.homeUrl + 'health/records/my_blood_presureT_trend.html';
+            },
+            suger(){
+                $('#suger').addClass('singleReportWhite');
+                window.location.href = health.homeUrl + 'health/records/my_Blood_sugar.html';
+            },
+            oxygan(){
+                $('#oxygan').addClass('singleReportWhite');
+                window.location.href = health.homeUrl + 'health/records/my_blood_oxygen.html';
+            },
+            healthcontrol(){
+                $('#healthcontrol').addClass('singleReportWhite');
+                window.location.href = health.homeUrl + 'health/records/make_health_report.html';
+            },
+        },
+    })
+</script>
+</html>

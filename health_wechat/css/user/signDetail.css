@@ -1,0 +1,98 @@
+.navigator{
+    width: 10rem;
+    text-align: center;
+    font-size: 0.4rem;
+    color: #fff;
+    background-color: #10B9B9;
+    height: 1.194444rem;
+    line-height: 1.194444rem;
+    position: fixed;
+    left: 0;
+    top: 0;
+    right: 0;
+}
+span.icon-arrow-left:before{
+    content: "\e903";
+    font-size: 0.6rem;
+    color: #fff;
+    position: absolute;
+    left: 0.444444rem;
+    top: 0.3rem;
+    display: block;
+}
+.clearfix:after {       
+    content: ".";    
+    display: block;  
+    clear: both;     
+    visibility: hidden;    
+    line-height: 0;
+    height: 0;     
+    font-size:0;   
+}
+.clearfix { *zoom:1;}
+.contentPart{
+    margin-top: 1.194444rem;
+}
+.signHospitalInfo{
+    margin: 0 0.407407rem;
+    padding: 0.555556rem 0.185185rem;
+    border-bottom: 1px solid #aaa;
+}
+.hospitalInfoLeft {
+    float: left;
+    width: 6.944444rem;
+}
+.hospitalImg{
+    width: 1.481482rem;
+    height: 1.481482rem;
+    float: right;
+}
+.hospitalImg img{
+    display: block;
+    width: 1.481482rem;
+    height: 1.481482rem;
+    border-radius: 0.740741rem;
+    border:1px solid #666666;
+}
+.hospitalName{
+    font-size: 0.416667rem;
+    color: #333333;
+    padding-top: 0.15rem;
+    padding-bottom: 0.1rem;
+}
+.hospitalAddress{
+    color: #999999;
+    font-size: 0.370370rem;
+}
+.signHistory{
+    margin-left: 0.629630rem;
+}
+.signResult{
+    color: #0099ff;
+    font-size: 0.388889rem;
+    padding-top: 0.648148rem;
+    margin-bottom: 0.15rem;
+}
+.signTime{
+    font-size: 0.351852rem;
+    color: #999999;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

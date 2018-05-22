@@ -1,0 +1,405 @@
+body{
+    background-color: #e5e5e5;
+}
+.navigator{
+    width: 10rem;
+    text-align: center;
+    font-size: 0.4rem;
+    color: #fff;
+    background-color: #10B9B9;
+    height: 1.194444rem;
+    line-height: 1.194444rem;
+    left: 0;
+    top: 0;
+    right: 0;
+    position: fixed;
+    z-index: 99;
+}
+.navigator img{
+    display: block;
+    float: left;
+    margin-left: 0.555556rem;
+    width: 0.277778rem;
+    margin-top: 0.31rem;
+}
+.clearfix:after {       
+    content: ".";    
+    display: block;  
+    clear: both;     
+    visibility: hidden;    
+    line-height: 0;
+    height: 0;     
+    font-size:0;   
+}
+.clearfix { *zoom:1;}
+.tagPart{
+    margin-bottom: 20px;
+    margin-top: 1.194444rem;
+}
+.tagPart .residentTag{
+    height: 1.018519rem;
+    line-height: 1.018519rem;
+    font-size: 0.351852rem;
+    color: #666666;
+    padding-left: 0.629630rem;
+}
+.tagList{
+    background-color: #fff;
+    border-top: 1px solid #999999;
+    padding: 0.555556rem 0 0.15rem 0;
+}
+.tagList .tagListContent{
+    margin-left: 0.629630rem;
+}
+.tagListContent .singleTag{
+    display: block;
+    float: left;
+    width: 2.703704rem;
+    height: 0.759259rem;
+    line-height: 0.759259rem;
+    border: 1px solid #666666;
+    color: #666666;
+    text-align: center;
+    margin-bottom: 0.277778rem;
+    margin-right: 0.277778rem;
+    border-radius: 5px;
+    background-color: #fff;
+}
+.tagListContent .selectedSingleTag{
+    border: 1px solid #10b9b9;
+    color: #fff;
+    background-color: #10b9b9;
+    display: block;
+    float: left;
+    width: 2.703704rem;
+    height: 0.759259rem;
+    line-height: 0.759259rem;
+    text-align: center;
+    margin-bottom: 0.277778rem;
+    margin-right: 0.277778rem;
+    border-radius: 5px;
+}
+.supplyTag{
+    background-color: #fff;
+    padding-bottom: 0.333333rem;
+    border-bottom: 1px solid #999999;
+}
+.supplyContent{
+    margin-left: 0.629630rem;
+    border: 1px solid #666666;
+    height: 0.759259rem;
+    line-height: 0.759259rem;
+    font-size: 0.351852rem;
+    color: #666666;
+    border-radius: 5px;
+    margin-right: 0.629630rem;
+}
+.supplyContent .supplyOtherContent{
+    margin-left: 0.9rem;
+    font-size: 0.351852rem;
+}
+.supplyContent input{
+    display: inline-block;
+    border: none;
+    outline: none;
+    font-size: 0.351852rem;
+    color: #666666;
+    margin-left: 0.3rem;
+    width: 6rem;
+}
+
+.supplyTagContent{
+    margin-left: 0.629630rem;
+    border: 1px solid #10b9b9;
+    height: 0.759259rem;
+    line-height: 0.759259rem;
+    font-size: 0.351852rem;
+    color: #10b9b9;
+    border-radius: 5px;
+    margin-right: 0.629630rem;
+}
+.supplyTagContent .supplyOtherTagContent{
+    margin-left: 0.9rem;
+    font-size: 0.351852rem;
+}
+.supplyTagContent .supplyOtherTagList{
+    display: inline-block;
+    font-size: 0.351852rem;
+    color: #10b9b9;
+    margin-left: 0.3rem;
+}
+
+
+.residentInfo{
+    border-top: 1px solid #999999;
+    background-color: #fff;
+    border-bottom: 1px solid #999999;
+}
+.valueMessage{
+    border-bottom: 1px solid #666666;
+    padding: 0.4rem 0 0.3rem 0.185185rem;
+    margin: 0 0.629630rem;
+}
+.valueMessageTag{
+    font-size: 0.370370rem;
+    color: #999999;
+    margin-bottom: 0.15rem;
+}
+input.infoWrite{
+    display: block;
+    width: 8.8rem;
+    border: none;
+    outline: none;
+    font-size: 0.388889rem;
+    color: #333333;
+}
+.residentBloodInfo{
+    padding: 0.4rem 0.629630rem 0.5rem 0.629630rem;
+    font-size: 0.370370rem;
+}
+.residentBloodInfo .bloodTag{
+    font-size: 0.370370rem;
+    color: #999999;
+    margin-bottom: -0.15rem;
+    padding: 0  0.185185rem;
+}
+.bloodDetailInfo{
+    border-bottom: 1px solid #666666;
+     /*padding: 0  0.185185rem;*/
+}
+.bloodInfoLeft{
+    float: left;
+    width: 3.5rem;
+    position: relative;
+}
+.bloodInfoLeft p{
+    color: #666666;
+    font-size: 0.388889rem;
+    padding-bottom: 0.3rem;
+}
+.bloodInfoLeft ul{
+    position: absolute;
+    background-color: #fff;
+    border: 1px solid #10b9b9;
+    padding: 3px;
+    width: 3.48rem;
+    left: 0;
+    top: 0;
+    display: none;
+    font-size: 0.370370rem;
+}
+.bloodInfoLeft ul li{
+    text-align: center;
+    height: 0.8rem;
+    line-height: 0.8rem;
+}
+.bloodInfoLeft ul li.firsLine{
+    background-color: #10b9b9;
+    color: #fff;
+}
+.bloodInfoLeft .trangle{
+    float: right;
+    margin-left: 0.15rem;
+    width: 0;
+    height: 0;
+    border-left: 0.148rem solid transparent;
+    border-right: 0.148rem solid transparent;
+    border-top: 0.185185rem solid #333333;
+    margin-top: 0.2rem;
+}
+.bloodInfoRight{
+    float: right;
+    width: 3.5rem;
+    position: relative;
+}
+.bloodInfoRight p{
+    color: #666666;
+    font-size: 0.388889rem;
+     padding-bottom: 0.3rem;
+}
+.signInfo{
+    height: 1.018519rem;
+    line-height: 1.018519rem;
+    font-size: 0.351852rem;
+    color: #666666;
+    padding-left: 0.894815rem;
+    border-bottom: 1px solid #666666;
+}
+.signInfoList{
+    background-color: #fff;
+    padding: 0.15rem 0;
+}
+.signInfoList li{
+    height: 1rem;
+    line-height: 1rem;
+    font-size: 0.370370rem;
+    color: #333333;
+}
+.signInfoList li span.signInfoLeft{
+    float: left;
+    margin-left: 0.629630rem;
+    padding-left:0.185185rem;
+}
+.icon_time{
+    margin-left: 0.2rem;
+}
+.signInfoList li span.signInfoRight{
+    float: right;
+    margin-right: 0.629630rem;
+    padding-right:0.185185rem;
+}
+
+.agreeMent{
+    background-color: #fff;
+    padding-bottom: 0.740740rem;
+}
+.agreeMentContent{
+    margin: 0 0.629630rem;
+    border-top: 1px solid #666666;
+}
+.agreeMentContent img{
+    display: block;
+    width: 0.416667rem;
+    height: 0.416667rem;
+    float: left;
+    margin: 0.370370rem 0.277778rem 0 0.185185rem;
+}
+.agreeMentContent  span.agreeDeal{
+    display: block;
+    font-size: 0.370370rem;
+    float: left;
+    margin-top: 0.3rem;
+    margin-left: 0.15rem;
+}
+.agreeMentContent  span span.greenColor{
+    font-size: 0.370370rem;
+    color: #10b9b9;
+}
+
+.signatureContent{
+    margin: 0 0.629630rem;
+    border-top: 1px solid #666666;
+}
+.signatureContent .signature{
+    display: block;
+    float: left;
+    font-size: 0.370370rem;
+    color: #10b9b9;
+    margin: 0.370370rem 0.277778rem 0 0.185185rem;
+}
+.signatureContent  span.clear{
+    display: block;
+    font-size: 0.370370rem;
+    color: #10b9b9;
+    float: right;
+    margin: 0.370370rem 0.277778rem 0 0.185185rem;
+}
+.signaturePart{
+    width: 8.740740rem;
+    height: 3.777778rem;
+    margin: 0.2rem auto 0;
+    /*background-color: #EE82EE;*/
+}
+.signaturePart .jSignature{
+    height: 2.777778rem!important;
+}
+img.signatureImg{
+    display: block;
+    border-top: 1px solid #666666;
+    margin: 0 0.629630rem;
+    padding-top:0.370370rem;
+    width: 9rem;
+    height: 3rem
+}
+button.shortInfo{
+    display: block;
+    width: 9.111111rem;
+    height: 1.111111rem;
+    line-height: 1.111111rem;
+    text-align: center;
+    border-radius: 5px;
+    margin: 0.648148rem auto 0.648148rem;
+    font-size: 0.416667rem;
+    background: #999999;
+    color: #fff;
+}
+button.fullInfo{
+    display: block;
+    width: 9.111111rem;
+    height: 1.111111rem;
+    line-height: 1.111111rem;
+    text-align: center;
+    border-radius: 5px;
+    margin: 0.648148rem auto 0.648148rem;
+    font-size: 0.416667rem;
+    background: #10b9b9;
+    color: #fff;
+}
+
+
+.dialog{
+    position: fixed;
+    background: rgba(51,51,51,0.5);
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+}
+.content{
+    position: absolute;
+    top: 4.5rem;
+    width: 6.5rem;
+    left: 50%;
+    margin-left: -3.25rem;
+}
+.content .dialogTitle{
+    background: #fff;
+    border-radius: 0.092593rem 0.092593rem 0 0;
+    padding: 0.7rem 0;
+    text-align: center;
+}
+.content .dialogTitle img{
+    display: block;
+    float: left;
+    width: 0.944444rem;
+    height: 1.018519rem;
+    margin-left: 0.759258rem;
+    margin-right: 0.527778rem;
+}
+.dialogInfo{
+    float: left;
+    width: 4rem;
+    text-align: left;
+    font-size: 42px;
+    color: #666666;
+}
+.content .dialogBtns{
+    height: 1.296296rem;
+    line-height: 1.296296rem;
+    font-size: 0.388889rem;
+    color: #10b9b9;
+    background-color: #fff;
+    text-align: center;
+    border-radius: 0 0 0.092593rem 0.092593rem;
+    border: 1px solid #10b9b9;
+}
+span.icon-arrow-left:before{
+    content: "\e903";
+    font-size: 0.6rem;
+    color: #fff;
+    position: absolute;
+    left: 0.444444rem;
+    top: 0.3rem;
+    display: block;
+}
+.selectOption{
+    width: 3.5rem;
+}
+.checkboxNew{
+    display: inline-block;
+    float: left;
+    margin-left: 0.185185rem;
+    margin-top: 0.36rem;
+}

@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="pragma" content="no-cache"/>
+    <meta http-equiv="cache-control" content="no-cache"/>
+    <meta name="screen-orientation" content="portrait"/>
+    <meta name="x5-orientation" content="portrait"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="green"/>
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <title>病历详情</title>
+    <script type="text/javascript" src="/js/jquery.min.js"></script>
+    <script type="text/javascript" src="/js/link.js"></script>
+    <script type="text/javascript" src="/common/mint-ui.js"></script>
+    <link rel="stylesheet" href="/common/mint-ui.css">
+    <link rel="stylesheet" type="text/css" href="/common/common.css">
+    <link rel="stylesheet" type="text/css" href="/common/style.css">
+    <link rel="stylesheet" type="text/css" href="/css/records/case_details.css">
+</head>
+<body>
+<div id="app">
+    <!-- 二级导航部分 -->
+    <p class="navigator">
+        <span class="icon-arrowTwo-left"></span>
+        {{typeMsg}}
+        <span class="operation" @click="operation">操作
+            <span class="operation_hidden" v-show="flag">
+                <span @click="edit">编辑</span>
+                <span @click="deleteCase" style="border-top: none">删除</span>
+            </span>
+        </span>
+    </p>
+    <div>
+        <div class="content">
+            <div class="dot title_name">
+                {{models.title}}
+            </div>
+            <div class="title_info">
+                <span>{{models.create_user}}</span>
+                <span>{{models.time}}</span>
+                <span>{{models.time_slot}}</span>
+            </div>
+        </div>
+        <div class="case_con">
+            <div class="case_content">{{models.content}}</div>
+            <div class="case_img" is-show="models.file_lable">
+                <img @click="model(item.file_ext,item.file_path,item.file_id)"  v-for="(item,index) in models.files" :src="item.file_ext == 'pdf' ? '/img/icon-pdf.png' : item.file_path">
+            </div>
+        </div>
+    </div>
+    <!--  遮罩 -->
+    <div class="model" v-if="modelFlag" @click="close">
+        <div class="model_pic">
+            <img v-lazy="modelPic">
+        </div>
+    </div>
+</div>
+</body>
+
+<script type="text/javascript">
+    new Vue({
+        el: "#app",
+        data() {
+            return {
+                flag: false,
+                id:$.getQueryString('id'),
+                memberId:$.getQueryString('memberId'),
+                models:{},
+                typeMsg:'病历详情',
+                modelFlag:false,
+                pdfUrl:''
+            }
+        },
+        mounted(){
+            this.getDetail();
+        },
+        methods: {
+            model(file,path,id){
+                this.modelPic='';
+                this.modelFlag=!this.modelFlag;
+                if(file=='pdf'){
+                    let url=health.apiUrl+'preview/pdf?id='+id+'&token='+$.getToken();
+                    window.open(url);
+                }else {
+                    this.modelPic=path;
+                }
+            },
+            close(){
+                this.modelFlag=false;
+            },
+            getDetail(){
+                this.$indicator.open();
+                let url=$.formateUrl('wechat/case/view');
+                let params={
+                    case_id:this.id
+                };
+                $.get(url,params,res=>{
+                    if(res.code==0){
+                        this.$indicator.close();
+                        this.models = res.content;
+                        this.typeMsg = res.content.type == defined.FollowCase ? '病历详情' : '报告详情';
+                        $(document).attr("title",this.typeMsg);
+                    }else {
+                        this.$toast(res.message);
+                    }
+                })
+            },
+            deleteCase(){
+                this.$indicator.open();
+                let url=$.formateUrl('wechat/case/delete');
+                let params={
+                    case_id:this.id
+                };
+                $.post(url,params,res=>{
+                    if(res.code==0){
+                        this.$indicator.close();
+                        this.$toast('删除成功');
+                        setTimeout(function () {
+                            history.go(-1);
+                        }, 1500);
+                        //window.location.href=health.homeUrl+'/health/records/self_health_manage.html?memberId='+this.memberId;
+                    }else {
+                        this.$toast(res.message);
+                    }
+                    this.$indicator.close();
+                })
+            },
+            operation() {
+                this.flag = !this.flag;
+            },
+            edit() {
+                window.location.href=health.homeUrl+'/health/records/add_case.html?memberId='+this.memberId+'&id='+this.id+'&type='+this.models.file_lable;
+            }
+
+        },
+    })
+</script>
+</html>

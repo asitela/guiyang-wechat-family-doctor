@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="pragma" content="no-cache"/>
+    <meta http-equiv="cache-control" content="no-cache"/>
+    <meta name="screen-orientation" content="portrait"/>
+    <meta name="x5-orientation" content="portrait"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="green"/>
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <title>病历/报告</title>
+    <script type="text/javascript" src="/js/jquery.min.js"></script>
+    <script type="text/javascript" src="/js/link.js"></script>
+    <script type="text/javascript" src="/common/mint-ui.js"></script>
+    <link rel="stylesheet" href="/common/mint-ui.css">
+    <link rel="stylesheet" type="text/css" href="/common/common.css">
+    <link rel="stylesheet" type="text/css" href="/common/style.css">
+    <link rel="stylesheet" type="text/css" href="/css/records/add_case.css">
+</head>
+<body>
+<div id="app" v-cloak>
+    <p class="navigator">
+        <span class="icon-arrow-left"></span>{{operationMsg}}{{typeMsg}}
+    </p>
+    <form action="" id="case-form">
+        <input type="hidden" name="case_id" v-model="id">
+        <input type="hidden" name="type" v-model="type">
+        <input type="hidden" name="mem_id" v-model="memberId">
+        <div class="case_title">
+            <span class="title">{{typeMsg}}标题</span>
+            <input type="text" name="title" v-model="models.title">
+            <span class="del" v-if="models.title!=''" @click="del">×</span>
+        </div>
+        <div class="case_con">
+            <textarea name="content" id="" cols="50" rows="10" maxlength="500" @input="descInput" v-model="models.content"></textarea>
+            <span class="remnant">{{remnant}}/500</span>
+        </div>
+        <div class="pic_con">
+            <div class="pictureList clearfix">
+                <div class="singlePicture" @click="model(item.file_ext,item.file_path,item.file_id)" v-for="(item,index) in files">
+                    <input type="hidden" name="files[]" :value="item.file_id">
+                    <img v-if="item.file_ext == 'pdf'" src="/img/icon-pdf.png">
+                    <img v-else v-lazy="item.file_path">
+                    <span class="icon-del" @click.stop="delImg(index)"></span>
+                </div>
+                <div class="selectPicture">
+                    <span class="icon-picture"></span>
+                    <input type="file"  ref="upFile" multiple @change="changePic"/>
+                    <!--accept="image/*"-->
+                    <span class="picNum">{{files.length}}/{{fileMax}}</span>
+                </div>
+            </div>
+        </div>
+        <!-- 遮罩 -->
+        <div class="model" v-if="modelFlag" @click="close">
+            <div class="model_pic">
+                <img v-lazy="modelPic">
+            </div>
+        </div>
+        <div class="add">
+            <span class="sub_add" @click="caseSave">保存</span>
+        </div>
+    </form>
+</div>
+</body>
+<script type="text/javascript">
+    new Vue({
+        el: "#app",
+        data() {
+            return {
+                flag: false,
+                remnant: '0',
+                content: '',
+                modelFlag:false,
+                title:'',
+                operationMsg:'添加',
+                typeMsg:'病历',
+                id:$.getQueryString('id'),
+                type:$.getQueryString('type'),
+                memberId:$.getQueryString('memberId'),
+                models:{},
+                files:[],
+                fileMax:5,
+                modelPic:''
+            }
+        },
+        mounted(){
+            this.operationMsg = this.id ? '编辑' : '添加';
+            this.typeMsg = (this.type == defined.FollowCase) ? '病历' : '报告';
+            $(document).attr("title",this.operationMsg+this.typeMsg);
+            if(this.id){
+                this.getModels();
+            }
+        },
+        methods: {
+            getModels(){
+                this.$indicator.open();
+                let url=$.formateUrl('wechat/case/update');
+                let params={
+                    case_id:this.id
+                };
+                $.get(url,params,res=>{
+                    if(res.code==0){
+                        this.$indicator.close();
+                        this.models = res.content;
+                        res.content.files.forEach(item=>{
+                            this.files.push(item)
+                        });
+                        this.descInput();
+                        this.type = res.content.type
+                    }else {
+                        this.$toast(res.message);
+                    }
+                    this.$indicator.close();
+                })
+            },
+            caseSave(){
+                let url = $.formateUrl('wechat/case/create');
+
+                if(this.id){
+                    url = $.formateUrl('wechat/case/update');
+                }
+
+                var formData = $('#case-form').serialize();
+                this.$indicator.open();
+                $.ajax({
+                    url: url,
+                    type: 'POST',
+                    data: formData,
+                }).success(res => {
+                    if(res.code==0){
+                        this.$indicator.close();
+                        this.$toast('保存成功');
+                        let url=document.referrer;
+                        setTimeout(function () {
+                            window.location.replace(url);
+                        }, 1500);
+                        //window.location.href=health.homeUrl+'/health/records/self_health_manage.html?memberId='+this.memberId;
+                    }else {
+                        this.$toast(res.message);
+                    }
+                    this.$indicator.close();
+                });
+            },
+            // 上传图片
+            changePic() {
+                var fileArr = this.$refs.upFile.files;
+                if ((parseInt(this.files.length) + fileArr.length) > this.fileMax) {
+                    this.$toast('最多上传'+this.fileMax+'张图片');
+                    return false;
+                }
+                var formData = new FormData();
+                for (let i = 0; i < fileArr.length; i++) {
+                    formData.append("files[]", fileArr[i]);
+                }
+                this.$indicator.open();
+                let url = $.formateUrl('upload');
+                $.ajax({
+                    url: url,
+                    type: 'POST',
+                    data: formData,
+                    contentType: false,
+                    processData: false
+                }).success(res => {
+                    if (res.code == 0) {
+                        let data = res.content;
+                        data.forEach(item => {
+                            this.files.push(item);
+                        });
+                    } else {
+                        this.$toast(res.message);
+                    }
+                    this.$indicator.close();
+                });
+            },
+            // 删除图片
+            delImg(index) {
+                this.$messagebox.confirm('是否删除该图片?')
+                    .then(() => {
+                        this.$indicator.open();
+                        let url = $.formateUrl('upload/delete');
+                        var file = this.files[index];
+                        let params = {
+                            file_id: file.file_id
+                        };
+                        $.post(url, params, res => {
+                            if (res.code == 0) {
+                                this.$indicator.close();
+                                this.files.splice(index, 1);
+                            } else {
+                                this.$toast(res.message);
+                            }
+                            this.$indicator.close();
+                        })
+                    })
+            },
+            model(file,path,id){
+                this.modelPic='';
+                this.modelFlag=!this.modelFlag;
+                if(file=='pdf'){
+                    let url=health.apiUrl+'preview/pdf?id='+id+'&token='+$.getToken();
+                    window.open(url);
+                }else {
+                    this.modelPic=path;
+                }
+            },
+            close(){
+                this.modelFlag=false;
+            },
+            del(){
+                this.models.title='';
+            },
+            descInput(){
+                let txtVal = this.models.content.length;
+                this.remnant = txtVal;
+            },
+        },
+    })
+</script>
+</html>
